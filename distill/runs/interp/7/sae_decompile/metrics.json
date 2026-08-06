@@ -1,7 +1,7 @@
 {
   "position_agreement": 0.99995,
   "sequence_agreement": 0.99955,
-  "mean_tv": 0.0010688093290492084,
+  "mean_tv": 0.0008293685280307983,
   "n_sampled": 20000,
   "formal": {
     "mode": "exhaustive",
@@ -11,24 +11,60 @@
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 14,
-    "n_table_cells": 576
+    "n_nodes": 56,
+    "n_table_cells": 10184
   },
   "is_hard": false,
   "sae": {
     "n_latents_alive": 136,
-    "n_latents_symbolized": 77,
-    "coverage_activation_mass": 0.676,
+    "n_latents_symbolized": 101,
+    "coverage_activation_mass": 0.765,
     "sae_final_loss": 0.6572,
     "selected_features": {
       "count_self": 1.0,
+      "is_min": 0.999,
       "tok": 0.997,
       "count_a": 0.997,
       "rank_lt": 0.997,
+      "rank_gt": 0.992,
+      "is_max": 0.992,
       "count_b": 0.987,
       "count_c": 0.987
+    },
+    "compositions": {
+      "count_self_x_is_min": 0.999,
+      "count_self_x_tok": 0.999,
+      "count_self_x_count_a": 1.0,
+      "count_self_x_rank_lt": 0.999,
+      "count_self_x_rank_gt": 0.999,
+      "count_self_x_is_max": 0.998,
+      "count_self_x_count_b": 0.994,
+      "is_min_x_tok": 0.998,
+      "is_min_x_count_a": 0.998,
+      "is_min_x_rank_lt": 0.997,
+      "is_min_x_rank_gt": 0.993,
+      "is_min_x_is_max": 0.993,
+      "is_min_x_count_b": 0.987,
+      "tok_x_count_a": 0.996,
+      "tok_x_rank_lt": 0.998,
+      "tok_x_rank_gt": 0.994,
+      "tok_x_is_max": 0.995,
+      "tok_x_count_b": 0.991,
+      "count_a_x_rank_lt": 0.998,
+      "count_a_x_rank_gt": 0.998,
+      "count_a_x_is_max": 0.996,
+      "count_a_x_count_b": 0.992,
+      "rank_lt_x_rank_gt": 0.999,
+      "rank_lt_x_is_max": 0.999,
+      "rank_lt_x_count_b": 0.99,
+      "rank_gt_x_is_max": 0.992,
+      "rank_gt_x_count_b": 0.99,
+      "is_max_x_count_b": 0.987,
+      "kth_is_min_tok": 0.989,
+      "is_min_x_kth_is_min_tok": 0.885,
+      "is_max_x_kth_is_min_tok": 0.891
     }
   },
   "cegis_rounds": 0,
-  "seconds": 10.6
+  "seconds": 25.2
 }

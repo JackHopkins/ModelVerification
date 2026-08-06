@@ -53,8 +53,10 @@ suite was designed to be irreducible (m05 +0.08, m06 +0.35).
 - The `tree` control shows IO-fitting is enough for counting-flavored
   tasks but collapses on structural ones (reverse 0.51, interp/2 0.007) —
   evidence that mechanism-aware extraction is doing real work.
-- `sae_decompile` is the strongest program-emitting extractor on trained
-  models: interp mean 0.945 (vs 0.680 for the hand-banked tl_decompile),
+- `sae_decompile` is the strongest extractor on trained models — interp
+  mean 0.989 with composition templates (Approach A), beating even the
+  black-box tree control (0.950) while emitting verifiable programs
+  (vs 0.680 for the hand-banked tl_decompile),
   by *discovering* structural features the hand bank lacked (interp/2
   reverse: 0.013 -> 1.000 via the mirrored-position feature). Three
   failure modes were found and two fixed: (a) feature COMPOSITION — fixed
@@ -64,9 +66,14 @@ suite was designed to be irreducible (m05 +0.08, m06 +0.35).
   (b) granularity mismatch — models representing only a task-specific
   coarsening of token identity fail the identity probe, so base
   primitives are always retained and SAE selection only ADDS structure;
-  (c) still open: gather-style tasks (output position computed from
-  content, interp/21) and wide-window comparisons (interp/13) exceed the
-  additive readout. A latent sklearn pitfall found on the way: LogisticRegression
+  (c) FIXED by Approach-A composition templates: a post-selection round
+  generates T1 pairwise interactions, T2a gathers by position-valued
+  features, and T2b k-th-occurrence gathers (a pair-variable construction
+  proving conjunctive selectors are DSL-expressible), plus one
+  second-order gating pass — each admitted by the same decodability
+  probe. interp/21 (unique-extract): 0.107 -> 0.999 via the discovered
+  tok x is_first_occurrence composition. Residual limitation: m04's
+  mode-gather and deep task-gating (0.674). A latent sklearn pitfall found on the way: LogisticRegression
   omits coefficient rows for training-absent classes; the readout now maps
   rows via model.classes_.
 - Oracle correction found during SAE work: SIIT interp models are

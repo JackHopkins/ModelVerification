@@ -1,36 +1,69 @@
 {
   "position_agreement": 0.9999666666666667,
   "sequence_agreement": 0.9997,
-  "mean_tv": 0.0004186799583749271,
+  "mean_tv": 0.0006685299988111122,
   "n_sampled": 20000,
   "formal": {
     "mode": "exhaustive",
     "n_checked": 19683,
-    "n_disagreements": 10,
-    "disagreement_rate": 0.0005080526342529086,
+    "n_disagreements": 9,
+    "disagreement_rate": 0.0004572473708276177,
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 17,
-    "n_table_cells": 747
+    "n_nodes": 49,
+    "n_table_cells": 12131
   },
   "is_hard": false,
   "sae": {
     "n_latents_alive": 378,
-    "n_latents_symbolized": 209,
-    "coverage_activation_mass": 0.778,
+    "n_latents_symbolized": 215,
+    "coverage_activation_mass": 0.784,
     "sae_final_loss": 1.0227,
     "selected_features": {
       "count_b": 1.0,
       "count_c": 1.0,
       "count_self": 1.0,
+      "is_max": 1.0,
       "tok": 0.999,
       "count_a": 0.999,
       "rank_lt": 0.999,
+      "rank_gt": 0.999,
+      "is_min": 0.999,
       "first_x_tok": 0.671,
       "pos": 0.631
+    },
+    "compositions": {
+      "count_b_x_count_c": 1.0,
+      "count_b_x_count_self": 1.0,
+      "count_b_x_is_max": 1.0,
+      "count_b_x_tok": 0.999,
+      "count_b_x_count_a": 1.0,
+      "count_b_x_rank_lt": 0.999,
+      "count_b_x_rank_gt": 0.999,
+      "count_c_x_count_self": 1.0,
+      "count_c_x_is_max": 1.0,
+      "count_c_x_tok": 0.999,
+      "count_c_x_count_a": 1.0,
+      "count_c_x_rank_lt": 0.999,
+      "count_c_x_rank_gt": 0.999,
+      "count_self_x_is_max": 1.0,
+      "count_self_x_tok": 0.999,
+      "count_self_x_count_a": 1.0,
+      "count_self_x_rank_lt": 0.999,
+      "count_self_x_rank_gt": 0.999,
+      "is_max_x_tok": 0.999,
+      "is_max_x_count_a": 1.0,
+      "is_max_x_rank_lt": 0.999,
+      "is_max_x_rank_gt": 0.999,
+      "tok_x_count_a": 0.999,
+      "tok_x_rank_lt": 0.999,
+      "tok_x_rank_gt": 0.999,
+      "count_a_x_rank_lt": 0.999,
+      "count_a_x_rank_gt": 0.999,
+      "rank_lt_x_rank_gt": 0.999
     }
   },
   "cegis_rounds": 0,
-  "seconds": 14.6
+  "seconds": 26.4
 }

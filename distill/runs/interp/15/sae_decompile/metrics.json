@@ -1,7 +1,7 @@
 {
   "position_agreement": 1.0,
   "sequence_agreement": 1.0,
-  "mean_tv": 0.010941946018167384,
+  "mean_tv": 0.012418104323764336,
   "n_sampled": 20000,
   "formal": {
     "mode": "exhaustive",
@@ -11,8 +11,8 @@
     "exact_equivalent": true
   },
   "complexity": {
-    "n_nodes": 14,
-    "n_table_cells": 259
+    "n_nodes": 38,
+    "n_table_cells": 2545
   },
   "is_hard": false,
   "sae": {
@@ -25,8 +25,22 @@
       "eq_tok-1": 0.864,
       "eq_tok+1": 0.851,
       "frac_4": 0.708
+    },
+    "compositions": {
+      "pos_x_eq_tok-1": 0.811,
+      "pos_x_tok": 0.899,
+      "kth_eq_tok-1_tok": 0.885,
+      "kth_eq_tok+1_tok": 0.885,
+      "pos_x_kth_eq_tok-1_tok": 0.879,
+      "pos_x_kth_eq_tok+1_tok": 0.879,
+      "eq_tok-1_x_kth_eq_tok-1_tok": 0.974,
+      "eq_tok-1_x_kth_eq_tok+1_tok": 0.974,
+      "eq_tok+1_x_kth_eq_tok-1_tok": 0.871,
+      "eq_tok+1_x_kth_eq_tok+1_tok": 0.871,
+      "tok_x_kth_eq_tok-1_tok": 0.87,
+      "tok_x_kth_eq_tok+1_tok": 0.87
     }
   },
   "cegis_rounds": 0,
-  "seconds": 5.4
+  "seconds": 6.6
 }

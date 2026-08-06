@@ -1,8 +1,8 @@
 {
   "mode": "exhaustive",
   "n_checked": 1953125,
-  "n_disagreements": 404497,
-  "disagreement_rate": 0.207102464,
+  "n_disagreements": 383435,
+  "disagreement_rate": 0.19631872,
   "exact_equivalent": false,
   "examples": [
     [

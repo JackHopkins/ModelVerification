@@ -1,7 +1,7 @@
 {
   "position_agreement": 1.0,
   "sequence_agreement": 1.0,
-  "mean_tv": 0.0014410635777675816,
+  "mean_tv": 0.0016423007824841816,
   "n_sampled": 20000,
   "formal": {
     "mode": "sampled",
@@ -11,8 +11,8 @@
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 14,
-    "n_table_cells": 760
+    "n_nodes": 65,
+    "n_table_cells": 12307
   },
   "is_hard": false,
   "sae": {
@@ -22,11 +22,43 @@
     "sae_final_loss": 0.2501,
     "selected_features": {
       "tok": 0.959,
+      "is_min": 0.935,
       "eq_tok-1": 0.922,
       "eq_tok+1": 0.922,
+      "is_max": 0.899,
       "frac_6": 0.714
+    },
+    "compositions": {
+      "tok_x_is_min": 0.9,
+      "tok_x_eq_tok-1": 0.781,
+      "tok_x_eq_tok+1": 0.78,
+      "tok_x_is_max": 0.86,
+      "is_min_x_eq_tok-1": 0.857,
+      "is_min_x_eq_tok+1": 0.859,
+      "eq_tok-1_x_eq_tok+1": 0.87,
+      "kth_is_min_tok": 0.929,
+      "kth_eq_tok-1_tok": 0.93,
+      "kth_eq_tok+1_tok": 0.93,
+      "tok_x_kth_is_min_tok": 0.859,
+      "tok_x_kth_eq_tok-1_tok": 0.926,
+      "tok_x_kth_eq_tok+1_tok": 0.926,
+      "is_min_x_kth_is_min_tok": 0.912,
+      "is_min_x_kth_eq_tok-1_tok": 0.929,
+      "is_min_x_kth_eq_tok+1_tok": 0.929,
+      "eq_tok-1_x_kth_is_min_tok": 0.974,
+      "eq_tok-1_x_kth_eq_tok-1_tok": 0.981,
+      "eq_tok-1_x_kth_eq_tok+1_tok": 0.981,
+      "eq_tok+1_x_kth_is_min_tok": 0.921,
+      "eq_tok+1_x_kth_eq_tok-1_tok": 0.929,
+      "eq_tok+1_x_kth_eq_tok+1_tok": 0.929,
+      "is_max_x_kth_is_min_tok": 0.915,
+      "is_max_x_kth_eq_tok-1_tok": 0.929,
+      "is_max_x_kth_eq_tok+1_tok": 0.929,
+      "pos_x_kth_is_min_tok": 0.901,
+      "pos_x_kth_eq_tok-1_tok": 0.928,
+      "pos_x_kth_eq_tok+1_tok": 0.928
     }
   },
   "cegis_rounds": 0,
-  "seconds": 6.4
+  "seconds": 38.4
 }

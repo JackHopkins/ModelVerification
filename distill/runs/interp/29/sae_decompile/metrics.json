@@ -1,7 +1,7 @@
 {
   "position_agreement": 1.0,
   "sequence_agreement": 1.0,
-  "mean_tv": 0.0004011531660186607,
+  "mean_tv": 0.0004945446826768575,
   "n_sampled": 20000,
   "formal": {
     "mode": "sampled",
@@ -11,8 +11,8 @@
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 14,
-    "n_table_cells": 547
+    "n_nodes": 76,
+    "n_table_cells": 8983
   },
   "is_hard": false,
   "sae": {
@@ -22,11 +22,49 @@
     "sae_final_loss": 0.4712,
     "selected_features": {
       "tok": 1.0,
+      "is_max": 0.943,
+      "is_min": 0.943,
       "eq_tok-1": 0.895,
       "eq_tok+1": 0.89,
       "frac_b": 0.819
+    },
+    "compositions": {
+      "tok_x_is_max": 0.943,
+      "tok_x_is_min": 0.943,
+      "tok_x_eq_tok-1": 0.85,
+      "tok_x_eq_tok+1": 0.796,
+      "is_max_x_is_min": 0.886,
+      "is_min_x_eq_tok-1": 0.851,
+      "kth_is_max_tok": 0.863,
+      "kth_is_min_tok": 0.943,
+      "kth_eq_tok-1_tok": 0.908,
+      "kth_eq_tok+1_tok": 0.908,
+      "tok_x_kth_is_max_tok": 0.862,
+      "tok_x_kth_is_min_tok": 0.887,
+      "tok_x_kth_eq_tok-1_tok": 0.898,
+      "tok_x_kth_eq_tok+1_tok": 0.898,
+      "is_max_x_kth_is_max_tok": 0.861,
+      "is_max_x_kth_is_min_tok": 0.926,
+      "is_max_x_kth_eq_tok-1_tok": 0.906,
+      "is_max_x_kth_eq_tok+1_tok": 0.906,
+      "is_min_x_kth_is_max_tok": 0.853,
+      "is_min_x_kth_is_min_tok": 0.93,
+      "is_min_x_kth_eq_tok-1_tok": 0.905,
+      "is_min_x_kth_eq_tok+1_tok": 0.905,
+      "eq_tok-1_x_kth_is_max_tok": 0.926,
+      "eq_tok-1_x_kth_is_min_tok": 0.97,
+      "eq_tok-1_x_kth_eq_tok-1_tok": 0.967,
+      "eq_tok-1_x_kth_eq_tok+1_tok": 0.967,
+      "eq_tok+1_x_kth_is_max_tok": 0.85,
+      "eq_tok+1_x_kth_is_min_tok": 0.928,
+      "eq_tok+1_x_kth_eq_tok-1_tok": 0.905,
+      "eq_tok+1_x_kth_eq_tok+1_tok": 0.905,
+      "pos_x_kth_is_max_tok": 0.85,
+      "pos_x_kth_is_min_tok": 0.896,
+      "pos_x_kth_eq_tok-1_tok": 0.903,
+      "pos_x_kth_eq_tok+1_tok": 0.903
     }
   },
   "cegis_rounds": 0,
-  "seconds": 7.9
+  "seconds": 42.7
 }

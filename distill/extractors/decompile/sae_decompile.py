@@ -111,7 +111,93 @@ def build_extended_bank(spec):
         cat.append(("prev_x_tok",
                     SeqMap(pair_tab, shifted[-1], tok).named("prev_x_tok"),
                     V * V))
+
+    # extremum / order primitives (token indices are value-sorted, so <
+    # over indices tracks < over numeric token values)
+    gt = lt.T.copy()
+    rank_gt = SelectorWidth(Select(tok, tok, gt)).named("rank_gt")
+    cat.append(("rank_gt", rank_gt, L + 1))
+    cat.append(("is_max", TableMap({c: int(c == 0) for c in range(L + 1)},
+                                   rank_gt).named("is_max"), 2))
+    rank_lt_node = cat[[n for n, *_ in cat].index("rank_lt")][1]
+    cat.append(("is_min", TableMap({c: int(c == 0) for c in range(L + 1)},
+                                   rank_lt_node).named("is_min"), 2))
+    # neighbor comparisons (trend building blocks)
+    lt_tab = {(a, b): float(a < b) for a in range(V) for b in range(V)}
+    gt_tab = {(a, b): float(a > b) for a in range(V) for b in range(V)}
+    cat.append(("prev_lt_tok", SeqMap(lt_tab, shifted[-1], tok).named("prev_lt_tok"), 2))
+    cat.append(("prev_gt_tok", SeqMap(gt_tab, shifted[-1], tok).named("prev_gt_tok"), 2))
+    # global trend fractions (numerical): mean of the comparison indicators
+    sel_all = Select(idx, idx, np.ones((L, L), bool))
+    for nm in ("prev_lt_tok", "prev_gt_tok"):
+        node = cat[[n for n, *_ in cat].index(nm)][1]
+        num.append((f"frac_{nm}",
+                    Aggregate(sel_all, node, default=0).named(f"frac_{nm}")))
     return cat, num
+
+
+def build_compositions(sel_cat, spec):
+    """Approach-A templates over SAE-selected features.
+
+    T1  pairwise interaction: joint SeqMap of two selected cat features
+    T2a gather: token at the position named by a position-valued feature
+    T2b kth-occurrence gather: token at the q-th position where a selected
+        binary feature fires (expressible with a pair variable + selector;
+        with b = is_first_occurrence this is exactly 'extract unique')
+    """
+    V = len(spec.vocab)
+    L = max(spec.seq_lens)
+    tok = Tokens().named("tok")
+    idx = Indices().named("pos")
+    comp = []
+
+    base = [(n, node, card) for n, node, card in sel_cat]
+    # T1: pairwise interactions
+    for i in range(len(base)):
+        for j in range(i + 1, len(base)):
+            na, a, ca = base[i]
+            nb, b, cb = base[j]
+            if ca * cb > 400:
+                continue
+            tab = {(x, y): x * cb + y for x in range(ca) for y in range(cb)}
+            comp.append((f"{na}_x_{nb}",
+                         SeqMap(tab, a, b).named(f"{na}_x_{nb}"), ca * cb))
+
+    # T2a: gather by position-valued features (card fits the position range)
+    eye = np.eye(L, dtype=bool)
+    for n, node, card in base:
+        if n in ("pos", "tok") or card > L:
+            continue
+        if not n.startswith(("rank", "count", "prefix")) and card != L:
+            continue
+        comp.append((f"tok_at_{n}",
+                     Aggregate(Select(idx, node, eye[:, :card] if card <= L else eye),
+                               tok).named(f"tok_at_{n}"), V))
+
+    # T2b: kth-occurrence gathers over selected binary features
+    for n, node, card in base:
+        if card != 2:
+            continue
+        pair_tab = {(f, i): f * L + i for f in range(2) for i in range(L)}
+        pair_b = SeqMap(pair_tab, node, idx).named(f"pair_{n}")
+        M = np.zeros((2 * L, 2 * L), bool)
+        for ki in range(L):
+            for qi in range(L):
+                if ki < qi:
+                    M[1 * L + ki, 0 * L + qi] = True
+                    M[1 * L + ki, 1 * L + qi] = True
+        prefix_ones = SelectorWidth(Select(pair_b, pair_b, M)).named(f"nprev_{n}")
+        pair2_tab = {(f, c): f * (L + 1) + c for f in range(2) for c in range(L + 1)}
+        pair2 = SeqMap(pair2_tab, node, prefix_ones).named(f"pair2_{n}")
+        M2 = np.zeros((2 * (L + 1), L), bool)
+        for c in range(L + 1):
+            for q in range(L):
+                if c == q:
+                    M2[1 * (L + 1) + c, q] = True  # b fires and it's the q-th
+        comp.append((f"kth_{n}_tok",
+                     Aggregate(Select(pair2, idx, M2), tok).named(f"kth_{n}_tok"),
+                     V))
+    return comp
 
 
 class SAE(torch.nn.Module):
@@ -279,6 +365,57 @@ class SAEDecompileExtractor(TLDecompileExtractor):
         for base_idx in (0, 1):  # tok, pos
             if not any(n == cat[base_idx][0] for n, *_ in sel_cat):
                 sel_cat.append(cat[base_idx])
+
+        # ---- composition round (Approach A): templates over the selected
+        # features, admitted by the same decodability probe ----
+        top_sel = sel_cat[:8]
+        comps = [c for c in build_compositions(top_sel, oracle.spec)
+                 if not any(c[0] == n for n, *_ in sel_cat)]
+        if comps:
+            comp_vals = np.concatenate(
+                [eval_features(comps, content).reshape(-1, len(comps))
+                 for content in contents])
+            report["compositions"] = {}
+            admitted = []
+            for k, (name, node, card) in enumerate(comps):
+                vals = comp_vals[sub, k].astype(int)
+                if len(np.unique(vals)) < 2:
+                    continue
+                ind = np.stack([vals == v for v in range(card)], 1).astype(float)
+                predc, _ = ridge_fit(Faug, ind)
+                acc = float((predc.argmax(1) == vals).mean())
+                basefreq = float(np.bincount(vals).max() / len(vals))
+                if acc >= 0.85 or acc - basefreq >= 0.5:
+                    sel_cat.append((name, node, card))
+                    admitted.append((name, node, card))
+                    report["compositions"][name] = round(acc, 3)
+
+            # second-order pass: small gating features x admitted gathers
+            # (e.g. task token x extremum value) — depth-3 compositions
+            gates = [c for c in top_sel if c[2] <= 16]
+            gathers = [c for c in admitted if c[0].startswith(("kth_", "tok_at_"))]
+            for gn, gnode, gc in gates:
+                for hn, hnode, hc in gathers:
+                    if gc * hc > 400:
+                        continue
+                    name = f"{gn}_x_{hn}"
+                    if any(name == n for n, *_ in sel_cat):
+                        continue
+                    tab = {(x, y): x * hc + y for x in range(gc) for y in range(hc)}
+                    node = SeqMap(tab, gnode, hnode).named(name)
+                    vals = np.concatenate(
+                        [np.where(ok, v, 0).ravel() for v, ok in
+                         (_eval_node(node, {"content": c}, {})
+                          for c in contents)])[sub].astype(int)
+                    if len(np.unique(vals)) < 2:
+                        continue
+                    ind = np.stack([vals == v for v in range(gc * hc)], 1).astype(float)
+                    predc, _ = ridge_fit(Faug, ind)
+                    acc = float((predc.argmax(1) == vals).mean())
+                    basefreq = float(np.bincount(vals).max() / len(vals))
+                    if acc >= 0.85 or acc - basefreq >= 0.5:
+                        sel_cat.append((name, node, gc * hc))
+                        report["compositions"][name] = round(acc, 3)
         return sel_cat, sel_num, report
 
     def extract(self, oracle, rng, extra=None):
