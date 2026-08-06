@@ -1,0 +1,29 @@
+{
+  "task": "m05_soft_mixture",
+  "description": "min(digits) vs max(digits) blended by count of '!' context.",
+  "vocab": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "!"
+  ],
+  "seq_len": 10,
+  "n_classes": 8,
+  "lm": false,
+  "train": {
+    "steps": 4000,
+    "batch": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "warmup": 100,
+    "seed": 0
+  },
+  "n_params": 26344,
+  "final_loss_mean100": 0.14178826488554477,
+  "train_seconds": 94.9
+}

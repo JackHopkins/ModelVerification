@@ -1,0 +1,26 @@
+{
+  "task": "m06_ngram_mixture",
+  "description": "LM on 0.6*bigram + 0.4*trigram source; optimal = ensemble.",
+  "vocab": [
+    "t0",
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5"
+  ],
+  "seq_len": 16,
+  "n_classes": 6,
+  "lm": true,
+  "train": {
+    "steps": 5000,
+    "batch": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "warmup": 100,
+    "seed": 0
+  },
+  "n_params": 26374,
+  "final_loss_mean100": 1.4639896821975709,
+  "train_seconds": 126.8
+}

@@ -1,0 +1,24 @@
+{
+  "input_encoding_map": [
+    [
+      "bos",
+      0
+    ],
+    [
+      "pad",
+      1
+    ],
+    [
+      "x",
+      2
+    ],
+    [
+      "y",
+      3
+    ]
+  ],
+  "categorical_output": false,
+  "output_labels": [
+    "frac_prevs_7"
+  ]
+}

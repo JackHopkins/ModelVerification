@@ -1,0 +1,136 @@
+{
+  "name": "p07_pair_balance",
+  "description": "Running (open - close) parenthesis balance as a fraction.",
+  "vocab": [
+    "(",
+    ")",
+    "a"
+  ],
+  "max_seq_len": 8,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 2,
+  "num_heads": 2,
+  "key_size": 10,
+  "mlp_hidden_size": 4,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 19,
+  "residual_labels": [
+    "bools_close_18",
+    "bools_open_16",
+    "closes_14",
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "one",
+    "opens_13",
+    "pair_balance_12",
+    "tokens:(",
+    "tokens:)",
+    "tokens:a",
+    "tokens:bos",
+    "tokens:pad"
+  ],
+  "num_parameters": 3814,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      9,
+      19
+    ],
+    "token_embed||embeddings": [
+      5,
+      19
+    ],
+    "transformer/layer_0/attn/key||b": [
+      20
+    ],
+    "transformer/layer_0/attn/key||w": [
+      19,
+      20
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      19
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      20,
+      19
+    ],
+    "transformer/layer_0/attn/query||b": [
+      20
+    ],
+    "transformer/layer_0/attn/query||w": [
+      19,
+      20
+    ],
+    "transformer/layer_0/attn/value||b": [
+      20
+    ],
+    "transformer/layer_0/attn/value||w": [
+      19,
+      20
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      4
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      19,
+      4
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      19
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      4,
+      19
+    ],
+    "transformer/layer_1/attn/key||b": [
+      20
+    ],
+    "transformer/layer_1/attn/key||w": [
+      19,
+      20
+    ],
+    "transformer/layer_1/attn/linear||b": [
+      19
+    ],
+    "transformer/layer_1/attn/linear||w": [
+      20,
+      19
+    ],
+    "transformer/layer_1/attn/query||b": [
+      20
+    ],
+    "transformer/layer_1/attn/query||w": [
+      19,
+      20
+    ],
+    "transformer/layer_1/attn/value||b": [
+      20
+    ],
+    "transformer/layer_1/attn/value||w": [
+      19,
+      20
+    ],
+    "transformer/layer_1/mlp/linear_1||b": [
+      4
+    ],
+    "transformer/layer_1/mlp/linear_1||w": [
+      19,
+      4
+    ],
+    "transformer/layer_1/mlp/linear_2||b": [
+      19
+    ],
+    "transformer/layer_1/mlp/linear_2||w": [
+      4,
+      19
+    ]
+  }
+}

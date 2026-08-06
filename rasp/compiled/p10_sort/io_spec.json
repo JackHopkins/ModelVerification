@@ -1,0 +1,47 @@
+{
+  "input_encoding_map": [
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      5,
+      4
+    ],
+    [
+      "bos",
+      5
+    ],
+    [
+      "pad",
+      6
+    ]
+  ],
+  "categorical_output": true,
+  "output_labels": [
+    "sort_34:1",
+    "sort_34:2",
+    "sort_34:3",
+    "sort_34:4",
+    "sort_34:5"
+  ],
+  "output_values": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}

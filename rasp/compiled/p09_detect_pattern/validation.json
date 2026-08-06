@@ -1,0 +1,71 @@
+[
+  {
+    "input": [
+      "a",
+      "b",
+      "c",
+      "a",
+      "b",
+      "c"
+    ],
+    "rasp_expected": [
+      null,
+      null,
+      true,
+      false,
+      false,
+      true
+    ],
+    "model_decoded": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      true
+    ],
+    "match": true
+  },
+  {
+    "input": [
+      "a",
+      "b",
+      "a",
+      "b",
+      "c"
+    ],
+    "rasp_expected": [
+      null,
+      null,
+      false,
+      false,
+      true
+    ],
+    "model_decoded": [
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    "match": true
+  },
+  {
+    "input": [
+      "c",
+      "b",
+      "a"
+    ],
+    "rasp_expected": [
+      null,
+      null,
+      false
+    ],
+    "model_decoded": [
+      false,
+      false,
+      false
+    ],
+    "match": true
+  }
+]

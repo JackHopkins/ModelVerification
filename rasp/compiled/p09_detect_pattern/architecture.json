@@ -1,0 +1,187 @@
+{
+  "name": "p09_detect_pattern",
+  "description": "True where the pattern \"abc\" ends at the current position.",
+  "vocab": [
+    "a",
+    "b",
+    "c"
+  ],
+  "max_seq_len": 8,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 3,
+  "num_heads": 2,
+  "key_size": 10,
+  "mlp_hidden_size": 6,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 28,
+  "residual_labels": [
+    "detect_abc_25:False",
+    "detect_abc_25:True",
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "map_27:False",
+    "map_27:True",
+    "map_31:False",
+    "map_31:True",
+    "map_33:False",
+    "map_33:True",
+    "one",
+    "sequence_map_26:False",
+    "sequence_map_26:True",
+    "shift_by(1)_29:False",
+    "shift_by(1)_29:True",
+    "shift_by(2)_28:False",
+    "shift_by(2)_28:True",
+    "tokens:a",
+    "tokens:b",
+    "tokens:bos",
+    "tokens:c",
+    "tokens:pad"
+  ],
+  "num_parameters": 8486,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      9,
+      28
+    ],
+    "token_embed||embeddings": [
+      5,
+      28
+    ],
+    "transformer/layer_0/attn/key||b": [
+      20
+    ],
+    "transformer/layer_0/attn/key||w": [
+      28,
+      20
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      28
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      20,
+      28
+    ],
+    "transformer/layer_0/attn/query||b": [
+      20
+    ],
+    "transformer/layer_0/attn/query||w": [
+      28,
+      20
+    ],
+    "transformer/layer_0/attn/value||b": [
+      20
+    ],
+    "transformer/layer_0/attn/value||w": [
+      28,
+      20
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      6
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      28,
+      6
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      28
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      6,
+      28
+    ],
+    "transformer/layer_1/attn/key||b": [
+      20
+    ],
+    "transformer/layer_1/attn/key||w": [
+      28,
+      20
+    ],
+    "transformer/layer_1/attn/linear||b": [
+      28
+    ],
+    "transformer/layer_1/attn/linear||w": [
+      20,
+      28
+    ],
+    "transformer/layer_1/attn/query||b": [
+      20
+    ],
+    "transformer/layer_1/attn/query||w": [
+      28,
+      20
+    ],
+    "transformer/layer_1/attn/value||b": [
+      20
+    ],
+    "transformer/layer_1/attn/value||w": [
+      28,
+      20
+    ],
+    "transformer/layer_1/mlp/linear_1||b": [
+      6
+    ],
+    "transformer/layer_1/mlp/linear_1||w": [
+      28,
+      6
+    ],
+    "transformer/layer_1/mlp/linear_2||b": [
+      28
+    ],
+    "transformer/layer_1/mlp/linear_2||w": [
+      6,
+      28
+    ],
+    "transformer/layer_2/attn/key||b": [
+      20
+    ],
+    "transformer/layer_2/attn/key||w": [
+      28,
+      20
+    ],
+    "transformer/layer_2/attn/linear||b": [
+      28
+    ],
+    "transformer/layer_2/attn/linear||w": [
+      20,
+      28
+    ],
+    "transformer/layer_2/attn/query||b": [
+      20
+    ],
+    "transformer/layer_2/attn/query||w": [
+      28,
+      20
+    ],
+    "transformer/layer_2/attn/value||b": [
+      20
+    ],
+    "transformer/layer_2/attn/value||w": [
+      28,
+      20
+    ],
+    "transformer/layer_2/mlp/linear_1||b": [
+      6
+    ],
+    "transformer/layer_2/mlp/linear_1||w": [
+      28,
+      6
+    ],
+    "transformer/layer_2/mlp/linear_2||b": [
+      28
+    ],
+    "transformer/layer_2/mlp/linear_2||w": [
+      6,
+      28
+    ]
+  }
+}

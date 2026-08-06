@@ -1,0 +1,10 @@
+|--- feature_21 <= 0.50
+|   |--- class: 0
+|--- feature_21 >  0.50
+|   |--- feature_2 <= 4.50
+|   |   |--- class: 0
+|   |--- feature_2 >  4.50
+|   |   |--- feature_2 <= 5.50
+|   |   |   |--- class: 1
+|   |   |--- feature_2 >  5.50
+|   |   |   |--- class: 0

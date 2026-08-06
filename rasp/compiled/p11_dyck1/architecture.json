@@ -1,0 +1,337 @@
+{
+  "name": "p11_dyck1",
+  "description": "True everywhere iff the input is a balanced ()-string.",
+  "vocab": [
+    "(",
+    ")"
+  ],
+  "max_seq_len": 10,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 6,
+  "num_heads": 2,
+  "key_size": 13,
+  "mlp_hidden_size": 402,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 53,
+  "residual_labels": [
+    "bools_close_55",
+    "bools_open_54",
+    "closes_51",
+    "dyck1_39:False",
+    "dyck1_39:True",
+    "has_neg_44",
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "indices:8",
+    "indices:9",
+    "is_negative_48",
+    "last_zero_40:False",
+    "last_zero_40:True",
+    "length_49:0",
+    "length_49:1",
+    "length_49:2",
+    "length_49:3",
+    "length_49:4",
+    "length_49:5",
+    "length_49:6",
+    "length_49:7",
+    "length_49:8",
+    "length_49:9",
+    "length_49:10",
+    "length_49_selector_width_attn_output",
+    "map_43:False",
+    "map_43:True",
+    "map_45:-1",
+    "map_45:0",
+    "map_45:1",
+    "map_45:2",
+    "map_45:3",
+    "map_45:4",
+    "map_45:5",
+    "map_45:6",
+    "map_45:7",
+    "map_45:8",
+    "map_45:9",
+    "not_has_neg_41:False",
+    "not_has_neg_41:True",
+    "one",
+    "opens_50",
+    "pair_balance_46",
+    "tokens:(",
+    "tokens:)",
+    "tokens:bos",
+    "tokens:pad"
+  ],
+  "num_parameters": 293055,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      11,
+      53
+    ],
+    "token_embed||embeddings": [
+      4,
+      53
+    ],
+    "transformer/layer_0/attn/key||b": [
+      26
+    ],
+    "transformer/layer_0/attn/key||w": [
+      53,
+      26
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      53
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      26,
+      53
+    ],
+    "transformer/layer_0/attn/query||b": [
+      26
+    ],
+    "transformer/layer_0/attn/query||w": [
+      53,
+      26
+    ],
+    "transformer/layer_0/attn/value||b": [
+      26
+    ],
+    "transformer/layer_0/attn/value||w": [
+      53,
+      26
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      402
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      53,
+      402
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      53
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      402,
+      53
+    ],
+    "transformer/layer_1/attn/key||b": [
+      26
+    ],
+    "transformer/layer_1/attn/key||w": [
+      53,
+      26
+    ],
+    "transformer/layer_1/attn/linear||b": [
+      53
+    ],
+    "transformer/layer_1/attn/linear||w": [
+      26,
+      53
+    ],
+    "transformer/layer_1/attn/query||b": [
+      26
+    ],
+    "transformer/layer_1/attn/query||w": [
+      53,
+      26
+    ],
+    "transformer/layer_1/attn/value||b": [
+      26
+    ],
+    "transformer/layer_1/attn/value||w": [
+      53,
+      26
+    ],
+    "transformer/layer_1/mlp/linear_1||b": [
+      402
+    ],
+    "transformer/layer_1/mlp/linear_1||w": [
+      53,
+      402
+    ],
+    "transformer/layer_1/mlp/linear_2||b": [
+      53
+    ],
+    "transformer/layer_1/mlp/linear_2||w": [
+      402,
+      53
+    ],
+    "transformer/layer_2/attn/key||b": [
+      26
+    ],
+    "transformer/layer_2/attn/key||w": [
+      53,
+      26
+    ],
+    "transformer/layer_2/attn/linear||b": [
+      53
+    ],
+    "transformer/layer_2/attn/linear||w": [
+      26,
+      53
+    ],
+    "transformer/layer_2/attn/query||b": [
+      26
+    ],
+    "transformer/layer_2/attn/query||w": [
+      53,
+      26
+    ],
+    "transformer/layer_2/attn/value||b": [
+      26
+    ],
+    "transformer/layer_2/attn/value||w": [
+      53,
+      26
+    ],
+    "transformer/layer_2/mlp/linear_1||b": [
+      402
+    ],
+    "transformer/layer_2/mlp/linear_1||w": [
+      53,
+      402
+    ],
+    "transformer/layer_2/mlp/linear_2||b": [
+      53
+    ],
+    "transformer/layer_2/mlp/linear_2||w": [
+      402,
+      53
+    ],
+    "transformer/layer_3/attn/key||b": [
+      26
+    ],
+    "transformer/layer_3/attn/key||w": [
+      53,
+      26
+    ],
+    "transformer/layer_3/attn/linear||b": [
+      53
+    ],
+    "transformer/layer_3/attn/linear||w": [
+      26,
+      53
+    ],
+    "transformer/layer_3/attn/query||b": [
+      26
+    ],
+    "transformer/layer_3/attn/query||w": [
+      53,
+      26
+    ],
+    "transformer/layer_3/attn/value||b": [
+      26
+    ],
+    "transformer/layer_3/attn/value||w": [
+      53,
+      26
+    ],
+    "transformer/layer_3/mlp/linear_1||b": [
+      402
+    ],
+    "transformer/layer_3/mlp/linear_1||w": [
+      53,
+      402
+    ],
+    "transformer/layer_3/mlp/linear_2||b": [
+      53
+    ],
+    "transformer/layer_3/mlp/linear_2||w": [
+      402,
+      53
+    ],
+    "transformer/layer_4/attn/key||b": [
+      26
+    ],
+    "transformer/layer_4/attn/key||w": [
+      53,
+      26
+    ],
+    "transformer/layer_4/attn/linear||b": [
+      53
+    ],
+    "transformer/layer_4/attn/linear||w": [
+      26,
+      53
+    ],
+    "transformer/layer_4/attn/query||b": [
+      26
+    ],
+    "transformer/layer_4/attn/query||w": [
+      53,
+      26
+    ],
+    "transformer/layer_4/attn/value||b": [
+      26
+    ],
+    "transformer/layer_4/attn/value||w": [
+      53,
+      26
+    ],
+    "transformer/layer_4/mlp/linear_1||b": [
+      402
+    ],
+    "transformer/layer_4/mlp/linear_1||w": [
+      53,
+      402
+    ],
+    "transformer/layer_4/mlp/linear_2||b": [
+      53
+    ],
+    "transformer/layer_4/mlp/linear_2||w": [
+      402,
+      53
+    ],
+    "transformer/layer_5/attn/key||b": [
+      26
+    ],
+    "transformer/layer_5/attn/key||w": [
+      53,
+      26
+    ],
+    "transformer/layer_5/attn/linear||b": [
+      53
+    ],
+    "transformer/layer_5/attn/linear||w": [
+      26,
+      53
+    ],
+    "transformer/layer_5/attn/query||b": [
+      26
+    ],
+    "transformer/layer_5/attn/query||w": [
+      53,
+      26
+    ],
+    "transformer/layer_5/attn/value||b": [
+      26
+    ],
+    "transformer/layer_5/attn/value||w": [
+      53,
+      26
+    ],
+    "transformer/layer_5/mlp/linear_1||b": [
+      402
+    ],
+    "transformer/layer_5/mlp/linear_1||w": [
+      53,
+      402
+    ],
+    "transformer/layer_5/mlp/linear_2||b": [
+      53
+    ],
+    "transformer/layer_5/mlp/linear_2||w": [
+      402,
+      53
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "input_encoding_map": [
+    [
+      "a",
+      0
+    ],
+    [
+      "b",
+      1
+    ],
+    [
+      "bos",
+      2
+    ],
+    [
+      "c",
+      3
+    ],
+    [
+      "d",
+      4
+    ],
+    [
+      "pad",
+      5
+    ]
+  ],
+  "categorical_output": true,
+  "output_labels": [
+    "shift_right_5:a",
+    "shift_right_5:b",
+    "shift_right_5:c",
+    "shift_right_5:d"
+  ],
+  "output_values": [
+    "a",
+    "b",
+    "c",
+    "d"
+  ]
+}

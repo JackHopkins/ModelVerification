@@ -1,0 +1,37 @@
+{
+  "input_encoding_map": [
+    [
+      "(",
+      0
+    ],
+    [
+      ")",
+      1
+    ],
+    [
+      "bos",
+      2
+    ],
+    [
+      "pad",
+      3
+    ],
+    [
+      "{",
+      4
+    ],
+    [
+      "}",
+      5
+    ]
+  ],
+  "categorical_output": true,
+  "output_labels": [
+    "shuffle_dyck2_56:False",
+    "shuffle_dyck2_56:True"
+  ],
+  "output_values": [
+    false,
+    true
+  ]
+}

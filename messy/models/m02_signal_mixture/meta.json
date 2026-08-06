@@ -1,0 +1,25 @@
+{
+  "task": "m02_signal_mixture",
+  "description": "Label sampled 0.85 from count rule, 0.15 from a marker bit.",
+  "vocab": [
+    "a",
+    "b",
+    "c",
+    "o",
+    "x"
+  ],
+  "seq_len": 9,
+  "n_classes": 2,
+  "lm": false,
+  "train": {
+    "steps": 4000,
+    "batch": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "warmup": 100,
+    "seed": 0
+  },
+  "n_params": 14882,
+  "final_loss_mean100": 0.2124484458565712,
+  "train_seconds": 90.6
+}

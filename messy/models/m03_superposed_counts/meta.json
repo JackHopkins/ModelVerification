@@ -1,0 +1,28 @@
+{
+  "task": "m03_superposed_counts",
+  "description": "argmax token count, 8 counters squeezed into d_model=10.",
+  "vocab": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h"
+  ],
+  "seq_len": 12,
+  "n_classes": 8,
+  "lm": false,
+  "train": {
+    "steps": 6000,
+    "batch": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "warmup": 100,
+    "seed": 0
+  },
+  "n_params": 2968,
+  "final_loss_mean100": 0.03126893674954772,
+  "train_seconds": 56.8
+}

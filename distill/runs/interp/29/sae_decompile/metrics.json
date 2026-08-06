@@ -1,0 +1,32 @@
+{
+  "position_agreement": 1.0,
+  "sequence_agreement": 1.0,
+  "mean_tv": 0.0004011531660186607,
+  "n_sampled": 20000,
+  "formal": {
+    "mode": "sampled",
+    "n_checked": 200000,
+    "n_disagreements": 0,
+    "disagreement_rate": 0.0,
+    "exact_equivalent": false
+  },
+  "complexity": {
+    "n_nodes": 14,
+    "n_table_cells": 547
+  },
+  "is_hard": false,
+  "sae": {
+    "n_latents_alive": 93,
+    "n_latents_symbolized": 31,
+    "coverage_activation_mass": 0.846,
+    "sae_final_loss": 0.4712,
+    "selected_features": {
+      "tok": 1.0,
+      "eq_tok-1": 0.895,
+      "eq_tok+1": 0.89,
+      "frac_b": 0.819
+    }
+  },
+  "cegis_rounds": 0,
+  "seconds": 7.9
+}

@@ -1,0 +1,12 @@
+{
+  "argmax_accuracy_vs_rule": 1.0,
+  "p1_rule0_marker0": 0.00037335403612814844,
+  "p1_rule0_marker0_bayes": 0.0,
+  "p1_rule0_marker1": 0.1506900191307068,
+  "p1_rule0_marker1_bayes": 0.15000000000000002,
+  "p1_rule1_marker0": 0.8479721546173096,
+  "p1_rule1_marker0_bayes": 0.85,
+  "p1_rule1_marker1": 0.9996073842048645,
+  "p1_rule1_marker1_bayes": 1.0,
+  "mean_calibration_error": 0.0008709585861652047
+}

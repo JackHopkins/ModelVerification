@@ -1,0 +1,20 @@
+{
+  "position_agreement": 0.90165,
+  "sequence_agreement": 0.90165,
+  "mean_tv": 0.13300156668470905,
+  "n_sampled": 20000,
+  "formal": {
+    "mode": "sampled",
+    "n_checked": 200000,
+    "n_disagreements": 20143,
+    "disagreement_rate": 0.100715,
+    "exact_equivalent": false
+  },
+  "complexity": {
+    "n_nodes": 37,
+    "n_table_cells": 1180
+  },
+  "is_hard": false,
+  "cegis_rounds": 8,
+  "seconds": 84.3
+}

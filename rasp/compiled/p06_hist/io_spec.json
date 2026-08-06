@@ -1,0 +1,47 @@
+{
+  "input_encoding_map": [
+    [
+      "a",
+      0
+    ],
+    [
+      "b",
+      1
+    ],
+    [
+      "bos",
+      2
+    ],
+    [
+      "c",
+      3
+    ],
+    [
+      "pad",
+      4
+    ]
+  ],
+  "categorical_output": true,
+  "output_labels": [
+    "hist_10:0",
+    "hist_10:1",
+    "hist_10:2",
+    "hist_10:3",
+    "hist_10:4",
+    "hist_10:5",
+    "hist_10:6",
+    "hist_10:7",
+    "hist_10:8"
+  ],
+  "output_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ]
+}

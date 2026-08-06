@@ -1,0 +1,44 @@
+{
+  "position_agreement": 0.9972,
+  "sequence_agreement": 0.9972,
+  "n_sampled": 20000,
+  "formal": {
+    "mode": "exhaustive",
+    "n_checked": 2046,
+    "n_disagreements": 42,
+    "disagreement_rate": 0.020527859237536656,
+    "exact_equivalent": false
+  },
+  "structural": {
+    "node_f1": 0.884,
+    "node_precision": 0.792,
+    "node_recall": 1.0,
+    "gt_nodes": {
+      "SeqMap": 1,
+      "Aggregate": 4,
+      "Select": 4,
+      "Indices": 1,
+      "Map": 6,
+      "SelectorWidth": 1,
+      "Tokens": 1,
+      "LinComb": 1
+    },
+    "extracted_nodes": {
+      "SeqMap": 1,
+      "Aggregate": 4,
+      "Indices": 1,
+      "Map": 9,
+      "SelectorWidth": 1,
+      "Tokens": 1,
+      "Select": 5,
+      "LinComb": 2
+    }
+  },
+  "complexity": {
+    "n_nodes": 24,
+    "n_table_cells": 455
+  },
+  "is_hard": true,
+  "cegis_rounds": 0,
+  "seconds": 1.8
+}

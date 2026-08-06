@@ -1,0 +1,33 @@
+{
+  "input_encoding_map": [
+    [
+      "a",
+      0
+    ],
+    [
+      "b",
+      1
+    ],
+    [
+      "bos",
+      2
+    ],
+    [
+      "c",
+      3
+    ],
+    [
+      "pad",
+      4
+    ]
+  ],
+  "categorical_output": true,
+  "output_labels": [
+    "detect_abc_25:False",
+    "detect_abc_25:True"
+  ],
+  "output_values": [
+    false,
+    true
+  ]
+}

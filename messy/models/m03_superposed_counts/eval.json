@@ -1,0 +1,6 @@
+{
+  "accuracy": 0.99332,
+  "probe_mean_r2": 0.7513766900136538,
+  "probe_mean_abs_offdiag_cosine": 0.17516594070528987,
+  "probe_max_abs_offdiag_cosine": 0.5265424136199827
+}

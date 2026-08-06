@@ -1,0 +1,58 @@
+|--- feature_2 <= 1.50
+|   |--- feature_4 <= -0.50
+|   |   |--- feature_2 <= 0.50
+|   |   |   |--- class: 0
+|   |   |--- feature_2 >  0.50
+|   |   |   |--- class: 2
+|   |--- feature_4 >  -0.50
+|   |   |--- feature_0 <= 1.50
+|   |   |   |--- feature_3 <= -0.50
+|   |   |   |   |--- feature_13 <= 0.50
+|   |   |   |   |   |--- class: 3
+|   |   |   |   |--- feature_13 >  0.50
+|   |   |   |   |   |--- class: 5
+|   |   |   |--- feature_3 >  -0.50
+|   |   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |   |--- class: 2
+|   |   |   |   |--- feature_2 >  0.50
+|   |   |   |   |   |--- class: 4
+|   |   |--- feature_0 >  1.50
+|   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |--- class: 1
+|   |   |   |--- feature_2 >  0.50
+|   |   |   |   |--- class: 3
+|--- feature_2 >  1.50
+|   |--- feature_2 <= 3.50
+|   |   |--- feature_0 <= 0.50
+|   |   |   |--- feature_2 <= 2.50
+|   |   |   |   |--- class: 7
+|   |   |   |--- feature_2 >  2.50
+|   |   |   |   |--- class: 9
+|   |   |--- feature_0 >  0.50
+|   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |--- feature_2 <= 2.50
+|   |   |   |   |   |--- feature_0 <= 1.50
+|   |   |   |   |   |   |--- class: 6
+|   |   |   |   |   |--- feature_0 >  1.50
+|   |   |   |   |   |   |--- class: 5
+|   |   |   |   |--- feature_2 >  2.50
+|   |   |   |   |   |--- feature_0 <= 1.50
+|   |   |   |   |   |   |--- class: 8
+|   |   |   |   |   |--- feature_0 >  1.50
+|   |   |   |   |   |   |--- class: 7
+|   |   |   |--- feature_0 >  2.50
+|   |   |   |   |--- feature_2 <= 2.50
+|   |   |   |   |   |--- class: 4
+|   |   |   |   |--- feature_2 >  2.50
+|   |   |   |   |   |--- class: 6
+|   |--- feature_2 >  3.50
+|   |   |--- feature_0 <= 0.50
+|   |   |   |--- class: 11
+|   |   |--- feature_0 >  0.50
+|   |   |   |--- feature_0 <= 1.50
+|   |   |   |   |--- class: 10
+|   |   |   |--- feature_0 >  1.50
+|   |   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |   |--- class: 9
+|   |   |   |   |--- feature_0 >  2.50
+|   |   |   |   |   |--- class: 8

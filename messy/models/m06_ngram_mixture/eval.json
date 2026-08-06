@@ -1,0 +1,6 @@
+{
+  "model_mean_kl_vs_true": 0.0003008091177977234,
+  "pure_bigram_mean_kl_vs_true": 0.512971429947036,
+  "pure_trigram_mean_kl_vs_true": 0.8177306746099157,
+  "beats_both_single_heuristics": true
+}

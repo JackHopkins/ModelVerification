@@ -1,0 +1,26 @@
+{
+  "task": "m01_heuristic_vote",
+  "description": "Label = weighted vote (.4/.3/.2/.1 > 0.5) of four heuristics.",
+  "vocab": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f"
+  ],
+  "seq_len": 10,
+  "n_classes": 2,
+  "lm": false,
+  "train": {
+    "steps": 3000,
+    "batch": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "warmup": 100,
+    "seed": 0
+  },
+  "n_params": 26050,
+  "final_loss_mean100": 8.28930350689916e-05,
+  "train_seconds": 69.8
+}

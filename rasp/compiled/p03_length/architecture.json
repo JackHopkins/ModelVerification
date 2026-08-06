@@ -1,0 +1,99 @@
+{
+  "name": "p03_length",
+  "description": "Output the sequence length at every position.",
+  "vocab": [
+    "a",
+    "b",
+    "c"
+  ],
+  "max_seq_len": 8,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 1,
+  "num_heads": 1,
+  "key_size": 5,
+  "mlp_hidden_size": 18,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 24,
+  "residual_labels": [
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "length_3:0",
+    "length_3:1",
+    "length_3:2",
+    "length_3:3",
+    "length_3:4",
+    "length_3:5",
+    "length_3:6",
+    "length_3:7",
+    "length_3:8",
+    "length_3_selector_width_attn_output",
+    "one",
+    "tokens:a",
+    "tokens:b",
+    "tokens:bos",
+    "tokens:c",
+    "tokens:pad"
+  ],
+  "num_parameters": 1761,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      9,
+      24
+    ],
+    "token_embed||embeddings": [
+      5,
+      24
+    ],
+    "transformer/layer_0/attn/key||b": [
+      5
+    ],
+    "transformer/layer_0/attn/key||w": [
+      24,
+      5
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      24
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      5,
+      24
+    ],
+    "transformer/layer_0/attn/query||b": [
+      5
+    ],
+    "transformer/layer_0/attn/query||w": [
+      24,
+      5
+    ],
+    "transformer/layer_0/attn/value||b": [
+      5
+    ],
+    "transformer/layer_0/attn/value||w": [
+      24,
+      5
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      18
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      24,
+      18
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      24
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      18,
+      24
+    ]
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "name": "p10_sort",
+  "description": "Sort the input digits into ascending order.",
+  "vocab": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "max_seq_len": 8,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 3,
+  "num_heads": 1,
+  "key_size": 42,
+  "mlp_hidden_size": 40,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 71,
+  "residual_labels": [
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "one",
+    "sort_34:1",
+    "sort_34:2",
+    "sort_34:3",
+    "sort_34:4",
+    "sort_34:5",
+    "target_pos_36:0",
+    "target_pos_36:1",
+    "target_pos_36:2",
+    "target_pos_36:3",
+    "target_pos_36:4",
+    "target_pos_36:5",
+    "target_pos_36:6",
+    "target_pos_36:7",
+    "target_pos_36:8",
+    "target_pos_36_selector_width_attn_output",
+    "tokens:1",
+    "tokens:2",
+    "tokens:3",
+    "tokens:4",
+    "tokens:5",
+    "tokens:bos",
+    "tokens:pad",
+    "unique_keys_38:1.0",
+    "unique_keys_38:1.125",
+    "unique_keys_38:1.25",
+    "unique_keys_38:1.375",
+    "unique_keys_38:1.5",
+    "unique_keys_38:1.625",
+    "unique_keys_38:1.75",
+    "unique_keys_38:1.875",
+    "unique_keys_38:2.0",
+    "unique_keys_38:2.125",
+    "unique_keys_38:2.25",
+    "unique_keys_38:2.375",
+    "unique_keys_38:2.5",
+    "unique_keys_38:2.625",
+    "unique_keys_38:2.75",
+    "unique_keys_38:2.875",
+    "unique_keys_38:3.0",
+    "unique_keys_38:3.125",
+    "unique_keys_38:3.25",
+    "unique_keys_38:3.375",
+    "unique_keys_38:3.5",
+    "unique_keys_38:3.625",
+    "unique_keys_38:3.75",
+    "unique_keys_38:3.875",
+    "unique_keys_38:4.0",
+    "unique_keys_38:4.125",
+    "unique_keys_38:4.25",
+    "unique_keys_38:4.375",
+    "unique_keys_38:4.5",
+    "unique_keys_38:4.625",
+    "unique_keys_38:4.75",
+    "unique_keys_38:4.875",
+    "unique_keys_38:5.0",
+    "unique_keys_38:5.125",
+    "unique_keys_38:5.25",
+    "unique_keys_38:5.375",
+    "unique_keys_38:5.5",
+    "unique_keys_38:5.625",
+    "unique_keys_38:5.75",
+    "unique_keys_38:5.875"
+  ],
+  "num_parameters": 54884,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      9,
+      71
+    ],
+    "token_embed||embeddings": [
+      7,
+      71
+    ],
+    "transformer/layer_0/attn/key||b": [
+      42
+    ],
+    "transformer/layer_0/attn/key||w": [
+      71,
+      42
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      71
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      42,
+      71
+    ],
+    "transformer/layer_0/attn/query||b": [
+      42
+    ],
+    "transformer/layer_0/attn/query||w": [
+      71,
+      42
+    ],
+    "transformer/layer_0/attn/value||b": [
+      42
+    ],
+    "transformer/layer_0/attn/value||w": [
+      71,
+      42
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      40
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      71,
+      40
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      71
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      40,
+      71
+    ],
+    "transformer/layer_1/attn/key||b": [
+      42
+    ],
+    "transformer/layer_1/attn/key||w": [
+      71,
+      42
+    ],
+    "transformer/layer_1/attn/linear||b": [
+      71
+    ],
+    "transformer/layer_1/attn/linear||w": [
+      42,
+      71
+    ],
+    "transformer/layer_1/attn/query||b": [
+      42
+    ],
+    "transformer/layer_1/attn/query||w": [
+      71,
+      42
+    ],
+    "transformer/layer_1/attn/value||b": [
+      42
+    ],
+    "transformer/layer_1/attn/value||w": [
+      71,
+      42
+    ],
+    "transformer/layer_1/mlp/linear_1||b": [
+      40
+    ],
+    "transformer/layer_1/mlp/linear_1||w": [
+      71,
+      40
+    ],
+    "transformer/layer_1/mlp/linear_2||b": [
+      71
+    ],
+    "transformer/layer_1/mlp/linear_2||w": [
+      40,
+      71
+    ],
+    "transformer/layer_2/attn/key||b": [
+      42
+    ],
+    "transformer/layer_2/attn/key||w": [
+      71,
+      42
+    ],
+    "transformer/layer_2/attn/linear||b": [
+      71
+    ],
+    "transformer/layer_2/attn/linear||w": [
+      42,
+      71
+    ],
+    "transformer/layer_2/attn/query||b": [
+      42
+    ],
+    "transformer/layer_2/attn/query||w": [
+      71,
+      42
+    ],
+    "transformer/layer_2/attn/value||b": [
+      42
+    ],
+    "transformer/layer_2/attn/value||w": [
+      71,
+      42
+    ],
+    "transformer/layer_2/mlp/linear_1||b": [
+      40
+    ],
+    "transformer/layer_2/mlp/linear_1||w": [
+      71,
+      40
+    ],
+    "transformer/layer_2/mlp/linear_2||b": [
+      71
+    ],
+    "transformer/layer_2/mlp/linear_2||w": [
+      40,
+      71
+    ]
+  }
+}

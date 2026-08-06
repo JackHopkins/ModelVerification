@@ -1,0 +1,226 @@
+|--- feature_14 <= 0.50
+|   |--- feature_0 <= 1.50
+|   |   |--- feature_3 <= -0.50
+|   |   |   |--- feature_13 <= 0.50
+|   |   |   |   |--- feature_11 <= 0.50
+|   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |--- feature_11 >  0.50
+|   |   |   |   |   |--- value: [-0.00]
+|   |   |   |--- feature_13 >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |--- feature_3 >  -0.50
+|   |   |   |--- feature_2 <= 1.50
+|   |   |   |   |--- feature_5 <= 1.50
+|   |   |   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |   |   |--- feature_3 <= 0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |   |--- feature_3 >  0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |--- feature_2 >  0.50
+|   |   |   |   |   |   |--- feature_5 <= 0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |   |--- feature_5 >  0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |--- feature_5 >  1.50
+|   |   |   |   |   |--- feature_12 <= 0.50
+|   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |--- feature_12 >  0.50
+|   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |--- feature_2 >  1.50
+|   |   |   |   |--- feature_13 <= 1.50
+|   |   |   |   |   |--- feature_11 <= 0.50
+|   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |--- feature_11 >  0.50
+|   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |--- feature_13 >  1.50
+|   |   |   |   |   |--- value: [-0.00]
+|   |--- feature_0 >  1.50
+|   |   |--- feature_2 <= 1.50
+|   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |--- feature_13 <= 0.50
+|   |   |   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |   |   |--- feature_3 <= 0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |   |   |--- feature_3 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |   |--- feature_0 >  2.50
+|   |   |   |   |   |   |--- feature_12 <= 1.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |   |--- feature_12 >  1.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |--- feature_13 >  0.50
+|   |   |   |   |   |--- feature_13 <= 1.50
+|   |   |   |   |   |   |--- feature_4 <= -0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |   |--- feature_4 >  -0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |--- feature_13 >  1.50
+|   |   |   |   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |   |--- feature_0 >  2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 5
+|   |   |   |--- feature_2 >  0.50
+|   |   |   |   |--- feature_13 <= 0.50
+|   |   |   |   |   |--- feature_11 <= 1.50
+|   |   |   |   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |   |--- feature_0 >  2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |--- feature_11 >  1.50
+|   |   |   |   |   |   |--- feature_4 <= -0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |   |--- feature_4 >  -0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |--- feature_13 >  0.50
+|   |   |   |   |   |--- feature_13 <= 1.50
+|   |   |   |   |   |   |--- feature_11 <= 0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |   |--- feature_11 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |--- feature_13 >  1.50
+|   |   |   |   |   |   |--- feature_13 <= 2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 5
+|   |   |   |   |   |   |--- feature_13 >  2.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |--- feature_2 >  1.50
+|   |   |   |--- feature_13 <= 1.50
+|   |   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |   |--- feature_3 <= 0.50
+|   |   |   |   |   |   |--- feature_5 <= 0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |   |--- feature_5 >  0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |--- feature_3 >  0.50
+|   |   |   |   |   |   |--- feature_12 <= 1.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |   |--- feature_12 >  1.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |--- feature_0 >  2.50
+|   |   |   |   |   |--- feature_11 <= 1.50
+|   |   |   |   |   |   |--- feature_11 <= 0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |   |--- feature_11 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |--- feature_11 >  1.50
+|   |   |   |   |   |   |--- feature_7 <= 2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |   |--- feature_7 >  2.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |--- feature_13 >  1.50
+|   |   |   |   |--- feature_13 <= 2.50
+|   |   |   |   |   |--- feature_4 <= -0.50
+|   |   |   |   |   |   |--- feature_7 <= 0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |   |--- feature_7 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 5
+|   |   |   |   |   |--- feature_4 >  -0.50
+|   |   |   |   |   |   |--- feature_12 <= 0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |   |   |--- feature_12 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |--- feature_13 >  2.50
+|   |   |   |   |   |--- feature_13 <= 3.50
+|   |   |   |   |   |   |--- feature_4 <= -0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |   |--- feature_4 >  -0.50
+|   |   |   |   |   |   |   |--- value: [-0.00]
+|   |   |   |   |   |--- feature_13 >  3.50
+|   |   |   |   |   |   |--- value: [-0.00]
+|--- feature_14 >  0.50
+|   |--- feature_0 <= 0.50
+|   |   |--- feature_10 <= 1.50
+|   |   |   |--- value: [1.01]
+|   |   |--- feature_10 >  1.50
+|   |   |   |--- feature_7 <= 0.50
+|   |   |   |   |--- feature_10 <= 3.50
+|   |   |   |   |   |--- feature_8 <= 1.50
+|   |   |   |   |   |   |--- feature_9 <= 0.50
+|   |   |   |   |   |   |   |--- value: [1.01]
+|   |   |   |   |   |   |--- feature_9 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 5
+|   |   |   |   |   |--- feature_8 >  1.50
+|   |   |   |   |   |   |--- value: [1.01]
+|   |   |   |   |--- feature_10 >  3.50
+|   |   |   |   |   |--- value: [1.01]
+|   |   |   |--- feature_7 >  0.50
+|   |   |   |   |--- value: [1.01]
+|   |--- feature_0 >  0.50
+|   |   |--- feature_14 <= 1.50
+|   |   |   |--- feature_0 <= 1.50
+|   |   |   |   |--- feature_5 <= 2.50
+|   |   |   |   |   |--- feature_13 <= 0.50
+|   |   |   |   |   |   |--- feature_12 <= 0.50
+|   |   |   |   |   |   |   |--- value: [0.51]
+|   |   |   |   |   |   |--- feature_12 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |   |--- feature_13 >  0.50
+|   |   |   |   |   |   |--- value: [0.52]
+|   |   |   |   |--- feature_5 >  2.50
+|   |   |   |   |   |--- feature_12 <= 0.50
+|   |   |   |   |   |   |--- feature_13 <= 0.50
+|   |   |   |   |   |   |   |--- value: [0.51]
+|   |   |   |   |   |   |--- feature_13 >  0.50
+|   |   |   |   |   |   |   |--- value: [0.51]
+|   |   |   |   |   |--- feature_12 >  0.50
+|   |   |   |   |   |   |--- value: [0.51]
+|   |   |   |--- feature_0 >  1.50
+|   |   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |   |--- feature_3 <= 2.50
+|   |   |   |   |   |   |--- feature_5 <= 2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |   |--- feature_5 >  2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |--- feature_3 >  2.50
+|   |   |   |   |   |   |--- feature_5 <= 1.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |   |--- feature_5 >  1.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |--- feature_0 >  2.50
+|   |   |   |   |   |--- feature_2 <= 2.50
+|   |   |   |   |   |   |--- feature_5 <= 2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |   |--- feature_5 >  2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |--- feature_2 >  2.50
+|   |   |   |   |   |   |--- feature_13 <= 1.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |   |--- feature_13 >  1.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 5
+|   |   |--- feature_14 >  1.50
+|   |   |   |--- feature_0 <= 1.50
+|   |   |   |   |--- feature_10 <= 2.50
+|   |   |   |   |   |--- feature_8 <= 0.50
+|   |   |   |   |   |   |--- value: [1.00]
+|   |   |   |   |   |--- feature_8 >  0.50
+|   |   |   |   |   |   |--- feature_7 <= 0.50
+|   |   |   |   |   |   |   |--- value: [1.00]
+|   |   |   |   |   |   |--- feature_7 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |--- feature_10 >  2.50
+|   |   |   |   |   |--- feature_4 <= 1.50
+|   |   |   |   |   |   |--- value: [1.00]
+|   |   |   |   |   |--- feature_4 >  1.50
+|   |   |   |   |   |   |--- feature_6 <= 1.50
+|   |   |   |   |   |   |   |--- value: [1.00]
+|   |   |   |   |   |   |--- feature_6 >  1.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |--- feature_0 >  1.50
+|   |   |   |   |--- feature_14 <= 2.50
+|   |   |   |   |   |--- feature_4 <= -0.50
+|   |   |   |   |   |   |--- feature_6 <= 2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |   |--- feature_6 >  2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |--- feature_4 >  -0.50
+|   |   |   |   |   |   |--- feature_2 <= 2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |   |   |   |   |--- feature_2 >  2.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |--- feature_14 >  2.50
+|   |   |   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |   |   |--- value: [1.00]
+|   |   |   |   |   |--- feature_0 >  2.50
+|   |   |   |   |   |   |--- feature_10 <= 3.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 6
+|   |   |   |   |   |   |--- feature_10 >  3.50
+|   |   |   |   |   |   |   |--- value: [1.00]

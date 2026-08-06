@@ -1,0 +1,35 @@
+{
+  "input_encoding_map": [
+    [
+      "a",
+      0
+    ],
+    [
+      "b",
+      1
+    ],
+    [
+      "bos",
+      2
+    ],
+    [
+      "c",
+      3
+    ],
+    [
+      "pad",
+      4
+    ]
+  ],
+  "categorical_output": true,
+  "output_labels": [
+    "reverse_19:a",
+    "reverse_19:b",
+    "reverse_19:c"
+  ],
+  "output_values": [
+    "a",
+    "b",
+    "c"
+  ]
+}

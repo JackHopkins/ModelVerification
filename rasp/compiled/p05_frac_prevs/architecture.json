@@ -1,0 +1,131 @@
+{
+  "name": "p05_frac_prevs",
+  "description": "Running fraction of tokens equal to \"x\" up to each position.",
+  "vocab": [
+    "x",
+    "y"
+  ],
+  "max_seq_len": 8,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 2,
+  "num_heads": 1,
+  "key_size": 10,
+  "mlp_hidden_size": 1,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 15,
+  "residual_labels": [
+    "frac_prevs_7",
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "is_x_9",
+    "one",
+    "tokens:bos",
+    "tokens:pad",
+    "tokens:x",
+    "tokens:y"
+  ],
+  "num_parameters": 1577,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      9,
+      15
+    ],
+    "token_embed||embeddings": [
+      4,
+      15
+    ],
+    "transformer/layer_0/attn/key||b": [
+      10
+    ],
+    "transformer/layer_0/attn/key||w": [
+      15,
+      10
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      15
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      10,
+      15
+    ],
+    "transformer/layer_0/attn/query||b": [
+      10
+    ],
+    "transformer/layer_0/attn/query||w": [
+      15,
+      10
+    ],
+    "transformer/layer_0/attn/value||b": [
+      10
+    ],
+    "transformer/layer_0/attn/value||w": [
+      15,
+      10
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      1
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      15,
+      1
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      15
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      1,
+      15
+    ],
+    "transformer/layer_1/attn/key||b": [
+      10
+    ],
+    "transformer/layer_1/attn/key||w": [
+      15,
+      10
+    ],
+    "transformer/layer_1/attn/linear||b": [
+      15
+    ],
+    "transformer/layer_1/attn/linear||w": [
+      10,
+      15
+    ],
+    "transformer/layer_1/attn/query||b": [
+      10
+    ],
+    "transformer/layer_1/attn/query||w": [
+      15,
+      10
+    ],
+    "transformer/layer_1/attn/value||b": [
+      10
+    ],
+    "transformer/layer_1/attn/value||w": [
+      15,
+      10
+    ],
+    "transformer/layer_1/mlp/linear_1||b": [
+      1
+    ],
+    "transformer/layer_1/mlp/linear_1||w": [
+      15,
+      1
+    ],
+    "transformer/layer_1/mlp/linear_2||b": [
+      15
+    ],
+    "transformer/layer_1/mlp/linear_2||w": [
+      1,
+      15
+    ]
+  }
+}

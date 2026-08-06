@@ -1,0 +1,47 @@
+{
+  "input_encoding_map": [
+    [
+      "a",
+      0
+    ],
+    [
+      "b",
+      1
+    ],
+    [
+      "bos",
+      2
+    ],
+    [
+      "c",
+      3
+    ],
+    [
+      "pad",
+      4
+    ]
+  ],
+  "categorical_output": true,
+  "output_labels": [
+    "length_3:0",
+    "length_3:1",
+    "length_3:2",
+    "length_3:3",
+    "length_3:4",
+    "length_3:5",
+    "length_3:6",
+    "length_3:7",
+    "length_3:8"
+  ],
+  "output_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ]
+}

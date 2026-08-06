@@ -1,0 +1,32 @@
+{
+  "task": "m04_multitask",
+  "description": "One model, four tasks (max/min/mode/last) selected by prefix.",
+  "vocab": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "TMAX",
+    "TMIN",
+    "TMODE",
+    "TLAST"
+  ],
+  "seq_len": 9,
+  "n_classes": 8,
+  "lm": false,
+  "train": {
+    "steps": 5000,
+    "batch": 256,
+    "lr": 0.001,
+    "weight_decay": 0.01,
+    "warmup": 100,
+    "seed": 0
+  },
+  "n_params": 15200,
+  "final_loss_mean100": 0.0017414770886534825,
+  "train_seconds": 115.1
+}

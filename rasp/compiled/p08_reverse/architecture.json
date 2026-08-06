@@ -1,0 +1,260 @@
+{
+  "name": "p08_reverse",
+  "description": "Output the input sequence reversed.",
+  "vocab": [
+    "a",
+    "b",
+    "c"
+  ],
+  "max_seq_len": 8,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 4,
+  "num_heads": 1,
+  "key_size": 18,
+  "mlp_hidden_size": 72,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 59,
+  "residual_labels": [
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "length_23:0",
+    "length_23:1",
+    "length_23:2",
+    "length_23:3",
+    "length_23:4",
+    "length_23:5",
+    "length_23:6",
+    "length_23:7",
+    "length_23:8",
+    "length_23_selector_width_attn_output",
+    "one",
+    "opp_idx-1_21:-8",
+    "opp_idx-1_21:-7",
+    "opp_idx-1_21:-6",
+    "opp_idx-1_21:-5",
+    "opp_idx-1_21:-4",
+    "opp_idx-1_21:-3",
+    "opp_idx-1_21:-2",
+    "opp_idx-1_21:-1",
+    "opp_idx-1_21:0",
+    "opp_idx-1_21:1",
+    "opp_idx-1_21:2",
+    "opp_idx-1_21:3",
+    "opp_idx-1_21:4",
+    "opp_idx-1_21:5",
+    "opp_idx-1_21:6",
+    "opp_idx-1_21:7",
+    "opp_idx_22:-7",
+    "opp_idx_22:-6",
+    "opp_idx_22:-5",
+    "opp_idx_22:-4",
+    "opp_idx_22:-3",
+    "opp_idx_22:-2",
+    "opp_idx_22:-1",
+    "opp_idx_22:0",
+    "opp_idx_22:1",
+    "opp_idx_22:2",
+    "opp_idx_22:3",
+    "opp_idx_22:4",
+    "opp_idx_22:5",
+    "opp_idx_22:6",
+    "opp_idx_22:7",
+    "opp_idx_22:8",
+    "reverse_19:a",
+    "reverse_19:b",
+    "reverse_19:c",
+    "tokens:a",
+    "tokens:b",
+    "tokens:bos",
+    "tokens:c",
+    "tokens:pad"
+  ],
+  "num_parameters": 52778,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      9,
+      59
+    ],
+    "token_embed||embeddings": [
+      5,
+      59
+    ],
+    "transformer/layer_0/attn/key||b": [
+      18
+    ],
+    "transformer/layer_0/attn/key||w": [
+      59,
+      18
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      59
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      18,
+      59
+    ],
+    "transformer/layer_0/attn/query||b": [
+      18
+    ],
+    "transformer/layer_0/attn/query||w": [
+      59,
+      18
+    ],
+    "transformer/layer_0/attn/value||b": [
+      18
+    ],
+    "transformer/layer_0/attn/value||w": [
+      59,
+      18
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      72
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      59,
+      72
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      59
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      72,
+      59
+    ],
+    "transformer/layer_1/attn/key||b": [
+      18
+    ],
+    "transformer/layer_1/attn/key||w": [
+      59,
+      18
+    ],
+    "transformer/layer_1/attn/linear||b": [
+      59
+    ],
+    "transformer/layer_1/attn/linear||w": [
+      18,
+      59
+    ],
+    "transformer/layer_1/attn/query||b": [
+      18
+    ],
+    "transformer/layer_1/attn/query||w": [
+      59,
+      18
+    ],
+    "transformer/layer_1/attn/value||b": [
+      18
+    ],
+    "transformer/layer_1/attn/value||w": [
+      59,
+      18
+    ],
+    "transformer/layer_1/mlp/linear_1||b": [
+      72
+    ],
+    "transformer/layer_1/mlp/linear_1||w": [
+      59,
+      72
+    ],
+    "transformer/layer_1/mlp/linear_2||b": [
+      59
+    ],
+    "transformer/layer_1/mlp/linear_2||w": [
+      72,
+      59
+    ],
+    "transformer/layer_2/attn/key||b": [
+      18
+    ],
+    "transformer/layer_2/attn/key||w": [
+      59,
+      18
+    ],
+    "transformer/layer_2/attn/linear||b": [
+      59
+    ],
+    "transformer/layer_2/attn/linear||w": [
+      18,
+      59
+    ],
+    "transformer/layer_2/attn/query||b": [
+      18
+    ],
+    "transformer/layer_2/attn/query||w": [
+      59,
+      18
+    ],
+    "transformer/layer_2/attn/value||b": [
+      18
+    ],
+    "transformer/layer_2/attn/value||w": [
+      59,
+      18
+    ],
+    "transformer/layer_2/mlp/linear_1||b": [
+      72
+    ],
+    "transformer/layer_2/mlp/linear_1||w": [
+      59,
+      72
+    ],
+    "transformer/layer_2/mlp/linear_2||b": [
+      59
+    ],
+    "transformer/layer_2/mlp/linear_2||w": [
+      72,
+      59
+    ],
+    "transformer/layer_3/attn/key||b": [
+      18
+    ],
+    "transformer/layer_3/attn/key||w": [
+      59,
+      18
+    ],
+    "transformer/layer_3/attn/linear||b": [
+      59
+    ],
+    "transformer/layer_3/attn/linear||w": [
+      18,
+      59
+    ],
+    "transformer/layer_3/attn/query||b": [
+      18
+    ],
+    "transformer/layer_3/attn/query||w": [
+      59,
+      18
+    ],
+    "transformer/layer_3/attn/value||b": [
+      18
+    ],
+    "transformer/layer_3/attn/value||w": [
+      59,
+      18
+    ],
+    "transformer/layer_3/mlp/linear_1||b": [
+      72
+    ],
+    "transformer/layer_3/mlp/linear_1||w": [
+      59,
+      72
+    ],
+    "transformer/layer_3/mlp/linear_2||b": [
+      59
+    ],
+    "transformer/layer_3/mlp/linear_2||w": [
+      72,
+      59
+    ]
+  }
+}

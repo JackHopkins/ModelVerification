@@ -1,0 +1,10 @@
+tracr @ git+https://github.com/google-deepmind/tracr@9ce2b8c82b6ba10e62e86cf6f390e7536d4fd2cd
+jax==0.11.0
+jaxlib==0.11.0
+dm-haiku==0.0.17
+numpy==2.5.1
+huggingface_hub
+# Optional — needed for interp_bench inference sanity checks:
+# torch==2.13.0
+# transformer_lens==3.6.0
+# mlx==0.32.0

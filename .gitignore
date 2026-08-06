@@ -1,0 +1,15 @@
+# environment
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# re-fetchable external artifacts (see interp_bench/download.py)
+interp_bench/tasks/
+
+# third-party clones (see distill/README.md for repos + commits)
+distill/third_party/
+
+# transient sweep logs
+distill/runs/*.log
+.idea/

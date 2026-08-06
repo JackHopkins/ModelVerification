@@ -1,0 +1,28 @@
+{
+  "input_encoding_map": [
+    [
+      "(",
+      0
+    ],
+    [
+      ")",
+      1
+    ],
+    [
+      "a",
+      2
+    ],
+    [
+      "bos",
+      3
+    ],
+    [
+      "pad",
+      4
+    ]
+  ],
+  "categorical_output": false,
+  "output_labels": [
+    "pair_balance_12"
+  ]
+}

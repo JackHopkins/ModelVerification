@@ -1,0 +1,1298 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "name": "InterpBench",
+  "description": "A benchmark of transformers with known circuits for evaluating mechanistic interpretability techniques.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "url": "https://huggingface.co/cybershiptrooper/InterpBench",
+  "version": "1.0.0",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "hf-repository",
+      "name": "hf-repository",
+      "description": "The Hugging Face git repository.",
+      "contentUrl": "https://huggingface.co/cybershiptrooper/InterpBench",
+      "encodingFormat": "git+https",
+      "sha256": "main"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "benchmark-cases-parquet",
+      "name": "benchmark-cases-parquet",
+      "description": "Parquet file describing all the cases in the benchmark.",
+      "containedIn": {
+        "@id": "hf-repository"
+      },
+      "encodingFormat": "application/x-parquet"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "training-args",
+      "name": "training-args",
+      "description": "Training arguments.",
+      "containedIn": {
+        "@id": "hf-repository"
+      },
+      "encodingFormat": "application/json",
+      "includes": "*/meta_[0-9]*.json"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "circuits",
+      "name": "circuits",
+      "description": "Ground truth circuits (Pickle).",
+      "containedIn": {
+        "@id": "hf-repository"
+      },
+      "encodingFormat": "application/octet-stream",
+      "includes": "*/edges.pkl"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "weights",
+      "name": "weights",
+      "description": "Serialized PyTorch state dictionaries (Pickle).",
+      "containedIn": {
+        "@id": "hf-repository"
+      },
+      "encodingFormat": "application/octet-stream",
+      "includes": "*/ll_model_[0-9]*.pkl"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "cfgs",
+      "name": "cfgs",
+      "description": "Architecture configs (Pickle).",
+      "containedIn": {
+        "@id": "hf-repository"
+      },
+      "encodingFormat": "application/octet-stream",
+      "includes": "*/ll_model_cfg_[0-9]*.pkl"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "cases",
+      "name": "cases",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "case_id",
+          "name": "case_id",
+          "description": "Column 'case_id' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "case_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "url",
+          "name": "url",
+          "description": "Column 'url' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "task_description",
+          "name": "task_description",
+          "description": "Column 'task_description' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "task_description"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "max_seq_len",
+          "name": "max_seq_len",
+          "description": "Column 'max_seq_len' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "max_seq_len"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "min_seq_len",
+          "name": "min_seq_len",
+          "description": "Column 'min_seq_len' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "min_seq_len"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg_file_url",
+          "name": "transformer_cfg_file_url",
+          "description": "Column 'transformer_cfg_file_url' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg_file_url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args_file_url",
+          "name": "training_args_file_url",
+          "description": "Column 'training_args_file_url' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args_file_url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "weights_file_url",
+          "name": "weights_file_url",
+          "description": "Column 'weights_file_url' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "weights_file_url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "circuit_file_url",
+          "name": "circuit_file_url",
+          "description": "Column 'circuit_file_url' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "circuit_file_url"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.n_layers",
+          "name": "transformer_cfg.n_layers",
+          "description": "Column 'transformer_cfg.n_layers' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.n_layers"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.d_model",
+          "name": "transformer_cfg.d_model",
+          "description": "Column 'transformer_cfg.d_model' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.d_model"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.n_ctx",
+          "name": "transformer_cfg.n_ctx",
+          "description": "Column 'transformer_cfg.n_ctx' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.n_ctx"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.d_head",
+          "name": "transformer_cfg.d_head",
+          "description": "Column 'transformer_cfg.d_head' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.d_head"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.model_name",
+          "name": "transformer_cfg.model_name",
+          "description": "Column 'transformer_cfg.model_name' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.model_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.n_heads",
+          "name": "transformer_cfg.n_heads",
+          "description": "Column 'transformer_cfg.n_heads' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.n_heads"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.d_mlp",
+          "name": "transformer_cfg.d_mlp",
+          "description": "Column 'transformer_cfg.d_mlp' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.d_mlp"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.act_fn",
+          "name": "transformer_cfg.act_fn",
+          "description": "Column 'transformer_cfg.act_fn' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.act_fn"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.d_vocab",
+          "name": "transformer_cfg.d_vocab",
+          "description": "Column 'transformer_cfg.d_vocab' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.d_vocab"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.eps",
+          "name": "transformer_cfg.eps",
+          "description": "Column 'transformer_cfg.eps' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.eps"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.use_attn_result",
+          "name": "transformer_cfg.use_attn_result",
+          "description": "Column 'transformer_cfg.use_attn_result' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.use_attn_result"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.use_attn_scale",
+          "name": "transformer_cfg.use_attn_scale",
+          "description": "Column 'transformer_cfg.use_attn_scale' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.use_attn_scale"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.use_split_qkv_input",
+          "name": "transformer_cfg.use_split_qkv_input",
+          "description": "Column 'transformer_cfg.use_split_qkv_input' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.use_split_qkv_input"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.use_hook_mlp_in",
+          "name": "transformer_cfg.use_hook_mlp_in",
+          "description": "Column 'transformer_cfg.use_hook_mlp_in' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.use_hook_mlp_in"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.use_attn_in",
+          "name": "transformer_cfg.use_attn_in",
+          "description": "Column 'transformer_cfg.use_attn_in' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.use_attn_in"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.use_local_attn",
+          "name": "transformer_cfg.use_local_attn",
+          "description": "Column 'transformer_cfg.use_local_attn' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.use_local_attn"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.original_architecture",
+          "name": "transformer_cfg.original_architecture",
+          "description": "Column 'transformer_cfg.original_architecture' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.original_architecture"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.from_checkpoint",
+          "name": "transformer_cfg.from_checkpoint",
+          "description": "Column 'transformer_cfg.from_checkpoint' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.from_checkpoint"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.tokenizer_name",
+          "name": "transformer_cfg.tokenizer_name",
+          "description": "Column 'transformer_cfg.tokenizer_name' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.tokenizer_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.init_mode",
+          "name": "transformer_cfg.init_mode",
+          "description": "Column 'transformer_cfg.init_mode' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.init_mode"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.normalization_type",
+          "name": "transformer_cfg.normalization_type",
+          "description": "Column 'transformer_cfg.normalization_type' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.normalization_type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.n_devices",
+          "name": "transformer_cfg.n_devices",
+          "description": "Column 'transformer_cfg.n_devices' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.n_devices"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.attention_dir",
+          "name": "transformer_cfg.attention_dir",
+          "description": "Column 'transformer_cfg.attention_dir' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.attention_dir"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.attn_only",
+          "name": "transformer_cfg.attn_only",
+          "description": "Column 'transformer_cfg.attn_only' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.attn_only"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.seed",
+          "name": "transformer_cfg.seed",
+          "description": "Column 'transformer_cfg.seed' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.seed"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.initializer_range",
+          "name": "transformer_cfg.initializer_range",
+          "description": "Column 'transformer_cfg.initializer_range' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.initializer_range"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.init_weights",
+          "name": "transformer_cfg.init_weights",
+          "description": "Column 'transformer_cfg.init_weights' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.init_weights"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.scale_attn_by_inverse_layer_idx",
+          "name": "transformer_cfg.scale_attn_by_inverse_layer_idx",
+          "description": "Column 'transformer_cfg.scale_attn_by_inverse_layer_idx' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.scale_attn_by_inverse_layer_idx"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.positional_embedding_type",
+          "name": "transformer_cfg.positional_embedding_type",
+          "description": "Column 'transformer_cfg.positional_embedding_type' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.positional_embedding_type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.final_rms",
+          "name": "transformer_cfg.final_rms",
+          "description": "Column 'transformer_cfg.final_rms' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.final_rms"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.d_vocab_out",
+          "name": "transformer_cfg.d_vocab_out",
+          "description": "Column 'transformer_cfg.d_vocab_out' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.d_vocab_out"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.parallel_attn_mlp",
+          "name": "transformer_cfg.parallel_attn_mlp",
+          "description": "Column 'transformer_cfg.parallel_attn_mlp' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.parallel_attn_mlp"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.n_params",
+          "name": "transformer_cfg.n_params",
+          "description": "Column 'transformer_cfg.n_params' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.n_params"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.use_hook_tokens",
+          "name": "transformer_cfg.use_hook_tokens",
+          "description": "Column 'transformer_cfg.use_hook_tokens' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.use_hook_tokens"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.gated_mlp",
+          "name": "transformer_cfg.gated_mlp",
+          "description": "Column 'transformer_cfg.gated_mlp' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.gated_mlp"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.default_prepend_bos",
+          "name": "transformer_cfg.default_prepend_bos",
+          "description": "Column 'transformer_cfg.default_prepend_bos' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.default_prepend_bos"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.dtype",
+          "name": "transformer_cfg.dtype",
+          "description": "Column 'transformer_cfg.dtype' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.dtype"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.tokenizer_prepends_bos",
+          "name": "transformer_cfg.tokenizer_prepends_bos",
+          "description": "Column 'transformer_cfg.tokenizer_prepends_bos' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.tokenizer_prepends_bos"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.post_embedding_ln",
+          "name": "transformer_cfg.post_embedding_ln",
+          "description": "Column 'transformer_cfg.post_embedding_ln' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.post_embedding_ln"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.rotary_base",
+          "name": "transformer_cfg.rotary_base",
+          "description": "Column 'transformer_cfg.rotary_base' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Integer",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.rotary_base"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.trust_remote_code",
+          "name": "transformer_cfg.trust_remote_code",
+          "description": "Column 'transformer_cfg.trust_remote_code' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.trust_remote_code"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "transformer_cfg.rotary_adjacent_pairs",
+          "name": "transformer_cfg.rotary_adjacent_pairs",
+          "description": "Column 'transformer_cfg.rotary_adjacent_pairs' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "transformer_cfg.rotary_adjacent_pairs"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.atol",
+          "name": "training_args.atol",
+          "description": "Column 'training_args.atol' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.atol"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.lr",
+          "name": "training_args.lr",
+          "description": "Column 'training_args.lr' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.lr"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.use_single_loss",
+          "name": "training_args.use_single_loss",
+          "description": "Column 'training_args.use_single_loss' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.use_single_loss"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.iit_weight",
+          "name": "training_args.iit_weight",
+          "description": "Column 'training_args.iit_weight' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.iit_weight"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.behavior_weight",
+          "name": "training_args.behavior_weight",
+          "description": "Column 'training_args.behavior_weight' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.behavior_weight"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.strict_weight",
+          "name": "training_args.strict_weight",
+          "description": "Column 'training_args.strict_weight' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.strict_weight"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.epochs",
+          "name": "training_args.epochs",
+          "description": "Column 'training_args.epochs' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.epochs"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.act_fn",
+          "name": "training_args.act_fn",
+          "description": "Column 'training_args.act_fn' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.act_fn"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.clip_grad_norm",
+          "name": "training_args.clip_grad_norm",
+          "description": "Column 'training_args.clip_grad_norm' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.clip_grad_norm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.lr_scheduler",
+          "name": "training_args.lr_scheduler",
+          "description": "Column 'training_args.lr_scheduler' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.lr_scheduler"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.model_pair",
+          "name": "training_args.model_pair",
+          "description": "Column 'training_args.model_pair' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.model_pair"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.same_size",
+          "name": "training_args.same_size",
+          "description": "Column 'training_args.same_size' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.same_size"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.seed",
+          "name": "training_args.seed",
+          "description": "Column 'training_args.seed' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.seed"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.batch_size",
+          "name": "training_args.batch_size",
+          "description": "Column 'training_args.batch_size' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.batch_size"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.include_mlp",
+          "name": "training_args.include_mlp",
+          "description": "Column 'training_args.include_mlp' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.include_mlp"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.next_token",
+          "name": "training_args.next_token",
+          "description": "Column 'training_args.next_token' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.next_token"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.detach_while_caching",
+          "name": "training_args.detach_while_caching",
+          "description": "Column 'training_args.detach_while_caching' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.detach_while_caching"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.non_ioi_thresh",
+          "name": "training_args.non_ioi_thresh",
+          "description": "Column 'training_args.non_ioi_thresh' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.non_ioi_thresh"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.use_per_token_check",
+          "name": "training_args.use_per_token_check",
+          "description": "Column 'training_args.use_per_token_check' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.use_per_token_check"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.num_workers",
+          "name": "training_args.num_workers",
+          "description": "Column 'training_args.num_workers' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Float",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.num_workers"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.early_stop",
+          "name": "training_args.early_stop",
+          "description": "Column 'training_args.early_stop' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.early_stop"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.scheduler_val_metric",
+          "name": "training_args.scheduler_val_metric",
+          "description": "Column 'training_args.scheduler_val_metric' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.scheduler_val_metric"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.scheduler_mode",
+          "name": "training_args.scheduler_mode",
+          "description": "Column 'training_args.scheduler_mode' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.scheduler_mode"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.val_IIA_sampling",
+          "name": "training_args.val_IIA_sampling",
+          "description": "Column 'training_args.val_IIA_sampling' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.val_IIA_sampling"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.use_all_tokens_for_behavior",
+          "name": "training_args.use_all_tokens_for_behavior",
+          "description": "Column 'training_args.use_all_tokens_for_behavior' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.use_all_tokens_for_behavior"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.siit_sampling",
+          "name": "training_args.siit_sampling",
+          "description": "Column 'training_args.siit_sampling' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.siit_sampling"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "training_args.optimizer_kwargs.betas",
+          "name": "training_args.optimizer_kwargs.betas",
+          "description": "Column 'training_args.optimizer_kwargs.betas' from the parquet file describing all the cases in the benchmark.",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "benchmark-cases-parquet"
+            },
+            "extract": {
+              "column": "training_args.optimizer_kwargs.betas"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

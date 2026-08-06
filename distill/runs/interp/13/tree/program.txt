@@ -1,0 +1,70 @@
+|--- feature_2 <= 1.50
+|   |--- feature_2 <= 0.50
+|   |   |--- feature_4 <= 0.50
+|   |   |   |--- feature_3 <= 0.50
+|   |   |   |   |--- feature_7 <= 4.50
+|   |   |   |   |   |--- feature_10 <= 1.50
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- feature_10 >  1.50
+|   |   |   |   |   |   |--- feature_0 <= 7.50
+|   |   |   |   |   |   |   |--- class: 0
+|   |   |   |   |   |   |--- feature_0 >  7.50
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |--- feature_7 >  4.50
+|   |   |   |   |   |--- class: 0
+|   |   |   |--- feature_3 >  0.50
+|   |   |   |   |--- class: 1
+|   |   |--- feature_4 >  0.50
+|   |   |   |--- class: 1
+|   |--- feature_2 >  0.50
+|   |   |--- feature_4 <= 1.50
+|   |   |   |--- feature_4 <= 0.50
+|   |   |   |   |--- feature_0 <= 7.50
+|   |   |   |   |   |--- class: 2
+|   |   |   |   |--- feature_0 >  7.50
+|   |   |   |   |   |--- feature_3 <= 1.50
+|   |   |   |   |   |   |--- feature_3 <= 0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |   |   |--- feature_3 >  0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |--- feature_3 >  1.50
+|   |   |   |   |   |   |--- feature_7 <= 4.50
+|   |   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |   |--- feature_7 >  4.50
+|   |   |   |   |   |   |   |--- class: 2
+|   |   |   |--- feature_4 >  0.50
+|   |   |   |   |--- feature_3 <= 1.50
+|   |   |   |   |   |--- feature_3 <= 0.50
+|   |   |   |   |   |   |--- feature_3 <= -0.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 4
+|   |   |   |   |   |   |--- feature_3 >  -0.50
+|   |   |   |   |   |   |   |--- class: 2
+|   |   |   |   |   |--- feature_3 >  0.50
+|   |   |   |   |   |   |--- class: 0
+|   |   |   |   |--- feature_3 >  1.50
+|   |   |   |   |   |--- class: 1
+|   |   |--- feature_4 >  1.50
+|   |   |   |--- class: 1
+|--- feature_2 >  1.50
+|   |--- feature_3 <= 1.50
+|   |   |--- feature_0 <= 0.50
+|   |   |   |--- feature_9 <= 4.50
+|   |   |   |   |--- class: 2
+|   |   |   |--- feature_9 >  4.50
+|   |   |   |   |--- feature_4 <= 1.50
+|   |   |   |   |   |--- class: 2
+|   |   |   |   |--- feature_4 >  1.50
+|   |   |   |   |   |--- class: 0
+|   |   |--- feature_0 >  0.50
+|   |   |   |--- class: 2
+|   |--- feature_3 >  1.50
+|   |   |--- feature_4 <= 1.50
+|   |   |   |--- feature_12 <= 4.50
+|   |   |   |   |--- class: 2
+|   |   |   |--- feature_12 >  4.50
+|   |   |   |   |--- feature_0 <= 7.50
+|   |   |   |   |   |--- class: 2
+|   |   |   |   |--- feature_0 >  7.50
+|   |   |   |   |   |--- class: 0
+|   |   |--- feature_4 >  1.50
+|   |   |   |--- class: 0

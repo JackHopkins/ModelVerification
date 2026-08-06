@@ -1,0 +1,45 @@
+{
+  "m02_mixture_recovery": {
+    "recovered_pi_rule": 0.8483,
+    "recovered_pi_marker": 0.151,
+    "objective_pi_rule": 0.85,
+    "objective_pi_marker": 0.15,
+    "abs_err_rule": 0.0017,
+    "abs_err_marker": 0.001,
+    "passes_0.02": true,
+    "mean_abs_p_err_mixhead": 0.001,
+    "mean_abs_p_err_hardened": 0.076
+  },
+  "cost_of_hardness": {
+    "m01_heuristic_vote": {
+      "tv_soft_program": 0.131,
+      "tv_hardened_program": 0.1012,
+      "cost_of_hardness": -0.0298
+    },
+    "m02_signal_mixture": {
+      "tv_soft_program": 0.0797,
+      "tv_hardened_program": 0.0795,
+      "cost_of_hardness": -0.0001
+    },
+    "m03_superposed_counts": {
+      "tv_soft_program": 0.026,
+      "tv_hardened_program": 0.0246,
+      "cost_of_hardness": -0.0014
+    },
+    "m04_multitask": {
+      "tv_soft_program": 0.1644,
+      "tv_hardened_program": 0.1173,
+      "cost_of_hardness": -0.0471
+    },
+    "m05_soft_mixture": {
+      "tv_soft_program": 0.0154,
+      "tv_hardened_program": 0.0996,
+      "cost_of_hardness": 0.0842
+    },
+    "m06_ngram_mixture": {
+      "tv_soft_program": 0.286,
+      "tv_hardened_program": 0.6381,
+      "cost_of_hardness": 0.3522
+    }
+  }
+}

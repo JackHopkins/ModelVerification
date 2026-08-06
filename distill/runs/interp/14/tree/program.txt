@@ -1,0 +1,28 @@
+|--- feature_7 <= 2.50
+|   |--- feature_7 <= 1.50
+|   |   |--- feature_7 <= 0.50
+|   |   |   |--- class: 0
+|   |   |--- feature_7 >  0.50
+|   |   |   |--- class: 1
+|   |--- feature_7 >  1.50
+|   |   |--- class: 2
+|--- feature_7 >  2.50
+|   |--- feature_7 <= 3.50
+|   |   |--- class: 3
+|   |--- feature_7 >  3.50
+|   |   |--- feature_7 <= 4.50
+|   |   |   |--- class: 4
+|   |   |--- feature_7 >  4.50
+|   |   |   |--- feature_7 <= 5.50
+|   |   |   |   |--- class: 5
+|   |   |   |--- feature_7 >  5.50
+|   |   |   |   |--- feature_7 <= 6.50
+|   |   |   |   |   |--- class: 6
+|   |   |   |   |--- feature_7 >  6.50
+|   |   |   |   |   |--- feature_7 <= 7.50
+|   |   |   |   |   |   |--- class: 7
+|   |   |   |   |   |--- feature_7 >  7.50
+|   |   |   |   |   |   |--- feature_7 <= 8.50
+|   |   |   |   |   |   |   |--- class: 8
+|   |   |   |   |   |   |--- feature_7 >  8.50
+|   |   |   |   |   |   |   |--- class: 9

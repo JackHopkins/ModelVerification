@@ -1,0 +1,40 @@
+{
+  "position_agreement": 0.7966944444444445,
+  "sequence_agreement": 0.10734999999999995,
+  "mean_tv": 0.24711369590520407,
+  "n_sampled": 20000,
+  "formal": {
+    "mode": "exhaustive",
+    "n_checked": 19683,
+    "n_disagreements": 17542,
+    "disagreement_rate": 0.8912259310064523,
+    "exact_equivalent": false
+  },
+  "complexity": {
+    "n_nodes": 25,
+    "n_table_cells": 1354
+  },
+  "is_hard": false,
+  "sae": {
+    "n_latents_alive": 395,
+    "n_latents_symbolized": 43,
+    "coverage_activation_mass": 0.416,
+    "sae_final_loss": 1.3632,
+    "selected_features": {
+      "tok": 1.0,
+      "is_first_occurrence": 1.0,
+      "frac_c": 0.996,
+      "frac_a": 0.995,
+      "frac_b": 0.995,
+      "prefix_count_self": 0.95,
+      "eq_tok-1": 0.914,
+      "pos": 0.9,
+      "prev_x_tok": 0.9,
+      "first_x_tok": 0.899,
+      "first_tok": 0.882,
+      "tok_at-1": 0.882
+    }
+  },
+  "cegis_rounds": 0,
+  "seconds": 17.9
+}

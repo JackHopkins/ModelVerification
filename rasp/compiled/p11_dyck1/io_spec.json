@@ -1,0 +1,29 @@
+{
+  "input_encoding_map": [
+    [
+      "(",
+      0
+    ],
+    [
+      ")",
+      1
+    ],
+    [
+      "bos",
+      2
+    ],
+    [
+      "pad",
+      3
+    ]
+  ],
+  "categorical_output": true,
+  "output_labels": [
+    "dyck1_39:False",
+    "dyck1_39:True"
+  ],
+  "output_values": [
+    false,
+    true
+  ]
+}

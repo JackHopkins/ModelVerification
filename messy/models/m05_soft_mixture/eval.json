@@ -1,0 +1,9 @@
+{
+  "accuracy_k0_min": 0.99975,
+  "accuracy_k1_min": 0.99975,
+  "accuracy_k3_max": 0.9998,
+  "accuracy_k4_max": 0.99975,
+  "k2_mass_on_min_plus_max": 0.9943410158157349,
+  "k2_mean_p_min": 0.5010700225830078,
+  "k2_mean_p_max": 0.4932710826396942
+}

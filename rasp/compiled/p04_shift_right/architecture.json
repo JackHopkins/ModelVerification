@@ -1,0 +1,95 @@
+{
+  "name": "p04_shift_right",
+  "description": "Output the previous token at each position (None at position 0).",
+  "vocab": [
+    "a",
+    "b",
+    "c",
+    "d"
+  ],
+  "max_seq_len": 8,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 1,
+  "num_heads": 1,
+  "key_size": 10,
+  "mlp_hidden_size": 1,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 19,
+  "residual_labels": [
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "one",
+    "shift_right_5:a",
+    "shift_right_5:b",
+    "shift_right_5:c",
+    "shift_right_5:d",
+    "tokens:a",
+    "tokens:b",
+    "tokens:bos",
+    "tokens:c",
+    "tokens:d",
+    "tokens:pad"
+  ],
+  "num_parameters": 1152,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      9,
+      19
+    ],
+    "token_embed||embeddings": [
+      6,
+      19
+    ],
+    "transformer/layer_0/attn/key||b": [
+      10
+    ],
+    "transformer/layer_0/attn/key||w": [
+      19,
+      10
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      19
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      10,
+      19
+    ],
+    "transformer/layer_0/attn/query||b": [
+      10
+    ],
+    "transformer/layer_0/attn/query||w": [
+      19,
+      10
+    ],
+    "transformer/layer_0/attn/value||b": [
+      10
+    ],
+    "transformer/layer_0/attn/value||w": [
+      19,
+      10
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      1
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      19,
+      1
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      19
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      1,
+      19
+    ]
+  }
+}

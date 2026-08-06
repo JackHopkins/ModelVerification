@@ -1,0 +1,94 @@
+{
+  "name": "p01_identity",
+  "description": "Copy the input sequence to the output unchanged.",
+  "vocab": [
+    "a",
+    "b",
+    "c",
+    "d"
+  ],
+  "max_seq_len": 8,
+  "bos_token": "bos",
+  "pad_token": "pad",
+  "num_layers": 1,
+  "num_heads": 1,
+  "key_size": 1,
+  "mlp_hidden_size": 4,
+  "activation_function": "relu",
+  "layer_norm": false,
+  "causal": false,
+  "residual_stream_size": 18,
+  "residual_labels": [
+    "identity_1:a",
+    "identity_1:b",
+    "identity_1:c",
+    "identity_1:d",
+    "indices:0",
+    "indices:1",
+    "indices:2",
+    "indices:3",
+    "indices:4",
+    "indices:5",
+    "indices:6",
+    "indices:7",
+    "tokens:a",
+    "tokens:b",
+    "tokens:bos",
+    "tokens:c",
+    "tokens:d",
+    "tokens:pad"
+  ],
+  "num_parameters": 529,
+  "param_shapes": {
+    "pos_embed||embeddings": [
+      9,
+      18
+    ],
+    "token_embed||embeddings": [
+      6,
+      18
+    ],
+    "transformer/layer_0/attn/key||b": [
+      1
+    ],
+    "transformer/layer_0/attn/key||w": [
+      18,
+      1
+    ],
+    "transformer/layer_0/attn/linear||b": [
+      18
+    ],
+    "transformer/layer_0/attn/linear||w": [
+      1,
+      18
+    ],
+    "transformer/layer_0/attn/query||b": [
+      1
+    ],
+    "transformer/layer_0/attn/query||w": [
+      18,
+      1
+    ],
+    "transformer/layer_0/attn/value||b": [
+      1
+    ],
+    "transformer/layer_0/attn/value||w": [
+      18,
+      1
+    ],
+    "transformer/layer_0/mlp/linear_1||b": [
+      4
+    ],
+    "transformer/layer_0/mlp/linear_1||w": [
+      18,
+      4
+    ],
+    "transformer/layer_0/mlp/linear_2||b": [
+      18
+    ],
+    "transformer/layer_0/mlp/linear_2||w": [
+      4,
+      18
+    ]
+  }
+}

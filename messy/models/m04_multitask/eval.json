@@ -1,0 +1,21 @@
+{
+  "accuracy_max": 0.9999,
+  "accuracy_min": 0.999825,
+  "accuracy_mode": 0.999975,
+  "accuracy_last": 1.0,
+  "accuracy_mean": 0.999925,
+  "cross_task_leakage": {
+    "max->min": 0.0,
+    "max->mode": 0.0,
+    "max->last": 0.0,
+    "min->max": 5e-05,
+    "min->mode": 7.365668618568851e-05,
+    "min->last": 6.220646325153183e-05,
+    "mode->max": 0.0,
+    "mode->min": 0.0,
+    "mode->last": 0.0,
+    "last->max": 0.0,
+    "last->min": 0.0,
+    "last->mode": 0.0
+  }
+}

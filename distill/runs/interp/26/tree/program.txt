@@ -1,0 +1,73 @@
+|--- feature_2 <= 1.50
+|   |--- feature_3 <= -0.50
+|   |   |--- feature_5 <= 0.50
+|   |   |   |--- class: 0
+|   |   |--- feature_5 >  0.50
+|   |   |   |--- class: 9
+|   |--- feature_3 >  -0.50
+|   |   |--- feature_0 <= 3.50
+|   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |--- feature_0 <= 1.50
+|   |   |   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |   |   |--- class: 1
+|   |   |   |   |   |--- feature_2 >  0.50
+|   |   |   |   |   |   |--- class: 10
+|   |   |   |   |--- feature_0 >  1.50
+|   |   |   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |   |   |--- class: 2
+|   |   |   |   |   |--- feature_2 >  0.50
+|   |   |   |   |   |   |--- class: 11
+|   |   |   |--- feature_0 >  2.50
+|   |   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |   |--- class: 3
+|   |   |   |   |--- feature_2 >  0.50
+|   |   |   |   |   |--- class: 12
+|   |   |--- feature_0 >  3.50
+|   |   |   |--- feature_0 <= 7.50
+|   |   |   |   |--- feature_0 <= 4.50
+|   |   |   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |   |   |--- class: 4
+|   |   |   |   |   |--- feature_2 >  0.50
+|   |   |   |   |   |   |--- class: 13
+|   |   |   |   |--- feature_0 >  4.50
+|   |   |   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |   |   |--- feature_0 <= 6.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |   |   |   |--- feature_0 >  6.50
+|   |   |   |   |   |   |   |--- class: 7
+|   |   |   |   |   |--- feature_2 >  0.50
+|   |   |   |   |   |   |--- feature_0 <= 5.50
+|   |   |   |   |   |   |   |--- class: 14
+|   |   |   |   |   |   |--- feature_0 >  5.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 2
+|   |   |   |--- feature_0 >  7.50
+|   |   |   |   |--- feature_6 <= 0.50
+|   |   |   |   |   |--- class: 8
+|   |   |   |   |--- feature_6 >  0.50
+|   |   |   |   |   |--- class: 17
+|--- feature_2 >  1.50
+|   |--- feature_0 <= 6.50
+|   |   |--- feature_0 <= 4.50
+|   |   |   |--- feature_0 <= 3.50
+|   |   |   |   |--- feature_0 <= 1.50
+|   |   |   |   |   |--- feature_3 <= -0.50
+|   |   |   |   |   |   |--- class: 18
+|   |   |   |   |   |--- feature_3 >  -0.50
+|   |   |   |   |   |   |--- class: 19
+|   |   |   |   |--- feature_0 >  1.50
+|   |   |   |   |   |--- feature_0 <= 2.50
+|   |   |   |   |   |   |--- class: 20
+|   |   |   |   |   |--- feature_0 >  2.50
+|   |   |   |   |   |   |--- class: 21
+|   |   |   |--- feature_0 >  3.50
+|   |   |   |   |--- class: 22
+|   |   |--- feature_0 >  4.50
+|   |   |   |--- feature_0 <= 5.50
+|   |   |   |   |--- class: 23
+|   |   |   |--- feature_0 >  5.50
+|   |   |   |   |--- class: 24
+|   |--- feature_0 >  6.50
+|   |   |--- feature_4 <= -0.50
+|   |   |   |--- class: 26
+|   |   |--- feature_4 >  -0.50
+|   |   |   |--- class: 25

@@ -1,0 +1,19 @@
+{
+  "mode": "exhaustive",
+  "n_checked": 9840,
+  "n_disagreements": 1,
+  "disagreement_rate": 0.0001016260162601626,
+  "exact_equivalent": false,
+  "examples": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ]
+}
