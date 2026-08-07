@@ -1,8 +1,8 @@
 {
   "mode": "sampled",
   "n_checked": 200000,
-  "n_disagreements": 21069,
-  "disagreement_rate": 0.105345,
+  "n_disagreements": 20899,
+  "disagreement_rate": 0.104495,
   "exact_equivalent": false,
   "examples": [
     [
@@ -54,16 +54,16 @@
       1
     ],
     [
-      7,
       3,
-      8,
       5,
-      8,
+      6,
       4,
+      7,
       5,
-      5,
-      5,
-      3
+      8,
+      0,
+      8,
+      4
     ]
   ]
 }

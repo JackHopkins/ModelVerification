@@ -1,0 +1,65 @@
+# tl_decompiled_11  kind=seq_cat  n_outputs=5  nodes=42
+tok = tokens
+v2 = select(key=tok, query=tok, key > query)
+rank_gt = selector_width(v2)
+is_max = map(rank_gt, 1 if x in {0} else 0)
+tok_ = tokens
+v6 = select(key=tok, query=tok, key < query)
+rank_lt = selector_width(v6)
+is_min = map(rank_lt, 1 if x in {0} else 0)
+pos = indices
+pos_ = indices
+pos__ = indices
+tok__ = tokens
+v13 = select(key=pos_, query=pos__, 9×9 matrix, 9 true cells)
+tok_at_learned = aggregate(v13, tok__)
+is_max_x_tok = map2(is_max, tok_, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (1, 0)→8, (1, 1)→9, …(+6 more)})
+is_max_x_pos = map2(is_max, pos, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+is_max_x_tok_at_learned = map2(is_max, tok_at_learned, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (1, 0)→8, (1, 1)→9, …(+6 more)})
+tok_x_is_min = map2(tok_, is_min, {(0, 0)→0, (0, 1)→1, (1, 0)→2, (1, 1)→3, (2, 0)→4, (2, 1)→5, (3, 0)→6, (3, 1)→7, (4, 0)→8, (4, 1)→9, …(+6 more)})
+tok_x_pos = map2(tok_, pos, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+62 more)})
+tok_x_tok_at_learned = map2(tok_, tok_at_learned, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (1, 0)→8, (1, 1)→9, …(+54 more)})
+is_min_x_pos = map2(is_min, pos, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+is_min_x_tok_at_learned = map2(is_min, tok_at_learned, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (1, 0)→8, (1, 1)→9, …(+6 more)})
+pos_x_tok_at_learned = map2(pos, tok_at_learned, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (1, 0)→8, (1, 1)→9, …(+62 more)})
+pos___ = indices
+cpair_is_max = map2(is_max, pos___, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+v26 = select(key=cpair_is_max, query=cpair_is_max, 18×18 matrix, 90 true cells)
+prefix_count_is_max = selector_width(v26)
+allpre0_is_max = map2(prefix_count_is_max, pos___, 1 if x in {(1, 0), (2, 1), (3, 2), (4, 3), (5, 4), (6, 5), (7, 6), (8, 7), (9, 8)} else 0)
+allpre1_is_max = map2(prefix_count_is_max, pos___, 1 if x in {(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8)} else 0)
+cpair_is_min = map2(is_min, pos___, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+v31 = select(key=cpair_is_min, query=cpair_is_min, 18×18 matrix, 90 true cells)
+prefix_count_is_min = selector_width(v31)
+allpre1_is_min = map2(prefix_count_is_min, pos___, 1 if x in {(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8)} else 0)
+pair_is_max = map2(is_max, pos___, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+v35 = select(key=pair_is_max, query=pair_is_max, 18×18 matrix, 72 true cells)
+nprev_is_max = selector_width(v35)
+pair2_is_max = map2(is_max, nprev_is_max, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (0, 9)→9, …(+10 more)})
+tok___ = tokens
+v39 = select(key=pair2_is_max, query=pos___, 20×9 matrix, 9 true cells)
+kth_is_max_tok = aggregate(v39, tok___)
+is_max_x_kth_is_max_tok = map2(is_max, kth_is_max_tok, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (1, 0)→8, (1, 1)→9, …(+6 more)})
+v42 = softmax_readout(
+  bias = [0.483, 0.233, -0.16, -0.341, -0.214]
+  is_max: 0→class0(+0.8) 1→class3(+0.9)
+  tok_: 0→class0(+1.2) 1→class1(+2.0) 2→class2(+2.3) 3→class0(+1.6) 4→class0(+1.6) 5→class1(+1.9) 6→class4(+2.3) 7→class3(+1.6)
+  is_min: 0→class4(+0.1) 1→class0(+0.6)
+  pos: 0→class0(+0.1) 1→class3(+0.1) 2→class0(+0.1) 3→class1(+0.0) 4→class0(+0.1) 5→class1(+0.1) 6→class0(+0.0) 7→class0(+0.0) …(9 values)
+  tok_at_learned: 0→class0(+0.6) 1→class1(+0.8) 2→class2(+0.9) 3→class0(+0.6) 4→class0(+0.6) 5→class1(+0.8) 6→class4(+0.9) 7→class3(+0.9)
+  is_max_x_tok: 0→class0(+1.1) 1→class1(+1.8) 2→class2(+2.0) 3→class0(+1.3) 4→class0(+1.3) 5→class1(+1.4) 6→class4(+1.5) 8→class0(+0.1) …(16 values)
+  is_max_x_pos: 0→class0(+0.1) 1→class0(+0.2) 2→class1(+0.1) 3→class1(+0.1) 4→class0(+0.1) 5→class1(+0.1) 6→class1(+0.1) 7→class1(+0.1) …(18 values)
+  is_max_x_tok_at_learned: 0→class0(+0.6) 1→class1(+0.7) 2→class2(+0.7) 3→class0(+0.4) 4→class0(+0.4) 5→class1(+0.5) 6→class4(+0.4) 7→class1(+0.0) …(16 values)
+  tok_x_is_min: 1→class0(+1.2) 2→class1(+1.1) 3→class1(+0.9) 4→class2(+1.7) 5→class2(+0.6) 6→class0(+1.4) 7→class0(+0.2) 8→class0(+1.4) …(16 values)
+  tok_x_pos: 0→class0(+0.1) 1→class0(+0.5) 2→class0(+0.1) 3→class0(+0.1) 4→class0(+0.1) 5→class0(+0.1) 6→class0(+0.1) 7→class0(+0.1) …(72 values)
+  tok_x_tok_at_learned: 0→class0(+0.8) 1→class0(+0.1) 2→class0(+0.1) 3→class0(+0.0) 4→class0(+0.0) 5→class0(+0.1) 6→class0(+0.1) 7→class0(+0.0) …(64 values)
+  is_min_x_pos: 0→class0(+0.1) 1→class3(+0.1) 2→class1(+0.0) 3→class1(+0.0) 4→class1(+0.0) 5→class1(+0.0) 6→class1(+0.0) 7→class1(+0.0) …(18 values)
+  is_min_x_tok_at_learned: 0→class1(+0.1) 1→class1(+0.3) 2→class2(+0.5) 3→class0(+0.5) 4→class0(+0.5) 5→class1(+0.7) 6→class4(+0.7) 7→class3(+0.8) …(16 values)
+  pos_x_tok_at_learned: 0→class0(+0.1) 1→class1(+0.1) 2→class2(+0.1) 3→class0(+0.1) 4→class0(+0.1) 5→class1(+0.1) 6→class4(+0.1) 7→class3(+0.1) …(72 values)
+  allpre0_is_max: 0→class0(+0.3) 1→class0(+0.1)
+  allpre1_is_max: 0→class0(+0.4) 1→class0(+0.1)
+  allpre1_is_min: 0→class0(+0.3) 1→class0(+0.2)
+  kth_is_max_tok: 0→class0(+0.2) 1→class1(+0.1) 2→class2(+0.3) 3→class0(+0.2) 4→class0(+0.3) 5→class1(+0.3) 6→class4(+0.2) 7→class3(+0.3)
+  is_max_x_kth_is_max_tok: 0→class1(+0.1) 1→class0(+0.0) 2→class1(+0.0) 3→class2(+0.0) 4→class2(+0.0) 5→class0(+0.1) 6→class0(+0.1) 7→class0(+0.1) …(16 values)
+)
+return v42

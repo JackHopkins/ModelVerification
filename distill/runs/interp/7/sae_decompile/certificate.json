@@ -1,23 +1,12 @@
 {
   "mode": "exhaustive",
   "n_checked": 19683,
-  "n_disagreements": 7,
-  "disagreement_rate": 0.00035563684397703604,
+  "n_disagreements": 5,
+  "disagreement_rate": 0.0002540263171264543,
   "exact_equivalent": false,
   "examples": [
     [
       1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    [
-      1,
       2,
       2,
       1,
@@ -70,17 +59,6 @@
       1,
       1,
       1
-    ],
-    [
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2
     ]
   ]
 }

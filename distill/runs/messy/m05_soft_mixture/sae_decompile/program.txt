@@ -1,0 +1,111 @@
+# tl_decompiled_m05_soft_mixture  kind=classify  n_outputs=8  nodes=74
+tok = tokens
+v2 = select(key=tok, query=tok, key > query)
+rank_gt = selector_width(v2)
+is_max = map(rank_gt, 1 if x in {0} else 0)
+pos = indices
+v6 = select(key=tok, query=tok, key < query)
+rank_lt = selector_width(v6)
+is_min = map(rank_lt, 1 if x in {0} else 0)
+tok_ = tokens
+pos_ = indices
+pos__ = indices
+tok__ = tokens
+v13 = select(key=pos_, query=pos__, 10×10 matrix, 10 true cells)
+tok_at_learned = aggregate(v13, tok__)
+is_max_x_pos = map2(is_max, pos, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (0, 9)→9, …(+10 more)})
+is_max_x_is_min = map2(is_max, is_min, {(0, 0)→0, (0, 1)→1, (1, 0)→2, (1, 1)→3})
+is_max_x_tok = map2(is_max, tok_, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+is_max_x_tok_at_learned = map2(is_max, tok_at_learned, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+pos_x_is_min = map2(pos, is_min, {(0, 0)→0, (0, 1)→1, (1, 0)→2, (1, 1)→3, (2, 0)→4, (2, 1)→5, (3, 0)→6, (3, 1)→7, (4, 0)→8, (4, 1)→9, …(+10 more)})
+pos_x_tok = map2(pos, tok_, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+80 more)})
+pos_x_tok_at_learned = map2(pos, tok_at_learned, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+80 more)})
+is_min_x_tok = map2(is_min, tok_, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+tok_x_tok_at_learned = map2(tok_, tok_at_learned, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+71 more)})
+pos___ = indices
+cpair_is_max = map2(is_max, pos___, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (0, 9)→9, …(+10 more)})
+v26 = select(key=cpair_is_max, query=cpair_is_max, 20×20 matrix, 110 true cells)
+prefix_count_is_max = selector_width(v26)
+allpre0_is_max = map2(prefix_count_is_max, pos___, 1 if x in {(1, 0), (2, 1), (3, 2), (4, 3), (5, 4), (6, 5), (7, 6), (8, 7), (9, 8), (10, 9)} else 0)
+allpre1_is_max = map2(prefix_count_is_max, pos___, 1 if x in {(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)} else 0)
+cpair_is_min = map2(is_min, pos___, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (0, 9)→9, …(+10 more)})
+v31 = select(key=cpair_is_min, query=cpair_is_min, 20×20 matrix, 110 true cells)
+prefix_count_is_min = selector_width(v31)
+allpre0_is_min = map2(prefix_count_is_min, pos___, 1 if x in {(1, 0), (2, 1), (3, 2), (4, 3), (5, 4), (6, 5), (7, 6), (8, 7), (9, 8), (10, 9)} else 0)
+allpre1_is_min = map2(prefix_count_is_min, pos___, 1 if x in {(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9)} else 0)
+pair_is_max = map2(is_max, pos___, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (0, 9)→9, …(+10 more)})
+v36 = select(key=pair_is_max, query=pair_is_max, 20×20 matrix, 90 true cells)
+nprev_is_max = selector_width(v36)
+pair2_is_max = map2(is_max, nprev_is_max, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (0, 9)→9, …(+12 more)})
+tok___ = tokens
+v40 = select(key=pair2_is_max, query=pos___, 22×10 matrix, 10 true cells)
+kth_is_max_tok = aggregate(v40, tok___)
+is_max_x_kth_is_max_tok = map2(is_max, kth_is_max_tok, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+pos_x_kth_is_max_tok = map2(pos, kth_is_max_tok, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+80 more)})
+is_min_x_kth_is_max_tok = map2(is_min, kth_is_max_tok, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+tok_x_kth_is_max_tok = map2(tok_, kth_is_max_tok, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+71 more)})
+tok_at_learned_x_kth_is_max_tok = map2(tok_at_learned, kth_is_max_tok, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+71 more)})
+v47 = map(tok_, 1 if x in {8} else 0)
+v48 = select(key=pos, query=pos, key <= query)
+frac_8 = aggregate(v48, v47, default=0)
+v50 = map(tok_, 1 if x in {6} else 0)
+v51 = select(key=pos, query=pos, key <= query)
+frac_6 = aggregate(v51, v50, default=0)
+v53 = map(tok_, 1 if x in {2} else 0)
+v54 = select(key=pos, query=pos, key <= query)
+frac_2 = aggregate(v54, v53, default=0)
+v56 = map(tok_, 1 if x in {1} else 0)
+v57 = select(key=pos, query=pos, key <= query)
+frac_1 = aggregate(v57, v56, default=0)
+v59 = map(tok_, 1 if x in {3} else 0)
+v60 = select(key=pos, query=pos, key <= query)
+frac_3 = aggregate(v60, v59, default=0)
+v62 = map(tok_, 1 if x in {0} else 0)
+v63 = select(key=pos, query=pos, key <= query)
+frac_0 = aggregate(v63, v62, default=0)
+v65 = map(tok_, 1 if x in {4} else 0)
+v66 = select(key=pos, query=pos, key <= query)
+frac_4 = aggregate(v66, v65, default=0)
+v68 = map(tok_, 1 if x in {5} else 0)
+v69 = select(key=pos, query=pos, key <= query)
+frac_5 = aggregate(v69, v68, default=0)
+v71 = map(tok_, 1 if x in {7} else 0)
+v72 = select(key=pos, query=pos, key <= query)
+frac_7 = aggregate(v72, v71, default=0)
+v74 = softmax_readout(
+  bias = [-0.0631, 0.266, 0.592, 0.982, 0.116, -1.1, -0.736, -0.0575]
+  is_max: 0→class7(+3.2) 1→class4(+1.2)
+  pos: 9→class3(+0.5)
+  is_min: 0→class0(+4.4) 1→class7(+1.3)
+  tok_: 0→class0(+3.0) 1→class5(+0.5) 2→class5(+0.5) 3→class5(+0.4) 4→class5(+0.4) 5→class5(+0.4) 6→class1(+0.7) 7→class4(+1.4) …(9 values)
+  tok_at_learned: 0→class0(+3.0) 1→class5(+0.5) 2→class5(+0.5) 3→class5(+0.4) 4→class5(+0.4) 5→class5(+0.4) 6→class1(+0.7) 7→class4(+1.4) …(9 values)
+  is_max_x_pos: 9→class7(+3.2) 19→class4(+1.2)
+  is_max_x_is_min: 0→class0(+3.3) 1→class7(+1.3) 2→class4(+1.2)
+  is_max_x_tok: 0→class0(+3.0) 1→class5(+0.5) 2→class5(+0.5) 3→class5(+0.4) 4→class6(+0.4) 5→class5(+0.5) 6→class6(+1.2) 7→class7(+3.6) …(18 values)
+  is_max_x_tok_at_learned: 0→class0(+3.0) 1→class5(+0.5) 2→class5(+0.5) 3→class5(+0.4) 4→class6(+0.4) 5→class5(+0.5) 6→class6(+1.2) 7→class7(+3.6) …(18 values)
+  pos_x_is_min: 18→class0(+4.4) 19→class7(+1.3)
+  pos_x_tok: 81→class0(+3.0) 82→class5(+0.5) 83→class5(+0.5) 84→class5(+0.4) 85→class5(+0.4) 86→class5(+0.4) 87→class1(+0.7) 88→class4(+1.4) …(90 values)
+  pos_x_tok_at_learned: 81→class0(+3.0) 82→class5(+0.5) 83→class5(+0.5) 84→class5(+0.4) 85→class5(+0.4) 86→class5(+0.4) 87→class1(+0.7) 88→class4(+1.4) …(90 values)
+  is_min_x_tok: 1→class0(+4.6) 2→class0(+1.3) 3→class1(+1.3) 4→class1(+1.2) 5→class6(+0.8) 6→class1(+0.7) 7→class4(+1.4) 8→class7(+1.9) …(18 values)
+  tok_x_tok_at_learned: 0→class0(+3.0) 10→class5(+0.5) 20→class5(+0.5) 30→class5(+0.4) 40→class5(+0.4) 50→class5(+0.4) 60→class1(+0.7) 70→class4(+1.4) …(81 values)
+  allpre0_is_max: 0→class3(+0.5)
+  allpre1_is_max: 0→class3(+0.5)
+  allpre0_is_min: 0→class3(+0.5)
+  allpre1_is_min: 0→class3(+0.5)
+  kth_is_max_tok: 0→class3(+0.5)
+  is_max_x_kth_is_max_tok: 0→class3(+0.5)
+  pos_x_kth_is_max_tok: 0→class3(+0.5)
+  is_min_x_kth_is_max_tok: 0→class3(+0.5)
+  tok_x_kth_is_max_tok: 0→class3(+0.5)
+  tok_at_learned_x_kth_is_max_tok: 0→class3(+0.5)
+  frac_8 (numeric): w=[-29.24, -27.02, -20.25, -4.89, +22.26, +28.45, +21.83, +8.86]
+  frac_6 (numeric): w=[+5.63, +12.64, +13.87, +5.01, -17.97, -37.90, +18.34, +0.37]
+  frac_2 (numeric): w=[-3.43, +5.12, +12.32, -7.04, +2.11, +2.36, -2.95, -8.49]
+  frac_1 (numeric): w=[+0.48, +18.03, -23.82, -5.01, +5.63, +6.68, +1.73, -3.71]
+  frac_3 (numeric): w=[-3.77, +3.84, +4.84, +2.61, +1.65, +2.38, -2.94, -8.61]
+  frac_0 (numeric): w=[+19.14, -46.75, -25.23, +4.41, +16.04, +16.48, +10.90, +5.00]
+  frac_4 (numeric): w=[-4.30, +2.86, +4.15, -4.20, +8.85, +4.04, -2.64, -8.76]
+  frac_5 (numeric): w=[-1.93, +5.84, +7.38, -3.36, -18.77, +17.20, +0.28, -6.65]
+  frac_7 (numeric): w=[+17.57, +25.55, +26.94, +12.93, -19.77, -40.32, -44.93, +22.04]
+)
+return v74

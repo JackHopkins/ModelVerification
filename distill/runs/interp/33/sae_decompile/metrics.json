@@ -1,7 +1,7 @@
 {
   "position_agreement": 1.0,
   "sequence_agreement": 1.0,
-  "mean_tv": 0.00023324264281794334,
+  "mean_tv": 0.00039795688738219185,
   "n_sampled": 20000,
   "formal": {
     "mode": "sampled",
@@ -11,40 +11,20 @@
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 48,
-    "n_table_cells": 3290
+    "n_nodes": 7,
+    "n_table_cells": 112
   },
   "is_hard": false,
   "sae": {
     "n_latents_alive": 7,
     "n_latents_symbolized": 0,
-    "coverage_activation_mass": 0.006,
-    "sae_final_loss": 0.1986,
+    "coverage_activation_mass": 0.002,
+    "sae_final_loss": 0.1964,
     "selected_features": {
-      "is_min": 0.903,
-      "eq_tok-1": 0.895,
-      "eq_tok+1": 0.89
+      "is_min": 0.862
     },
-    "compositions": {
-      "kth_is_min_tok": 0.943,
-      "kth_eq_tok-1_tok": 0.908,
-      "kth_eq_tok+1_tok": 0.908,
-      "is_min_x_kth_is_min_tok": 0.915,
-      "is_min_x_kth_eq_tok-1_tok": 0.905,
-      "is_min_x_kth_eq_tok+1_tok": 0.905,
-      "eq_tok-1_x_kth_is_min_tok": 0.97,
-      "eq_tok-1_x_kth_eq_tok-1_tok": 0.967,
-      "eq_tok-1_x_kth_eq_tok+1_tok": 0.967,
-      "eq_tok+1_x_kth_is_min_tok": 0.928,
-      "eq_tok+1_x_kth_eq_tok-1_tok": 0.905,
-      "eq_tok+1_x_kth_eq_tok+1_tok": 0.905,
-      "tok_x_kth_eq_tok-1_tok": 0.898,
-      "tok_x_kth_eq_tok+1_tok": 0.898,
-      "pos_x_kth_is_min_tok": 0.896,
-      "pos_x_kth_eq_tok-1_tok": 0.903,
-      "pos_x_kth_eq_tok+1_tok": 0.903
-    }
+    "compositions": {}
   },
   "cegis_rounds": 0,
-  "seconds": 27.0
+  "seconds": 7.9
 }

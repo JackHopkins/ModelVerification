@@ -135,6 +135,22 @@ class NaryMap(Node):
         for _, kok in kids:
             ok &= kok
         idxs = [np.where(ok, kv, 0).astype(np.int64) for kv, _ in kids]
+        # vectorized fast path: dense LUT over the key grid when small
+        dims = tuple(max(k[a] for k in self.table) + 1
+                     for a in range(len(idxs))) if self.table else ()
+        if self.table and np.prod(dims) <= 1_000_000 \
+                and all(min(k[a] for k in self.table) >= 0
+                        for a in range(len(idxs))):
+            lut = np.full(dims, np.nan)
+            for k, v in self.table.items():
+                lut[k] = v
+            inb = np.ones(ok.shape, bool)
+            for ix, d in zip(idxs, dims):
+                inb &= (ix >= 0) & (ix < d)
+            safe = [np.clip(ix, 0, d - 1) for ix, d in zip(idxs, dims)]
+            out = np.where(inb, lut[tuple(safe)], np.nan)
+            ok = ok & inb & ~np.isnan(out)
+            return np.where(ok, out, np.nan), ok
         out = np.full(idxs[0].shape, np.nan)
         flat_ok = ok.ravel()
         flat_out = out.ravel()
@@ -146,6 +162,20 @@ class NaryMap(Node):
             else:
                 flat_ok[i] = False
         return flat_out.reshape(out.shape), flat_ok.reshape(ok.shape)
+
+
+class Coalesce(Node):
+    """Boundary default: x where defined, const where x is invalid."""
+
+    def __init__(self, x: Node, const: float = 0.0):
+        self.x, self.const = x, float(const)
+
+    def children(self):
+        return [self.x]
+
+    def eval_(self, ctx, kids):
+        (xv, xok), = kids
+        return np.where(xok, xv, self.const), np.ones(xv.shape, bool)
 
 
 class Cmp(Node):
@@ -429,3 +459,144 @@ class Program:
             {"name": self.name, "kind": self.kind, "n_outputs": self.n_outputs,
              "complexity": self.complexity(), "is_hard": self.is_hard()},
             indent=2)
+
+    def source(self):
+        return render_source(self)
+
+
+# ------------------------------------------------------------------ source
+
+
+def _fmt_num(v):
+    f = float(v)
+    return str(int(f)) if f == int(f) else f"{f:.3g}"
+
+
+def _fmt_table(table, max_items=10):
+    keys = sorted(table)
+    vals = {float(table[k]) for k in keys}
+    if vals <= {0.0, 1.0}:  # indicator table
+        ones = [k for k in keys if float(table[k]) == 1.0]
+        if len(ones) <= max_items:
+            return f"1 if x in {{{', '.join(map(str, ones))}}} else 0"
+    items = [f"{k}→{_fmt_num(table[k])}" for k in keys[:max_items]]
+    tail = f", …(+{len(keys) - max_items} more)" if len(keys) > max_items else ""
+    return "{" + ", ".join(items) + tail + "}"
+
+
+def _fmt_matrix(m):
+    """Recognize common selector predicates, else summarize true cells."""
+    a, b = m.shape
+    k, q = np.indices((a, b))
+    for pat, desc in ((k == q, "key == query"), (k < q, "key < query"),
+                      (k <= q, "key <= query"), (k > q, "key > query"),
+                      (k >= q, "key >= query")):
+        if a == b and np.array_equal(m, pat):
+            return desc
+    if m.all():
+        return "always"
+    cells = np.argwhere(m)
+    if len(cells) <= 8:
+        body = ", ".join(f"({ki},{qi})" for ki, qi in cells)
+        return f"true at (key,query) ∈ {{{body}}}"
+    return f"{a}×{b} matrix, {len(cells)} true cells"
+
+
+def render_source(program):
+    """Readable pseudo-RASP: one assignment per DAG node, topological."""
+    order = list(_walk(program.output).values())
+    names, lines, counter = {}, [], [0]
+
+    def nm(node):
+        if id(node) in names:
+            return names[id(node)]
+        counter[0] += 1
+        n = node.name or f"v{counter[0]}"
+        # disambiguate repeated names
+        while n in names.values():
+            n += "_"
+        names[id(node)] = n
+        return n
+
+    def expr(node):
+        t = type(node).__name__
+        if isinstance(node, Tokens):
+            return "tokens"
+        if isinstance(node, Indices):
+            return "indices"
+        if isinstance(node, Const):
+            return f"const({_fmt_num(node.value)})"
+        if isinstance(node, TableMap):
+            d = f", default={_fmt_num(node.default)}" if node.default is not None else ""
+            return f"map({nm(node.x)}, {_fmt_table(node.table)}{d})"
+        if isinstance(node, SeqMap):
+            return f"map2({nm(node.x)}, {nm(node.y)}, {_fmt_table(node.table)})"
+        if isinstance(node, NaryMap):
+            xs = ", ".join(nm(x) for x in node.xs)
+            return f"mapN([{xs}], {_fmt_table(node.table)})"
+        if isinstance(node, Coalesce):
+            return f"coalesce({nm(node.x)}, {_fmt_num(node.const)})"
+        if isinstance(node, Cmp):
+            return f"({nm(node.x)} {node.op} {_fmt_num(node.const)})"
+        if isinstance(node, Between):
+            return f"({_fmt_num(node.lo)} < {nm(node.x)} < {_fmt_num(node.hi)})"
+        if isinstance(node, LinComb):
+            terms = " + ".join(f"{_fmt_num(w)}*{nm(x)}"
+                               for w, x in zip(node.weights, node.terms))
+            c = f" + {_fmt_num(node.const)}" if node.const else ""
+            return terms + c if terms else _fmt_num(node.const)
+        if isinstance(node, Select):
+            return (f"select(key={nm(node.keys)}, query={nm(node.queries)}, "
+                    f"{_fmt_matrix(node.matrix)})")
+        if isinstance(node, Aggregate):
+            d = f", default={_fmt_num(node.default)}" if node.default is not None else ""
+            return f"aggregate({nm(node.sel)}, {nm(node.sop)}{d})"
+        if isinstance(node, SelectorWidth):
+            return f"selector_width({nm(node.sel)})"
+        if isinstance(node, (SoftHead, MixHead)):
+            return t  # rendered in detail below
+        return t
+
+    # emit children before parents
+    emitted = set()
+
+    def emit(node):
+        if id(node) in emitted:
+            return
+        emitted.add(id(node))
+        for c in node.children():
+            emit(c)
+        if isinstance(node, (Aggregate, SelectorWidth)):
+            emit(node.sel)
+        if isinstance(node, SoftHead):
+            lines.append(f"{nm(node)} = softmax_readout(")
+            lines.append(f"  bias = [{', '.join(_fmt_num(b) for b in node.bias)}]")
+            for f, tbl in zip(node.features, node.tables):
+                votes = []
+                for v in range(len(tbl)):
+                    if np.abs(tbl[v]).max() < 1e-3:
+                        continue
+                    c = int(tbl[v].argmax())
+                    votes.append(f"{v}→class{c}({tbl[v][c]:+.1f})")
+                    if len(votes) >= 8 and v < len(tbl) - 1:
+                        votes.append(f"…({len(tbl)} values)")
+                        break
+                lines.append(f"  {nm(f)}: " + " ".join(votes))
+            for f, w in zip(node.num_features, node.num_weights):
+                ws = ", ".join(f"{x:+.2f}" for x in w)
+                lines.append(f"  {nm(f)} (numeric): w=[{ws}]")
+            lines.append(")")
+        elif isinstance(node, MixHead):
+            body = " + ".join(f"{_fmt_num(w)}·onehot({nm(f)})"
+                              for f, w in zip(node.features, node.weights))
+            lines.append(f"{nm(node)} = mixture({body})")
+        elif isinstance(node, Select):
+            lines.append(f"{nm(node)} = {expr(node)}")
+        else:
+            lines.append(f"{nm(node)} = {expr(node)}")
+
+    emit(program.output)
+    head = (f"# {program.name}  kind={program.kind}  "
+            f"n_outputs={program.n_outputs}  nodes={len(order)}")
+    out_name = names[id(program.output)]
+    return "\n".join([head] + lines + [f"return {out_name}"])

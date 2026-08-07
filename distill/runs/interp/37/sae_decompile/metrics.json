@@ -1,0 +1,49 @@
+{
+  "position_agreement": 1.0,
+  "sequence_agreement": 1.0,
+  "mean_tv": 0.0001899618067811177,
+  "n_sampled": 20000,
+  "formal": {
+    "mode": "sampled",
+    "n_checked": 200000,
+    "n_disagreements": 0,
+    "disagreement_rate": 0.0,
+    "exact_equivalent": false
+  },
+  "complexity": {
+    "n_nodes": 38,
+    "n_table_cells": 3531
+  },
+  "is_hard": false,
+  "sae": {
+    "n_latents_alive": 73,
+    "n_latents_symbolized": 43,
+    "coverage_activation_mass": 0.907,
+    "sae_final_loss": 0.4334,
+    "selected_features": {
+      "tok": 1.0,
+      "is_min": 0.913,
+      "is_max": 0.903,
+      "frac_no": 0.758,
+      "frac_J": 0.726,
+      "tok_at_learned": 0.924
+    },
+    "learned_gather_map": {
+      "1": 0
+    },
+    "compositions": {
+      "tok_x_is_min": 0.913,
+      "tok_x_is_max": 0.904,
+      "tok_x_pos": 0.529,
+      "tok_x_tok_at_learned": 0.913,
+      "is_min_x_tok_at_learned": 0.828,
+      "is_max_x_tok_at_learned": 0.82,
+      "allpre0_is_min": 0.948,
+      "allpre1_is_min": 0.895,
+      "allpre0_is_max": 0.953,
+      "allpre1_is_max": 0.893
+    }
+  },
+  "cegis_rounds": 0,
+  "seconds": 27.5
+}

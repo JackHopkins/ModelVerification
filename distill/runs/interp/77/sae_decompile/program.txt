@@ -1,0 +1,9 @@
+# tl_decompiled_77  kind=seq_cat  n_outputs=11  nodes=3
+tok = tokens
+pos = indices
+v3 = softmax_readout(
+  bias = [0.0534, 0.257, 0.0133, -0.338, -0.205, 0.0917, 0.155, 0.216, 0.0809, 0.0964, -0.419]
+  tok: 0→class6(+8.9) 1→class10(+8.9) 2→class2(+8.8) 3→class5(+8.7) 4→class9(+8.7) 5→class1(+9.8) 6→class4(+8.8) 7→class8(+8.7) …(11 values)
+  pos: 0→class7(+0.0) 1→class7(+0.0) 2→class7(+0.0) 3→class1(+0.0) 4→class1(+0.0) 5→class1(+0.0) 6→class5(+0.0) 7→class1(+0.0) …(9 values)
+)
+return v3

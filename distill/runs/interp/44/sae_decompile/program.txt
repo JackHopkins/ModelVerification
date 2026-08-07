@@ -1,0 +1,10 @@
+# sae_tabulated_44  kind=seq_cat  n_outputs=10  nodes=8
+tok = tokens
+v2 = select(key=tok, query=tok, key > query)
+rank_gt = selector_width(v2)
+is_max = map(rank_gt, 1 if x in {0} else 0)
+v5 = select(key=is_max, query=is_max, true at (key,query) ∈ {(1,0), (1,1)})
+count_is_max = selector_width(v5)
+all_is_max = map(count_is_max, 1 if x in {9} else 0)
+readout_table[rank_gt,all_is_max] = mapN([rank_gt, all_is_max], {(0, 0)→0, (0, 1)→1, (1, 0)→1, (1, 1)→0, (2, 0)→2, (2, 1)→0, (3, 0)→3, (3, 1)→0, (4, 0)→4, (4, 1)→0, …(+10 more)})
+return readout_table[rank_gt,all_is_max]

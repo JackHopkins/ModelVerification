@@ -1,0 +1,20 @@
+# sae_decompiled_4  kind=seq_num  n_outputs=1  nodes=18
+pos = indices
+tok = tokens
+v3 = map(tok, 1 if x in {1} else 0)
+v4 = select(key=pos, query=pos, key <= query)
+frac_1 = aggregate(v4, v3, default=0)
+v6 = map(tok, 1 if x in {0} else 0)
+v7 = select(key=pos, query=pos, key <= query)
+frac_0 = aggregate(v7, v6, default=0)
+v9 = map(tok, 1 if x in {2} else 0)
+v10 = select(key=pos, query=pos, key <= query)
+frac_2 = aggregate(v10, v9, default=0)
+v12 = map(tok, 1 if x in {3} else 0)
+v13 = select(key=pos, query=pos, key <= query)
+frac_3 = aggregate(v13, v12, default=0)
+v15 = map(tok, 1 if x in {4} else 0)
+v16 = select(key=pos, query=pos, key <= query)
+frac_4 = aggregate(v16, v15, default=0)
+v18 = -0.997*frac_1 + 1*frac_0 + 0.00109*frac_2 + -0.00408*frac_3 + -0.000275*frac_4 + -0.00524
+return v18

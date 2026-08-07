@@ -1,0 +1,61 @@
+{
+  "position_agreement": 1.0,
+  "sequence_agreement": 1.0,
+  "mean_tv": 0.00013848078086092436,
+  "n_sampled": 20000,
+  "formal": {
+    "mode": "exhaustive",
+    "n_checked": 19683,
+    "n_disagreements": 0,
+    "disagreement_rate": 0.0,
+    "exact_equivalent": true
+  },
+  "complexity": {
+    "n_nodes": 62,
+    "n_table_cells": 2826
+  },
+  "is_hard": false,
+  "sae": {
+    "n_latents_alive": 18,
+    "n_latents_symbolized": 11,
+    "coverage_activation_mass": 0.946,
+    "sae_final_loss": 0.2655,
+    "selected_features": {
+      "tok": 1.0,
+      "is_max": 0.952,
+      "is_min": 0.951,
+      "maj_\ud83d\ude0a": 0.851,
+      "frac_\ud83d\ude22": 0.794,
+      "frac_\ud83d\udcd8": 0.713,
+      "tok_at_learned": 0.908
+    },
+    "learned_gather_map": {
+      "1": 0
+    },
+    "compositions": {
+      "tok_x_is_max": 0.952,
+      "tok_x_is_min": 0.951,
+      "tok_x_maj_\ud83d\ude0a": 0.848,
+      "tok_x_tok_at_learned": 0.953,
+      "is_max_x_is_min": 0.917,
+      "is_max_x_tok_at_learned": 0.906,
+      "is_min_x_tok_at_learned": 0.906,
+      "maj_\ud83d\ude0a_x_tok_at_learned": 0.814,
+      "allpre0_is_max": 0.964,
+      "allpre1_is_max": 0.925,
+      "allpre0_is_min": 0.936,
+      "allpre1_is_min": 0.867,
+      "count_maj_\ud83d\ude0a": 0.851,
+      "all_maj_\ud83d\ude0a": 0.851,
+      "any_maj_\ud83d\ude0a": 0.851,
+      "allpre0_maj_\ud83d\ude0a": 0.851,
+      "allpre1_maj_\ud83d\ude0a": 0.953,
+      "kth_maj_\ud83d\ude0a_tok": 0.878,
+      "tok_x_kth_maj_\ud83d\ude0a_tok": 0.878,
+      "maj_\ud83d\ude0a_x_kth_maj_\ud83d\ude0a_tok": 0.85,
+      "tok_at_learned_x_kth_maj_\ud83d\ude0a_tok": 0.877
+    }
+  },
+  "cegis_rounds": 0,
+  "seconds": 39.9
+}

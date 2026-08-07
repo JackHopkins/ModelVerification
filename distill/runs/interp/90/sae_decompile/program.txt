@@ -1,0 +1,22 @@
+# tl_decompiled_90  kind=seq_cat  n_outputs=9  nodes=13
+tok = tokens
+v2 = select(key=tok, query=tok, key > query)
+rank_gt = selector_width(v2)
+is_max = map(rank_gt, 1 if x in {0} else 0)
+tok_ = tokens
+pos = indices
+is_max_x_tok = map2(is_max, tok_, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (0, 9)→9, …(+10 more)})
+pos_ = indices
+cpair_is_max = map2(is_max, pos_, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (1, 0)→9, …(+8 more)})
+v10 = select(key=cpair_is_max, query=cpair_is_max, 18×18 matrix, 90 true cells)
+prefix_count_is_max = selector_width(v10)
+allpre1_is_max = map2(prefix_count_is_max, pos_, 1 if x in {(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8)} else 0)
+v13 = softmax_readout(
+  bias = [0.653, -0.0078, -0.00506, 0.00463, -0.00686, -0.0447, 0.116, 0.0373, -0.746]
+  is_max: 0→class0(+0.8) 1→class8(+1.6)
+  tok_: 0→class0(+4.2) 1→class1(+5.1) 2→class2(+5.2) 3→class3(+5.2) 4→class4(+5.2) 5→class5(+5.3) 6→class0(+4.5) 7→class6(+5.7) …(10 values)
+  pos: 0→class0(+0.1) 1→class0(+0.1) 2→class0(+0.0) 3→class0(+0.1) 4→class0(+0.0) 5→class0(+0.1) 6→class0(+0.1) 7→class0(+0.1) …(9 values)
+  is_max_x_tok: 0→class0(+3.3) 1→class1(+3.8) 2→class2(+3.8) 3→class3(+3.8) 4→class4(+3.8) 5→class5(+3.7) 6→class0(+3.0) 7→class6(+3.5) …(20 values)
+  allpre1_is_max: 0→class0(+0.4) 1→class0(+0.2)
+)
+return v13

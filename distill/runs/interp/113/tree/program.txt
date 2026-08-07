@@ -1,0 +1,61 @@
+|--- feature_2 <= 28.50
+|   |--- feature_2 <= 3.50
+|   |   |--- feature_2 <= 2.50
+|   |   |   |--- feature_2 <= 1.50
+|   |   |   |   |--- feature_2 <= 0.50
+|   |   |   |   |   |--- class: 0
+|   |   |   |   |--- feature_2 >  0.50
+|   |   |   |   |   |--- class: 1
+|   |   |   |--- feature_2 >  1.50
+|   |   |   |   |--- class: 2
+|   |   |--- feature_2 >  2.50
+|   |   |   |--- class: 3
+|   |--- feature_2 >  3.50
+|   |   |--- feature_2 <= 18.50
+|   |   |   |--- feature_2 <= 12.50
+|   |   |   |   |--- feature_2 <= 11.50
+|   |   |   |   |   |--- feature_2 <= 10.50
+|   |   |   |   |   |   |--- feature_2 <= 9.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 5
+|   |   |   |   |   |   |--- feature_2 >  9.50
+|   |   |   |   |   |   |   |--- class: 10
+|   |   |   |   |   |--- feature_2 >  10.50
+|   |   |   |   |   |   |--- class: 11
+|   |   |   |   |--- feature_2 >  11.50
+|   |   |   |   |   |--- class: 12
+|   |   |   |--- feature_2 >  12.50
+|   |   |   |   |--- feature_2 <= 13.50
+|   |   |   |   |   |--- class: 13
+|   |   |   |   |--- feature_2 >  13.50
+|   |   |   |   |   |--- feature_2 <= 14.50
+|   |   |   |   |   |   |--- class: 14
+|   |   |   |   |   |--- feature_2 >  14.50
+|   |   |   |   |   |   |--- feature_2 <= 15.50
+|   |   |   |   |   |   |   |--- class: 15
+|   |   |   |   |   |   |--- feature_2 >  15.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|   |   |--- feature_2 >  18.50
+|   |   |   |--- feature_2 <= 19.50
+|   |   |   |   |--- class: 19
+|   |   |   |--- feature_2 >  19.50
+|   |   |   |   |--- feature_2 <= 22.50
+|   |   |   |   |   |--- feature_2 <= 21.50
+|   |   |   |   |   |   |--- feature_2 <= 20.50
+|   |   |   |   |   |   |   |--- class: 20
+|   |   |   |   |   |   |--- feature_2 >  20.50
+|   |   |   |   |   |   |   |--- class: 21
+|   |   |   |   |   |--- feature_2 >  21.50
+|   |   |   |   |   |   |--- class: 22
+|   |   |   |   |--- feature_2 >  22.50
+|   |   |   |   |   |--- feature_2 <= 24.50
+|   |   |   |   |   |   |--- feature_2 <= 23.50
+|   |   |   |   |   |   |   |--- class: 23
+|   |   |   |   |   |   |--- feature_2 >  23.50
+|   |   |   |   |   |   |   |--- class: 24
+|   |   |   |   |   |--- feature_2 >  24.50
+|   |   |   |   |   |   |--- feature_2 <= 25.50
+|   |   |   |   |   |   |   |--- class: 25
+|   |   |   |   |   |   |--- feature_2 >  25.50
+|   |   |   |   |   |   |   |--- truncated branch of depth 3
+|--- feature_2 >  28.50
+|   |--- class: 29
