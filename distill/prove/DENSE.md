@@ -197,15 +197,72 @@ relaxation of LN + GELU adds looseness on top and must stay under 1.29 to
 preserve the proof — the near-exact requirement from the tight-margin
 finding, now quantified for the domain.
 
+## Jacobian-sparse SAE construction — where it is / isn't needed (dissection)
+
+Traced the sound subspace per component to see what actually must be
+LEARNED vs read off the weights:
+
+- **Attention outputs (b0a, b1a): mostly ARCHITECTURAL, sound for free.**
+  b0a = z @ W_O + b_O where z (hook_z) is n_heads scalars (d_head=1). The
+  reachable z is soundly a per-head box [min value, max value] (z is a
+  convex combo of that head's values). Empirically head 1's z is CONSTANT
+  (std 0), head 3 nearly so — b0a is genuinely rank-3. NO SAE needed to
+  KNOW the subspace exists; it's W_O applied to a per-head z-box.
+
+- **BUT the free bound is LOOSE.** The sound per-head z-box uses the global
+  value RANGE (over all positions), which reactivates all 4 heads → rank-4
+  box → the property FLIPS (-9.28). The tightening the property needs
+  (rank 3) is the attention PATTERN structure at the query position: which
+  input directions actually drive z at the LAST position. That is a
+  JACOBIAN property (dz/dinput at the query), not a variance property.
+
+- **Key tension confirmed:** the gap-critical 4th dimension is LOW-variance
+  (sv 4.98 vs 1783) but HIGH gap-leverage. A variance/reconstruction-based
+  SAE would discard exactly the dimension soundness must bound. So the
+  construction must be **Jacobian-sparse, NOT reconstruction-sparse** — the
+  user's instinct is right and the reason is now concrete: sparsity on the
+  feature→feature Jacobian keeps the gap-critical low-variance directions
+  that recon-SAEs drop.
+
+- **MLP (b1m): the genuinely nonlinear, learnable part.** rank-4, no
+  architectural collapse. Here a Jacobian-sparse SAE on the MLP's
+  input→output map is the actual object to build.
+
+## The rank-3 collapse is PROVABLE (BOS-saturating heads), not learned
+
+Traced why b0a is rank-3. The attention PATTERN at the last query position:
+- **head 1: attends to position 0 (BOS) with weight 1.0, entropy-std 0.000**
+  — input-independent. z_head1 = value(BOS) = constant (BOS is a fixed
+  token). Provable from the QK circuit (head 1's BOS score saturates).
+- **head 3: 0.99 to BOS, entropy-std 0.054** — near-constant.
+- heads 0, 2: input-dependent (entropy-std 0.25, 0.59).
+
+So the rank-3 structure has a CONCRETE PROVABLE origin: two of four heads
+saturate onto BOS and contribute (near-)constant vectors. The effective
+DOF at the last position are heads {0, 2} + the BOS common-mode = 3. This
+is a structural invariant provable from the pattern, NOT something a
+recon-SAE should learn (and shouldn't, per the low-variance tension above).
+
+This reframes the construction once more, toward LESS learning and more
+provable structure: the sound tight subspace = {W_O applied to the
+per-head z-box, with the BOS-saturating heads pinned to their constant
+value}. The saturation is provable via a QK score-gap argument (the same
+HARD-attention lemma already built in hard_attention.py: prove head 1's
+BOS score exceeds all others by a margin → pattern ≈ one-hot on BOS →
+z ≈ value(BOS), constant). The existing attention step-lemmas COMPOSE into
+this.
+
 ## Status
 
-The correlated-domain direction is EMPIRICALLY VALIDATED: rank-3 zonotope
-proves the property (min gap +1.29) where the hyperbox fails (-210). The
-build path is now clear and de-risked:
-1. Derive the low-rank/feature subspace SOUNDLY (Jacobian-sparse SAE or
-   virtual-weights ∘ W_OV/W_QK), not from sample PCA.
-2. Sound zonotope/affine propagation through block0.ln2 + GELU, staying
-   within the +1.29 slack budget.
-3. Discharge as a real ∀-theorem on the discrete token space.
-The domain choice — the load-bearing decision — is settled. Remaining work
-is making the subspace sound and the LN/GELU relaxation tight enough.
+The Jacobian-sparse SAE turned out to be the WRONG tool for the attention
+part: the rank collapse is provable structure (BOS-saturating heads), not a
+learned feature — and the existing hard-attention lemma already proves the
+saturation. The remaining learnable object is narrower than thought: only
+the MLP (b1m) nonlinearity genuinely needs a Jacobian-sparse local
+linearization. The construction is now: (1) prove BOS-saturation of heads
+1,3 via the hard-attention lemma → constant z contributions [reuses built
+machinery]; (2) sound per-head box for heads 0,2 → b0a rank-3 zonotope;
+(3) Jacobian-sparse linearization of block0.mlp within the +1.29 budget;
+(4) linear block1 + unembed. Steps 1-2 reuse existing lemmas; step 3 is the
+one genuinely new learned/relaxed piece. Honest scope: smaller and more
+provable than the initial "train a Jacobian-SAE" framing.
