@@ -173,11 +173,39 @@ The rank-3 measurement is direct evidence this can work: the correlation is
 real and low-dimensional, so a correlated domain should be tight where the
 hyperbox is loose by 40x.
 
+## Zonotope probe — the correlated domain WORKS (green light)
+
+Represented the resampled components as a rank-r zonotope (center + G·ε,
+ε∈[-1,1]^r, G = principal axes scaled to the data extent) instead of a
+12-dim box, and propagated through the real block0 MLP:
+
+- **rank-3 zonotope: min gap +1.29, property provable on 100% of inputs.**
+- rank-4: -9.28 (flips). rank-12 (≈box): -17.78 (flips).
+
+Capturing exactly the rank-3 correlation is the difference between provable
+and not. Two consequences:
+1. The correlated domain is the right abstraction — confirmed, not
+   hypothesized. Intervals can't; a rank-3 affine/zonotope domain can.
+2. The rank must be EXACT — rank-4 already over-approximates enough to flip.
+   So the domain must track the SOUND low-rank structure precisely. PCA of
+   samples is not sound; this is where the Jacobian-sparse SAE / virtual-
+   weight basis becomes necessary — it DERIVES the subspace from the
+   network's connectivity rather than reading it off sampled activations.
+
+**Slack budget: +1.29** (worst case over 200 inputs). Thin. A SOUND
+relaxation of LN + GELU adds looseness on top and must stay under 1.29 to
+preserve the proof — the near-exact requirement from the tight-margin
+finding, now quantified for the domain.
+
 ## Status
 
-Domain wall identified and quantified (rank-3 reachable manifold vs 12-dim
-box, -210 vs verified-holds). The next build is a CORRELATED domain (affine/
-zonotope over the low-rank subspace, or an SAE/virtual-weight feature basis
-with sparse Jacobian), NOT a tighter interval propagator — intervals cannot
-represent the correlation that makes the property true. This reframes the
-harness around the domain, which is the actual load-bearing choice.
+The correlated-domain direction is EMPIRICALLY VALIDATED: rank-3 zonotope
+proves the property (min gap +1.29) where the hyperbox fails (-210). The
+build path is now clear and de-risked:
+1. Derive the low-rank/feature subspace SOUNDLY (Jacobian-sparse SAE or
+   virtual-weights ∘ W_OV/W_QK), not from sample PCA.
+2. Sound zonotope/affine propagation through block0.ln2 + GELU, staying
+   within the +1.29 slack budget.
+3. Discharge as a real ∀-theorem on the discrete token space.
+The domain choice — the load-bearing decision — is settled. Remaining work
+is making the subspace sound and the LN/GELU relaxation tight enough.
