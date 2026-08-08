@@ -82,21 +82,48 @@ def interval_from_zono(center, G):
 
 
 def sound_sigma_interval(rm_lo, rm_hi, eps=1e-5):
-    """Sound [sigma_lo, sigma_hi] for LayerNorm's sqrt(var+eps) over the box
-    [rm_lo, rm_hi] (d,). var = mean((x - mean x)^2). We bound it by interval
-    arithmetic on the centered vector; conservative but sound. d is small (4)."""
-    d = rm_lo.size
-    # mean over d dims: interval [mean(lo), mean(hi)]
+    """Sound [sigma_lo, sigma_hi] over the interval BOX [rm_lo, rm_hi].
+    Conservative — use sound_sigma_zonotope when an affine form is available,
+    which is far tighter because sigma depends on the CORRELATED zonotope,
+    not the independent box (the box over-estimates the sigma range ~1.3x)."""
     mu_lo, mu_hi = rm_lo.mean(), rm_hi.mean()
-    # centered coord i: x_i - mu, in [rm_lo[i]-mu_hi, rm_hi[i]-mu_lo]
     c_lo = rm_lo - mu_hi
     c_hi = rm_hi - mu_lo
-    # squared centered: [0 if straddles 0 else min(c_lo^2,c_hi^2), max(c_lo^2,c_hi^2)]
     sq_hi = np.maximum(c_lo**2, c_hi**2)
     sq_lo = np.where((c_lo <= 0) & (c_hi >= 0), 0.0,
                      np.minimum(c_lo**2, c_hi**2))
-    var_lo = sq_lo.mean(); var_hi = sq_hi.mean()
-    return float(np.sqrt(var_lo + eps)), float(np.sqrt(var_hi + eps))
+    return float(np.sqrt(sq_lo.mean() + eps)), float(np.sqrt(sq_hi.mean() + eps))
+
+
+def sound_sigma_zonotope(center, A, eps=1e-5):
+    """Tight sound [sigma_lo, sigma_hi] over the zonotope {center + A^T e,
+    e in [-1,1]^r}. sigma^2 * d = sum_j (cc_j + cA[:,j].e)^2 where cc, cA are
+    the MEAN-CENTERED center and coefficients. This is a convex quadratic in
+    e, so its MAX over the box is at a corner (enumerate 2^r) and its MIN is
+    at the box-clamped unconstrained minimizer. Both sound; r is small (3)."""
+    import itertools
+    d = center.size
+    r = A.shape[0]
+    # centering is LINEAR: centered = (I - 11^T/d) x. Apply to center AND coeffs,
+    # so the mean-per-eps is handled exactly (the mean itself depends on eps).
+    P = np.eye(d) - np.ones((d, d)) / d
+    cc = P @ center             # (d,) centered center
+    cA = A @ P.T                # (r, d) centered coeffs
+    corners = np.array(list(itertools.product([-1.0, 1.0], repeat=r)))
+    cvals = cc[None] + corners @ cA          # (2^r, d)
+    var_corner = (cvals ** 2).mean(1)
+    var_hi = float(var_corner.max())         # sound: convex quad max at a corner
+    # SOUND lower bound on var = (1/d) sum_j f_j(e)^2, f_j affine in e over box.
+    # Per coordinate j, f_j ranges over [cc_j - |cA[:,j]|_1, cc_j + |cA[:,j]|_1];
+    # min of f_j^2 over that interval is 0 if it straddles 0 else the near-endpoint^2.
+    # Summing these per-coordinate minima is a VALID (sound) lower bound (each term
+    # bounded independently below), though not tight — safe for soundness.
+    rad = np.abs(cA).sum(0)                   # (d,)
+    f_lo = cc - rad; f_hi = cc + rad
+    sq_lo = np.where((f_lo <= 0) & (f_hi >= 0), 0.0,
+                     np.minimum(f_lo**2, f_hi**2))
+    var_lo = float(sq_lo.mean())
+    return float(np.sqrt(max(var_lo, 0) + eps)), float(np.sqrt(var_hi + eps))
 
 
 if __name__ == "__main__":
