@@ -299,16 +299,44 @@ scalar in the decision direction (project dvec through the error's affine
 form) rather than box-then-amplify-then-project — the SAME shared-eps /
 no-premature-interval lesson, now at the error term.
 
-## Status: SOLVED in principle, tightness engineering remains
+## Error-projection tightening attempt — honest status
 
-The dense proof for case 8 is established to CLOSE: correlated (rank-3
-zonotope) domain + shared-eps affine propagation + Jacobian-affine MLP with
-a linearization error (≤0.57) that fits the +1.14 budget. Every soundness
-component is built and validated (sigma bound, GELU bounds, BOS-saturation
-lemma reuse). The only remaining work is an ENGINEERING tightening: bound
-the error in the decision direction instead of per-coordinate, so the
-implemented bound realizes the +0.5-ish slack the true error leaves. This
-is not a research barrier — it is the same shared-affine discipline applied
-once more. The hard problem (sound forall-theorems on a dense trained
-model) is answered: it reduces to a correlated domain that captures the
-low-rank reachable manifold, and it CLOSES with room to spare on case 8.
+Tried to realize the proven slack in a sound IMPLEMENTATION. Repeatedly hit
+my OWN bugs, not a barrier, but the sound bound does not yet close in code:
+
+- **A real bug found: block0.ln2 is `Identity`** (normalization_type None).
+  The entire sigma-bound apparatus (sound_sigma_zonotope etc.) was solving a
+  NON-PROBLEM — there is no LayerNorm in these models. The only nonlinearity
+  is GELU. (The earlier -241 "sigma is the dominant error" was partly this
+  phantom.) Removing it: the center MLP reconstruction is now EXACT (0.0).
+- With no LN: gap_cen is correct (min +5.3, ~margin), affine spread small
+  (max 9.85). So the LINEAR part closes. The leak is entirely the GELU
+  contribution's sound bound:
+  - affine-slope version: bad average slope over wide pre-act interval →
+    spurious -173.
+  - per-neuron INTERVAL version: decorrelates the 16 GELUs → -84.
+
+The true GELU decision-error is ≤0.57 (measured, correlated, cancels), but
+BOTH my sound implementations lose that correlation: interval-per-neuron
+throws it away; affine-with-slope mis-approximates it. The correct object is
+GELU carried as affine-in-eps with a TIGHT sound error that respects the
+cross-neuron correlation through u = W_out^T dvec — which I did not get
+right under time pressure.
+
+## Status: structure proven-closeable, sound IMPLEMENTATION not yet closing
+
+HONEST CORRECTION of the earlier "closes with room to spare": the STRUCTURE
+closes (exact-Jacobian affine +1.14; true linearization error ≤0.57 in the
+decision direction — both measured). But a SOUND, correlation-preserving
+bound on the GELU term in code has NOT been achieved — every version so far
+loses the correlation and lands negative (-84 to -173). So the theorem is
+proven CLOSEABLE numerically, but NOT yet PROVEN by a sound bound.
+
+Also a real correctness win banked: these models have NO LayerNorm (ln =
+Identity), so the hardest anticipated obstacle (1/sigma) does not exist
+here — the sound proof needs only a tight, correlation-preserving GELU
+relaxation. That is the entire remaining task, and it is a bounded one:
+16 GELUs, mostly saturated, carried affine-in-eps with a sound error that
+projects through u before summing (so cross-neuron cancellation survives).
+`mlp_linear.py` retains the sound GELU bounds (0/4000) which are correct;
+the sigma code is dead (no LN) and should be removed.
