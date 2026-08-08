@@ -394,3 +394,52 @@ bound-propagation problem of similar difficulty. The honest deliverable is:
 a validated correlation-preserving nonlinearity-bound technique, plus a
 precise characterization of why the sound subspace is the crux (cross-
 component correlation from shared x', rank-3 joint but rank-9 per-component).
+
+## Joint-propagation attempt: the reachable set is NOT ZONOTOPIC (the wall)
+
+Took on the joint problem directly. Findings, each a genuine measurement:
+- The "rank-3" was a variance-threshold ARTIFACT. With a proper cutoff the
+  joint (b0a,b1a,b1m) reachable set is **rank-7**, and its factors are NOT
+  linear in any low-dim intermediate (z0, last-pos resid — all residual/
+  signal ~1-2). No clean generative structure to exploit.
+- The property IS genuinely true: over the ACTUAL reachable triples (real
+  resample set), min gap +2.57, holds 100%. So the theorem is real; only a
+  sound ENCLOSURE is missing.
+- **No zonotope encloses it tightly enough.** rank-k zonotope + sound box
+  on discarded dims: rank-3 -167, rank-5 -33, rank-7 -19, rank-9/12 ~-20
+  (does not improve past the true rank). Adding discarded dims as an
+  independent box re-decorrelates — the same failure at higher rank.
+- **Discrete case-split helps but does not close.** Conditioning on x''s
+  LAST token collapses each case to rank 2-3 (widths 6-34% of full) —
+  because block1 attention is dominated by the last position. But per-case
+  rank-4 zonotope + box still gives -10.4: the per-case sets are LOWER-rank
+  but still CURVED, and the linear-image (zonotope) domain cannot enclose a
+  curved finite point-image tightly at this ~2.5 margin.
+
+ROOT CAUSE (definitive): the reachable joint set is the IMAGE of a finite
+discrete input set (11^9 token sequences) under a nonlinear network — a
+CURVED point cloud, not a box or a zonotope. Linear-image abstract domains
+(intervals, zonotopes, affine forms) fundamentally cannot enclose it
+tightly. This is a domain-class limitation, not a tuning problem: every
+zonotope variant (any rank, any case-split) either misses gap-critical
+directions or adds decorrelating slack, and the margin (~2.5) has no room
+for either.
+
+## Status: HARD WALL characterized; zonotope domains are insufficient
+
+Definitive honest assessment of the dense-proof arc:
+- SOLVED: correlation-preserving nonlinearity bound (sound_decision_gap,
+  +0.586 over a GIVEN correlated domain, GELU enclosures 0/960). Reusable.
+- CHARACTERIZED, NOT SOLVED: the sound domain. The reachable set is a
+  curved discrete-image, non-zonotopic; no linear-image domain encloses it
+  within the thin margin. Would require either (a) a NON-convex / disjunctive
+  domain (e.g. per-token-sequence bounds — exponential), (b) a much tighter
+  problem-specific relaxation exploiting the exact discrete structure, or
+  (c) accepting the proof only for models/properties with a fatter margin.
+- The property is TRUE (verified +2.57 over real triples); it is the sound
+  CERTIFICATION at this margin that the available domains cannot deliver.
+
+This is where honest effort lands: a real analytic contribution (the
+nonlinearity bound) and a precise, measured characterization of the
+domain-class barrier for sound proofs on dense trained models. Closing it
+needs a genuinely different abstract domain, not more of the same.
