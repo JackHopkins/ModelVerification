@@ -200,12 +200,61 @@ This is the qualitative goal of the whole reframe: "output j provably
 cannot depend on input i" and "these are exactly the live components" are
 statements about the network's mechanism, unattainable from I/O agreement.
 
-**Next:**
-- Extend the dependency graph to TransformerLens weights so circuit-
-  equality runs against InterpBench `edges.pkl` directly (trained models).
-- Compositional chaining of the step-lemmas into an end-to-end functional
-  theorem (network implements program), combining with the structural
-  properties here.
+**Built — dependency graph for TRAINED InterpBench models
+(`interp_graph.py`):** trained weights are DENSE, so dependency cannot be
+read off weight sparsity (every component nominally connects to every
+other). The sound primitive is CAUSAL: an edge exists iff an intervention
+on the source changes the output. We use **corrupt-baseline path
+patching** (patch a source to its activation on a shuffled input — an
+on-distribution intervention, far sharper than off-distribution mean-
+ablation, which lets other components compensate and hides used ones — the
+self-repair/hydra effect). `circuit_equality_interp` compares the recovered
+live-source set against `edges.pkl`.
+- **Recovers the circuit exactly where it is source-level and the effect
+  spectrum has a cliff:** cases 8, 11, 75 match `edges.pkl` (0 missing, 0
+  extra) with a clean 6–50x separation gap. `_auto_threshold` cuts at the
+  largest absolute drop; `circuit_equality_interp` reports whether the
+  separation was CLEAN or SMOOTH (unreliable) so the verdict is never
+  over-trusted.
+- **Honest limits, quantified:** of 86 cases, **59 are source-level**
+  (this graph's granularity) and **27 route through specific head q/k/v
+  inputs** — those need finer path-patching into `hook_{q,k,v}_input[h]`
+  (demonstrated: on case 21, patching `b3.q_input[0]` gives effect 5.0 vs
+  0.51 for the non-circuit `[1]`, a 10x separation the source-level ablate
+  misses). Some source-level cases (20, 21) still show smooth spectra where
+  single-node attribution under-separates; a full ACDC-style recursive
+  path patch is the principled completion.
+
+Contrast with the tracr path: there the labeled basis gives R and the
+dependency graph is a WEIGHT-level theorem (forall inputs). Here it is a
+sound but DISTRIBUTIONAL causal measurement (over sampled inputs) — the
+honest cost of dense trained weights, and why `edges.pkl` itself was built
+by patching, not proof.
+
+**Head-input granularity (`head_input_edges`):** corrupt-baseline path
+patching into each `hook_{q,k,v}_input[h]` — the granularity 27/86 circuits
+route through. It surfaces the right components in RANK order (case 21: the
+three ground-truth edges b3.{q,k,v}_input[0] are the top-3 effects 8.3/5.2/
+5.0, cleanly above the 3.6 next tier), but the single-gap auto-threshold
+cuts imperfectly when the circuit forms a cluster rather than a lone spike.
+The honest state: ranked attribution is correct; automatic cutoff is not
+robust on smooth spectra — a recursive ACDC pass (patch, threshold, recurse
+on survivors) is the principled fix.
+
+**Where this leaves the agenda (see also the top of this file):** the
+tracr path gives WEIGHT-LEVEL ∀-theorems (path-independence, circuit-
+equality, functional step-lemmas). The trained-model path gives sound but
+DISTRIBUTIONAL causal attribution — because dense weights admit no free
+forall, which is why edges.pkl itself was built by patching. Closing that
+gap (provable guarantees on dense trained nets over input REGIONS via
+sound abstract interpretation through real attention) is the open research
+problem, deferred by choice. Consolidated here; not yet attempted.
+
+**Next (when resumed):**
+- Recursive (ACDC) path patching for robust automatic circuit cutoff.
+- Compositional chaining of the tracr step-lemmas into an end-to-end
+  functional theorem (network implements program).
+- The hard problem: sound region-level guarantees on trained models.
 - Refine R for scalar/broadcast variables (`length`, `opp_idx`: one-hot
   at p*, zero elsewhere) and the hist saturation corner.
 - Chain step-lemmas into an end-to-end network theorem, then the
