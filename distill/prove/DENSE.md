@@ -89,9 +89,49 @@ Concretely the harness must:
 - **Stage C:** decompiler-supplied subspace invariant tightens the LN
   relaxation; CEGIS-discharge the invariant with the same propagator.
 
+## CROWN-through-LayerNorm scouting (interval probe, sound-sigma intent)
+
+Structural map of case 8 (circuit embed->block0.mlp->out):
+- **block0.attn (b0a)** feeds block0's ln2 -> block0.mlp (the CIRCUIT). This
+  is the ONLY LayerNorm-coupled perturbation. Its box width is ~59.
+- **block1.attn + block1.mlp** are written to resid_post AFTER the circuit
+  MLP and feed NO further LayerNorm (normalization_type None, no final LN),
+  so they enter the logits by a PURE LINEAR map. Box widths huge (~3000).
+
+Sigma reality: block0.ln2 sees resid_mid with norm ~88-130 and
+**sigma in [34.9, 60.8], ratio 1.74** (NOT the hoped ~1.10 — d_model is only
+4, so sigma is a mean over 4 dims and swings). The tight-sigma assumption
+does not hold for free; it would need the subspace invariant to justify.
+
+**THE decisive measurement (after fixing a 3x-repeated methodology error).**
+Three successive bounds gave nonsense (134, 29, -1882 slack) because they
+maximized worst-case over class-pairs and inputs INDEPENDENTLY — but the
+real quantity is per-input and CORRELATED. Computed correctly: resample
+block1 from 200 sources, measure the actual change to the (winner - its own
+runner-up) gap per input:
+- **worst gap-change = 12.8; margin in [5.3, 8.7]; per-input ratio maxes at
+  0.89 < 1.** The gap-change never exceeds the margin — THAT is why argmax
+  is invariant, and it is TIGHT (0.89, almost no slack).
+
+Implication (strategic): the property is not loose-and-blown-up; it is
+**tight and barely holds**. A sound bound must be accurate to within ~15%
+or it fails. So the challenge is not taming blowup (the usual dense-proof
+story) but achieving near-exact bounds on a genuinely marginal property.
+This raises the bar for the CROWN relaxations (LN + GELU + softmax must each
+stay very tight) and makes the decompiler subspace-invariant essentially
+mandatory, not merely helpful.
+
+LESSON (recorded): every worst-case bound over a coupled network must be
+computed per-decision (winner vs its own runner-up) and account for
+correlated movement; independent class/input maximization over-counts by
+100x+ and produces bounds that CONTRADICT verified ground truth. Validate
+any bound against the known-true property before trusting it.
+
 ## Status
 
-Findings established (this file), including two falsified hypotheses and the
-real LayerNorm-coupling mechanism. The additive/decision-subspace shortcut
-is DEAD — the harness must do genuine bound propagation through LayerNorm,
-which is the honest scope of the remaining work. Not yet built.
+Findings established, including the corrected tight-margin measurement and
+the structural split (one LN-coupled perturbation + linear block1). The
+additive shortcut is dead; the harness must do genuine bound propagation
+through block0.ln2, and it must be near-exact because the property holds
+with ratio 0.89. Not yet built — but now we know it must be tight, not just
+sound, which is the key design constraint.
