@@ -346,23 +346,51 @@ in principle." The correlation-preserving discipline — one shared-eps
 affine form all the way to the decision, intercept errors combined signed —
 is the whole technique.
 
-## Status: sound bound achieved; ONE soundness qualifier remains
+## Sound-zonotope derivation: BOS-saturation is NECESSARY BUT NOT SUFFICIENT
 
-What is now rigorous: the GELU enclosures (0/960), the shared-eps affine
-propagation, the signed intercept combination, the no-LN structure. The
-sound decision-gap bound is +0.586 > 0 on all sampled inputs.
+Attempted to derive the sound zonotope from BOS-saturation. Found the
+structure precisely: L0 head1 and L1 head2 attend to BOS with weight 1.0
+(provably constant z, via the hard-attention lemma); L0 head3 >= 0.968;
+other heads live. Building per-head sound z-boxes (BOS-saturated heads
+pinned to value(BOS), live heads to their value range) and mapping through
+W_O gives a SOUND enclosure of each component (b0a, b1a, b1m) individually.
 
-The REMAINING non-sound step (honestly flagged): the rank-3 zonotope is
-still PCA of sampled activations. A full forall-theorem needs the subspace
-derived from network STRUCTURE — the BOS-saturation lemma (heads 1,3
-saturate onto BOS → constant contributions; hard_attention.py already
-proves saturation) plus a sound per-head value box for the 2 live heads.
-That yields a SOUND enclosing zonotope, and then sound_decision_gap turns
-it into a theorem. So: sound bound over the given zonotope = DONE; sound
-zonotope from structure = the last piece. The dead sigma code (no LN) was
-removed from mlp_linear.py.
+**But this is INSUFFICIENT, and the reason is fundamental.** The rank-3
+structure that makes the property provable is a CROSS-COMPONENT correlation
+between b0a and b1 (they derive from the SAME x'). BOS-saturation only
+reduces each component's INDIVIDUAL rank. b1 is NOT a function of b0a
+(linear-prediction residual/signal 1.69 for b1a, 0.96 for b1m — essentially
+unpredictable), so the joint set is not a product of per-component sets.
+Verified directly: sampling inside the PRODUCT of sound per-component boxes
+gives min gap **-200** — the property FLIPS. Independent sound boxes are
+~rank 9; the true reachable set is rank 3; the missing 6 dimensions are the
+b0a<->b1 coupling.
 
-Net: the dense proof is one sound-subspace lemma away from a complete
-forall-theorem on a trained model, and the hard analytic core (correlation-
-preserving nonlinearity bound within the tight margin) is DONE and
-validated.
+So a sound zonotope requires bounding the reachable set of the JOINT map
+x' -> (b0a(x'), b1(x')), not per-component. That joint set IS low-rank
+(rank 3, provably from x' being a discrete token sequence through a fixed
+network), but capturing it soundly means propagating the token-input
+structure through BOTH attention layers jointly — essentially the same
+bound-propagation problem one level up. BOS-saturation helps (pins some
+dims) but does not close the cross-correlation.
+
+## Status: analytic core DONE; sound subspace is a harder joint problem
+
+Honest assessment of the whole dense-proof arc:
+- **DONE and validated:** the correlation-preserving GELU/decision bound
+  (sound_decision_gap, +0.586 over a GIVEN rank-3 zonotope, GELU enclosures
+  0/960). This was the hard *analytic* core and it works.
+- **NOT done:** deriving a SOUND rank-3 zonotope. BOS-saturation gives sound
+  per-component boxes but not the cross-component correlation, and the
+  product of sound boxes flips the property (-200). The sound joint
+  subspace needs the token-input structure propagated through both
+  attention layers — a genuine remaining problem, NOT a one-lemma finish as
+  I previously scoped it.
+
+Net correction: the dense proof is NOT "one lemma away." The analytic
+machinery is complete and sound over a given correlated domain; obtaining
+that domain SOUNDLY (the joint low-rank reachable set) is itself a
+bound-propagation problem of similar difficulty. The honest deliverable is:
+a validated correlation-preserving nonlinearity-bound technique, plus a
+precise characterization of why the sound subspace is the crux (cross-
+component correlation from shared x', rank-3 joint but rank-9 per-component).
