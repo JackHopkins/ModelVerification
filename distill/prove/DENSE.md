@@ -127,11 +127,57 @@ correlated movement; independent class/input maximization over-counts by
 100x+ and produces bounds that CONTRADICT verified ground truth. Validate
 any bound against the known-true property before trusting it.
 
+## CROWN harness attempt — the domain, not the nonlinearity, is the wall
+
+Built the verified circuit-forward reconstruction (emb + b0a + block0.mlp(
+ln2(emb+b0a)) + b1, exact to 1e-4 vs the real patched forward). Then probed
+the achievable tightness by propagating the resample box through the REAL
+block0 MLP:
+
+- **Independent hyperbox on (b0a, b1) → output gap = -210 (argmax FLIPS).**
+  But the real resample never flips (0/60000 verified). The hyperbox admits
+  impossible worlds. (A probe bug — resampling b0a and b1 from INDEPENDENT
+  indices instead of the same x' — briefly suggested the theorem was false;
+  direct full-forward patching confirms 0 flips, and the fixed
+  reconstruction agrees exactly with real patching. Theorem holds.)
+
+- **Root cause (decisive):** the resampled components are JOINTLY CORRELATED
+  (all from one x'). PCA on the nominally-12-dim joint (b0a,b1a,b1m) manifold:
+  **rank 3 captures 99% of variance; 84.8% is in ONE direction.** The
+  reachable set is a 3-dim correlated manifold, not a 12-dim box. The
+  hyperbox over-approximates by treating 12 independent axes → the -210.
+
+**So the wall is the DOMAIN, not the LayerNorm nonlinearity.** LN is only
+4-dim and per-input tractable. The killer is that the sound abstract domain
+must capture the low-rank correlation of the reachable activations;
+axis-aligned intervals cannot.
+
+## Pivot: correlated/feature-space domain (the promising direction)
+
+The fix is a domain that carries the correlation — a zonotope/affine domain
+over the rank-3 subspace, or better, a FEATURE-space basis where the
+connectivity is sparse:
+- **Virtual weights** (SAE decoder ∘ W_OV/W_QK): re-express computation in a
+  feature basis where feature→feature connectivity is sparse and weight-
+  mediated — the sparse dependency structure obstacle-1 said dense nets
+  lack. A domain over these features captures the correlation the neuron-
+  hyperbox misses.
+- **Jacobian-sparse SAEs** (train sparsity on the feature→feature Jacobian):
+  the stronger version, and the RIGHT one for verification — the Jacobian
+  IS the local linear map CROWN consumes, so a sparse Jacobian means few
+  cross-terms and tight bounds. Manufactures the structure verification
+  needs on the CONNECTIVITY (what CROWN uses), not the parameters (which LN
+  scrambles) — the key advantage over SPD for this purpose.
+
+The rank-3 measurement is direct evidence this can work: the correlation is
+real and low-dimensional, so a correlated domain should be tight where the
+hyperbox is loose by 40x.
+
 ## Status
 
-Findings established, including the corrected tight-margin measurement and
-the structural split (one LN-coupled perturbation + linear block1). The
-additive shortcut is dead; the harness must do genuine bound propagation
-through block0.ln2, and it must be near-exact because the property holds
-with ratio 0.89. Not yet built — but now we know it must be tight, not just
-sound, which is the key design constraint.
+Domain wall identified and quantified (rank-3 reachable manifold vs 12-dim
+box, -210 vs verified-holds). The next build is a CORRELATED domain (affine/
+zonotope over the low-rank subspace, or an SAE/virtual-weight feature basis
+with sparse Jacobian), NOT a tighter interval propagator — intervals cannot
+represent the correlation that makes the property true. This reframes the
+harness around the domain, which is the actual load-bearing choice.
