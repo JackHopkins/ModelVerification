@@ -252,17 +252,42 @@ BOS score exceeds all others by a margin → pattern ≈ one-hot on BOS →
 z ≈ value(BOS), constant). The existing attention step-lemmas COMPOSE into
 this.
 
+## Step 3 built: MLP linearization — the affine/Jacobian form CLOSES it
+
+`mlp_linear.py`: sound GELU linear bounds (0/4000 violations, grid+Lipschitz
+margin) + sound LayerNorm sigma interval. Then propagated the rank-3
+zonotope through block0.mlp. Three attempts, each fixing a decorrelation
+leak:
+
+1. **Interval-hull propagation: -646 (worse than hyperbox).** Taking the
+   interval hull at each step DISCARDS the rank-3 correlation — the exact
+   thing that made the property provable. Intervals can't; must stay affine.
+2. **Affine b0a/b1 but MLP-as-box: -249, 28% provable.** Sharing eps between
+   b0a and b1 (so their gap contributions can CANCEL) helped, but bounding
+   the MLP output as an independent box re-decorrelates it from its own
+   input.
+3. **MLP-as-AFFINE (Jacobian, shared eps): +1.14, 100% provable.** Carrying
+   mlp(rm) ≈ J·(rm−rm0)+mlp(rm0) as an affine function of the SAME eps
+   recovers the +1.29 ideal. THE STRUCTURE CLOSES.
+
+Decisive lesson: soundness here is entirely about keeping ONE affine form
+(shared eps) through the whole circuit so correlated terms cancel in the
+decision direction. Every place that drops to an interval/box loses the
+correlation and the property with it. This is why the JACOBIAN (not
+reconstruction) is the right object: it is the affine coefficient that
+carries the correlation through the MLP.
+
 ## Status
 
-The Jacobian-sparse SAE turned out to be the WRONG tool for the attention
-part: the rank collapse is provable structure (BOS-saturating heads), not a
-learned feature — and the existing hard-attention lemma already proves the
-saturation. The remaining learnable object is narrower than thought: only
-the MLP (b1m) nonlinearity genuinely needs a Jacobian-sparse local
-linearization. The construction is now: (1) prove BOS-saturation of heads
-1,3 via the hard-attention lemma → constant z contributions [reuses built
-machinery]; (2) sound per-head box for heads 0,2 → b0a rank-3 zonotope;
-(3) Jacobian-sparse linearization of block0.mlp within the +1.29 budget;
-(4) linear block1 + unembed. Steps 1-2 reuse existing lemmas; step 3 is the
-one genuinely new learned/relaxed piece. Honest scope: smaller and more
-provable than the initial "train a Jacobian-SAE" framing.
+The construction's core structure is VALIDATED end-to-end: affine
+propagation with shared eps through block0.mlp gives min gap +1.14, 100%
+provable. Remaining for full soundness: (3) uses the EXACT center Jacobian
+and ignores linearization ERROR (true MLP vs its tangent over the
+zonotope). That error must be bounded and subtracted from the +1.14. The
+MLP is nearly affine here (Jacobian std/mean 0.045, 98.6% of GELUs
+saturated) so the error should fit the budget — but bounding it soundly (via
+the GELU linear bounds already built, applied to the residual not the whole
+map) is the last step. Everything else (BOS-saturation reuse, per-head box,
+linear block1) is settled. The Jacobian-sparse SAE framing resolved into:
+carry the MLP as a Jacobian-affine form with sound linearization error — a
+much smaller, concrete object than training an SAE.
