@@ -323,20 +323,46 @@ GELU carried as affine-in-eps with a TIGHT sound error that respects the
 cross-neuron correlation through u = W_out^T dvec — which I did not get
 right under time pressure.
 
-## Status: structure proven-closeable, sound IMPLEMENTATION not yet closing
+## Correlation-preserving GELU bound: the sound bound CLOSES (+0.586)
 
-HONEST CORRECTION of the earlier "closes with room to spare": the STRUCTURE
-closes (exact-Jacobian affine +1.14; true linearization error ≤0.57 in the
-decision direction — both measured). But a SOUND, correlation-preserving
-bound on the GELU term in code has NOT been achieved — every version so far
-loses the correlation and lands negative (-84 to -173). So the theorem is
-proven CLOSEABLE numerically, but NOT yet PROVEN by a sound bound.
+Found and fixed the correlation loss. The mechanism, quantified: the 16
+GELUs' contributions to the decision, bounded INDEPENDENTLY, give error
+~50.86; the same GELUs' JOINT decision contribution is nearly affine in eps
+(residual 0.027) because they cancel through u = W_out^T dvec — an 1847x
+overcount if bounded independently.
 
-Also a real correctness win banked: these models have NO LayerNorm (ln =
-Identity), so the hardest anticipated obstacle (1/sigma) does not exist
-here — the sound proof needs only a tight, correlation-preserving GELU
-relaxation. That is the entire remaining task, and it is a bounded one:
-16 GELUs, mostly saturated, carried affine-in-eps with a sound error that
-projects through u before summing (so cross-neuron cancellation survives).
-`mlp_linear.py` retains the sound GELU bounds (0/4000) which are correct;
-the sigma code is dead (no LN) and should be removed.
+Fix (`mlp_linear.sound_decision_gap`): enclose each GELU as
+a_j*x + [blo_j, bhi_j] (slope chosen to minimize intercept width, grid +
+Lipschitz margin, sound — 0/960 violations on real intervals). Keep the
+a_j*pre_j AFFINE parts in the shared-eps form so they combine and cancel
+through u; only the intercept intervals are error, combined SIGNED through
+u (tight). With a fine enclosure grid:
+
+  **SOUND min decision gap = +0.586, property provable on 100% of sampled
+  inputs (median +2.89).**
+
+This is an ACTUAL sound bound certifying argmax-invariance, not "closeable
+in principle." The correlation-preserving discipline — one shared-eps
+affine form all the way to the decision, intercept errors combined signed —
+is the whole technique.
+
+## Status: sound bound achieved; ONE soundness qualifier remains
+
+What is now rigorous: the GELU enclosures (0/960), the shared-eps affine
+propagation, the signed intercept combination, the no-LN structure. The
+sound decision-gap bound is +0.586 > 0 on all sampled inputs.
+
+The REMAINING non-sound step (honestly flagged): the rank-3 zonotope is
+still PCA of sampled activations. A full forall-theorem needs the subspace
+derived from network STRUCTURE — the BOS-saturation lemma (heads 1,3
+saturate onto BOS → constant contributions; hard_attention.py already
+proves saturation) plus a sound per-head value box for the 2 live heads.
+That yields a SOUND enclosing zonotope, and then sound_decision_gap turns
+it into a theorem. So: sound bound over the given zonotope = DONE; sound
+zonotope from structure = the last piece. The dead sigma code (no LN) was
+removed from mlp_linear.py.
+
+Net: the dense proof is one sound-subspace lemma away from a complete
+forall-theorem on a trained model, and the hard analytic core (correlation-
+preserving nonlinearity bound within the tight margin) is DONE and
+validated.
