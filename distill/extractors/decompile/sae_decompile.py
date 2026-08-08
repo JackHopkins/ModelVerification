@@ -703,17 +703,36 @@ class SAEDecompileExtractor(TLDecompileExtractor):
         feats = ranked[:16]
         if not any(n == "pos" for n, *_ in feats):
             feats += [c for c in cat if c[0] == "pos"][:1]
+        # Always seed the local-window triple (prev, cur, next) even if the
+        # raw shift tokens score below derived features in the probe: the
+        # exact form of local-window tasks (trend, edge/run detection,
+        # smoothing) is a small joint table over these three, which the
+        # greedy top-16 pool otherwise buries. Cheap — vocab^3 cells.
+        by_name = {c[0]: c for c in cat}
+        for nm in ("tok_at-1", "tok", "tok_at+1"):
+            if nm in by_name and not any(n == nm for n, *_ in feats):
+                feats.append(by_name[nm])
         # evaluate with validity; features with boundary-invalid positions
-        # are wrapped in Coalesce(x, 0) so fit == runtime semantics
+        # Features with boundary-invalid positions (shift tokens at seq
+        # ends) are wrapped in Coalesce(x, card) — a FRESH out-of-range
+        # value, not 0. Coalescing to 0 would collide the boundary with
+        # real token 0, merging cells the table needs distinct (interp/13
+        # trend: the last-position cells are exactly the ambiguous ones,
+        # so the boundary must be its own symbol). Widen card by 1 to hold
+        # it. fit == runtime semantics because the program does the same.
         wrapped, Xcols = [], []
         contents = list(batches)
         allc = np.concatenate(contents)
         for name, node, card in feats:
             vals, ok = _eval_node(node, {"content": allc}, {})
             if not ok.all():
-                node = Coalesce(node, 0).named(f"{name}0")
+                node = Coalesce(node, card).named(f"{name}B")
+                col = np.where(ok, vals, card)
+                card = card + 1
+            else:
+                col = vals
             wrapped.append((name, node, card))
-            Xcols.append(np.where(ok, vals, 0).ravel().astype(np.int64))
+            Xcols.append(col.ravel().astype(np.int64))
         X = np.stack(Xcols, 1)
         numeric = spec.kind == "seq_num"
         tol = float(spec.meta.get("tol", 1e-3))

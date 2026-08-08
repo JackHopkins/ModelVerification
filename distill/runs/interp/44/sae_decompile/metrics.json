@@ -1,20 +1,20 @@
 {
-  "position_agreement": 0.9997555555555555,
-  "sequence_agreement": 0.99865,
-  "mean_tv": 0.0002444444444444326,
+  "position_agreement": 0.9997388888888888,
+  "sequence_agreement": 0.9985,
+  "mean_tv": 0.0005708691230830303,
   "n_sampled": 20000,
   "formal": {
     "mode": "sampled",
     "n_checked": 200000,
-    "n_disagreements": 261,
-    "disagreement_rate": 0.001305,
+    "n_disagreements": 298,
+    "disagreement_rate": 0.00149,
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 8,
-    "n_table_cells": 165
+    "n_nodes": 156,
+    "n_table_cells": 21761
   },
-  "is_hard": true,
+  "is_hard": false,
   "sae": {
     "n_latents_alive": 137,
     "n_latents_symbolized": 34,
@@ -98,11 +98,8 @@
       "eq_tok+1_x_kth_is_min_tok": 0.897,
       "eq_tok+1_x_kth_eq_tok-1_tok": 0.893,
       "eq_tok+1_x_kth_eq_tok+1_tok": 0.893
-    },
-    "readout": "tabulated",
-    "tab_acc": 0.9996,
-    "soft_acc": 0.9996
+    }
   },
   "cegis_rounds": 0,
-  "seconds": 75.8
+  "seconds": 119.8
 }
