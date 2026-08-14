@@ -1,0 +1,22 @@
+# tl_decompiled_72  kind=seq_cat  n_outputs=20  nodes=12
+tok = tokens
+tok_ = tokens
+v3 = select(key=tok_, query=tok_, key < query)
+rank_lt = selector_width(v3)
+is_min = map(rank_lt, 1 if x in {0} else 0)
+v6 = select(key=tok_, query=tok_, key > query)
+rank_gt = selector_width(v6)
+is_max = map(rank_gt, 1 if x in {0} else 0)
+pos = indices
+tok_x_is_min = map2(tok, is_min, {(0, 0)→0, (0, 1)→1, (1, 0)→2, (1, 1)→3, (2, 0)→4, (2, 1)→5, (3, 0)→6, (3, 1)→7, (4, 0)→8, (4, 1)→9, …(+30 more)})
+tok_x_is_max = map2(tok, is_max, {(0, 0)→0, (0, 1)→1, (1, 0)→2, (1, 1)→3, (2, 0)→4, (2, 1)→5, (3, 0)→6, (3, 1)→7, (4, 0)→8, (4, 1)→9, …(+30 more)})
+v12 = softmax_readout(
+  bias = [0.0219, -0.05, -0.0759, -0.0202, 0.0268, 0.0305, 0.0178, 0.0579, 0.00283, -0.000804, 0.00585, -0.00171, 0.0408, 0.0195, 0.0495, 0.0251, -0.00744, -0.118, -0.0467, 0.0224]
+  tok: 0→class19(+3.1) 1→class18(+3.8) 2→class17(+4.1) 3→class16(+4.0) 4→class15(+4.0) 5→class14(+4.0) 6→class13(+4.1) 7→class12(+4.1) …(20 values)
+  is_min: 0→class0(+0.6) 1→class19(+0.6)
+  is_max: 0→class19(+0.6) 1→class0(+0.6)
+  pos: 0→class4(+0.0) 1→class9(+0.0) 2→class10(+0.0) 3→class15(+0.0) 4→class8(+0.0) 5→class7(+0.1) 6→class14(+0.1) 7→class14(+0.1) …(9 values)
+  tok_x_is_min: 1→class19(+3.1) 2→class18(+1.5) 3→class18(+2.3) 4→class17(+1.9) 5→class17(+2.1) 6→class16(+2.3) 7→class16(+1.7) 8→class15(+2.5) …(40 values)
+  tok_x_is_max: 0→class19(+2.5) 1→class19(+0.6) 2→class18(+3.1) 3→class18(+0.7) 4→class17(+3.3) 5→class17(+0.8) 6→class16(+3.2) 7→class16(+0.7) …(40 values)
+)
+return v12

@@ -54,28 +54,39 @@ suite was designed to be irreducible (m05 +0.08, m06 +0.35).
   tasks but collapses on structural ones (reverse 0.51, interp/2 0.007) —
   evidence that mechanism-aware extraction is doing real work.
 - `sae_decompile` is the strongest extractor on trained models — interp
-  mean 0.989 with composition templates (Approach A), beating even the
-  black-box tree control (0.950) while emitting verifiable programs
-  (vs 0.680 for the hand-banked tl_decompile),
-  by *discovering* structural features the hand bank lacked (interp/2
-  reverse: 0.013 -> 1.000 via the mirrored-position feature). Three
-  failure modes were found and two fixed: (a) feature COMPOSITION — fixed
-  by composed candidates (count_self, rank_lt, prefix_count_self /
-  is_first_occurrence via a token-x-position pair variable, and pairwise
-  interaction features), taking hist-style cases from 0.000 to 1.000;
-  (b) granularity mismatch — models representing only a task-specific
-  coarsening of token identity fail the identity probe, so base
-  primitives are always retained and SAE selection only ADDS structure;
-  (c) FIXED by Approach-A composition templates: a post-selection round
-  generates T1 pairwise interactions, T2a gathers by position-valued
-  features, and T2b k-th-occurrence gathers (a pair-variable construction
-  proving conjunctive selectors are DSL-expressible), plus one
-  second-order gating pass — each admitted by the same decodability
-  probe. interp/21 (unique-extract): 0.107 -> 0.999 via the discovered
-  tok x is_first_occurrence composition. Residual limitation: m04's
-  mode-gather and deep task-gating (0.674). A latent sklearn pitfall found on the way: LogisticRegression
-  omits coefficient rows for training-absent classes; the readout now maps
-  rows via model.classes_.
+  mean **0.996** over the FULL 84-case suite, **81/84 cases at ≥ 0.99**
+  and 9 exact-equivalence certificates, beating the black-box tree
+  control (0.883) while emitting verifiable programs (vs 0.680 for the
+  hand-banked tl_decompile), by *discovering* structural features the
+  hand bank lacked (interp/2 reverse: 0.013 -> 1.000 via the
+  mirrored-position feature). The extractor discovers candidates rather
+  than enumerating them: (a) feature COMPOSITION — composed candidates
+  (count_self, rank_lt, prefix_count_self / is_first_occurrence via a
+  token-x-position pair variable, pairwise interactions), taking
+  hist-style cases from 0.000 to 1.000; (b) granularity mismatch — models
+  representing only a task-specific coarsening of token identity fail the
+  identity probe, so base primitives are always retained and SAE
+  selection only ADDS structure; (c) Approach-A composition templates
+  (T1 pairwise, T2a position-gathers, T2b k-th-occurrence gathers via a
+  pair variable, second-order gating) — interp/21 unique-extract
+  0.107 -> 0.999; (d) SYNTHESIZED position-map gathers — for each query
+  position, probe which source position's token is decodable from the
+  SAE code there (out-of-sample validated) and assemble the admitted
+  (q->s) map into one Select table. This fixed the three total failures
+  (93/103/110 from 0.000 to 1.000) and recovers the exact ground-truth
+  permutations (i XOR 1, floor(i/2), odd-parity swap) — the general cure
+  for conditionally-represented features that no fixed shift can match;
+  (e) counts/thresholds over derived predicates (majority indicators,
+  all/any/prefix-count of admitted binary features): interp/13 trend
+  0.786 -> 0.971; plus a tabulation readout (CART-in-DSL NaryMap, adopted
+  only when it beats the SoftHead on holdout) for joint position-
+  conditional logic. Residual limitations, inventoried by mechanism in
+  `runs/FAILURE_INVENTORY.md`: numeric interaction with a gathered global
+  value (97, scale-by-max, 0.779), one genuinely messy SIIT artifact
+  (124, 0.957 — matches no clean predicate), and m04's mode-gather /
+  deep task-gating (0.697). A latent sklearn pitfall found on the way:
+  LogisticRegression omits coefficient rows for training-absent classes;
+  the readout now maps rows via model.classes_.
 - Oracle correction found during SAE work: SIIT interp models are
   full-window-length trained (verified on case 2: the model reverses the
   entire padded window); interp evaluation now uses full-length inputs.

@@ -1,0 +1,75 @@
+{
+  "position_agreement": 1.0,
+  "sequence_agreement": 1.0,
+  "mean_tv": 0.0007002252511107978,
+  "n_sampled": 20000,
+  "formal": {
+    "mode": "sampled",
+    "n_checked": 200000,
+    "n_disagreements": 2,
+    "disagreement_rate": 1e-05,
+    "exact_equivalent": false
+  },
+  "complexity": {
+    "n_nodes": 69,
+    "n_table_cells": 14302
+  },
+  "is_hard": false,
+  "sae": {
+    "n_latents_alive": 153,
+    "n_latents_symbolized": 6,
+    "coverage_activation_mass": 0.219,
+    "sae_final_loss": 0.9282,
+    "selected_features": {
+      "tok": 0.991,
+      "pos": 0.986,
+      "is_min": 0.888,
+      "eq_tok-1": 0.884,
+      "eq_tok+1": 0.875,
+      "is_max": 0.873,
+      "tok_at_learned": 1.0
+    },
+    "learned_gather_map": {
+      "1": 2,
+      "2": 1,
+      "3": 4,
+      "4": 3,
+      "5": 6,
+      "6": 5,
+      "7": 8,
+      "8": 7
+    },
+    "compositions": {
+      "tok_x_pos": 0.951,
+      "tok_x_is_min": 0.891,
+      "tok_x_eq_tok-1": 0.906,
+      "tok_x_eq_tok+1": 0.896,
+      "tok_x_is_max": 0.889,
+      "tok_x_tok_at_learned": 0.958,
+      "pos_x_is_min": 0.814,
+      "pos_x_eq_tok-1": 0.844,
+      "pos_x_eq_tok+1": 0.841,
+      "pos_x_is_max": 0.804,
+      "pos_x_tok_at_learned": 0.99,
+      "is_min_x_tok_at_learned": 0.835,
+      "eq_tok-1_x_tok_at_learned": 0.884,
+      "eq_tok+1_x_tok_at_learned": 0.874,
+      "is_max_x_tok_at_learned": 0.83,
+      "allpre0_is_min": 0.947,
+      "allpre1_is_min": 0.944,
+      "allpre1_eq_tok-1": 0.944,
+      "allpre1_eq_tok+1": 0.944,
+      "allpre0_is_max": 0.948,
+      "allpre1_is_max": 0.942,
+      "kth_is_max_tok": 0.864,
+      "tok_x_kth_is_max_tok": 0.863,
+      "pos_x_kth_is_max_tok": 0.858,
+      "is_min_x_kth_is_max_tok": 0.852,
+      "eq_tok+1_x_kth_is_max_tok": 0.855,
+      "is_max_x_kth_is_max_tok": 0.861,
+      "tok_at_learned_x_kth_is_max_tok": 0.865
+    }
+  },
+  "cegis_rounds": 0,
+  "seconds": 61.7
+}

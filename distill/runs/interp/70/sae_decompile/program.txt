@@ -1,0 +1,16 @@
+# tl_decompiled_70  kind=seq_cat  n_outputs=11  nodes=8
+tok = tokens
+v2 = select(key=tok, query=tok, key < query)
+rank_lt = selector_width(v2)
+is_min = map(rank_lt, 1 if x in {0} else 0)
+tok_ = tokens
+pos = indices
+is_min_x_tok = map2(is_min, tok_, {(0, 0)→0, (0, 1)→1, (0, 2)→2, (0, 3)→3, (0, 4)→4, (0, 5)→5, (0, 6)→6, (0, 7)→7, (0, 8)→8, (0, 9)→9, …(+12 more)})
+v8 = softmax_readout(
+  bias = [0.0414, 0.0395, -0.0201, 0.0332, 0.0221, 0.0301, 0.0151, -0.318, 0.0295, 0.0489, 0.0781]
+  is_min: 0→class1(+0.1) 1→class10(+0.9)
+  tok_: 0→class10(+4.4) 1→class7(+6.2) 2→class4(+5.7) 3→class0(+5.5) 4→class3(+5.4) 5→class6(+5.4) 6→class9(+5.3) 7→class8(+5.3) …(11 values)
+  pos: 0→class5(+0.0) 1→class10(+0.0) 2→class3(+0.0) 3→class0(+0.0) 4→class9(+0.0) 5→class9(+0.0) 6→class0(+0.0) 7→class8(+0.0) …(9 values)
+  is_min_x_tok: 1→class7(+3.1) 2→class4(+3.4) 3→class0(+3.6) 4→class3(+3.7) 5→class6(+3.8) 6→class9(+3.8) 7→class8(+3.8) 8→class5(+3.8) …(22 values)
+)
+return v8

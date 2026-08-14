@@ -1,0 +1,20 @@
+{
+  "mode": "sampled",
+  "n_checked": 200000,
+  "n_disagreements": 1,
+  "disagreement_rate": 5e-06,
+  "exact_equivalent": false,
+  "examples": [
+    [
+      0,
+      1,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      2
+    ]
+  ]
+}

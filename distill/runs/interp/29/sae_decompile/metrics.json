@@ -1,7 +1,7 @@
 {
   "position_agreement": 1.0,
   "sequence_agreement": 1.0,
-  "mean_tv": 0.0004945446826768575,
+  "mean_tv": 0.0004265638254053736,
   "n_sampled": 20000,
   "formal": {
     "mode": "sampled",
@@ -11,60 +11,40 @@
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 76,
-    "n_table_cells": 8983
+    "n_nodes": 45,
+    "n_table_cells": 3044
   },
   "is_hard": false,
   "sae": {
-    "n_latents_alive": 93,
-    "n_latents_symbolized": 31,
-    "coverage_activation_mass": 0.846,
-    "sae_final_loss": 0.4712,
+    "n_latents_alive": 92,
+    "n_latents_symbolized": 36,
+    "coverage_activation_mass": 0.865,
+    "sae_final_loss": 0.4697,
     "selected_features": {
       "tok": 1.0,
-      "is_max": 0.943,
-      "is_min": 0.943,
-      "eq_tok-1": 0.895,
-      "eq_tok+1": 0.89,
-      "frac_b": 0.819
+      "is_max": 0.903,
+      "is_min": 0.898,
+      "frac_b": 0.832,
+      "frac_poiVg": 0.732,
+      "frac_TPSI": 0.727,
+      "frac_oCLrZaW": 0.705,
+      "frac_V": 0.703,
+      "tok_at_learned": 0.823
+    },
+    "learned_gather_map": {
+      "1": 0
     },
     "compositions": {
-      "tok_x_is_max": 0.943,
-      "tok_x_is_min": 0.943,
-      "tok_x_eq_tok-1": 0.85,
-      "tok_x_eq_tok+1": 0.796,
-      "is_max_x_is_min": 0.886,
-      "is_min_x_eq_tok-1": 0.851,
-      "kth_is_max_tok": 0.863,
-      "kth_is_min_tok": 0.943,
-      "kth_eq_tok-1_tok": 0.908,
-      "kth_eq_tok+1_tok": 0.908,
-      "tok_x_kth_is_max_tok": 0.862,
-      "tok_x_kth_is_min_tok": 0.887,
-      "tok_x_kth_eq_tok-1_tok": 0.898,
-      "tok_x_kth_eq_tok+1_tok": 0.898,
-      "is_max_x_kth_is_max_tok": 0.861,
-      "is_max_x_kth_is_min_tok": 0.926,
-      "is_max_x_kth_eq_tok-1_tok": 0.906,
-      "is_max_x_kth_eq_tok+1_tok": 0.906,
-      "is_min_x_kth_is_max_tok": 0.853,
-      "is_min_x_kth_is_min_tok": 0.93,
-      "is_min_x_kth_eq_tok-1_tok": 0.905,
-      "is_min_x_kth_eq_tok+1_tok": 0.905,
-      "eq_tok-1_x_kth_is_max_tok": 0.926,
-      "eq_tok-1_x_kth_is_min_tok": 0.97,
-      "eq_tok-1_x_kth_eq_tok-1_tok": 0.967,
-      "eq_tok-1_x_kth_eq_tok+1_tok": 0.967,
-      "eq_tok+1_x_kth_is_max_tok": 0.85,
-      "eq_tok+1_x_kth_is_min_tok": 0.928,
-      "eq_tok+1_x_kth_eq_tok-1_tok": 0.905,
-      "eq_tok+1_x_kth_eq_tok+1_tok": 0.905,
-      "pos_x_kth_is_max_tok": 0.85,
-      "pos_x_kth_is_min_tok": 0.896,
-      "pos_x_kth_eq_tok-1_tok": 0.903,
-      "pos_x_kth_eq_tok+1_tok": 0.903
+      "tok_x_is_max": 0.903,
+      "tok_x_is_min": 0.898,
+      "tok_x_tok_at_learned": 0.909,
+      "is_max_x_tok_at_learned": 0.818,
+      "is_min_x_tok_at_learned": 0.813,
+      "allpre0_is_max": 0.946,
+      "allpre0_is_min": 0.954,
+      "allpre1_is_min": 0.892
     }
   },
   "cegis_rounds": 0,
-  "seconds": 42.7
+  "seconds": 24.9
 }

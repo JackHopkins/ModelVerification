@@ -1,0 +1,83 @@
+{
+  "position_agreement": 0.9995666666666667,
+  "sequence_agreement": 0.9961,
+  "mean_tv": 0.0015576172935915654,
+  "n_sampled": 20000,
+  "formal": {
+    "mode": "sampled",
+    "n_checked": 200000,
+    "n_disagreements": 775,
+    "disagreement_rate": 0.003875,
+    "exact_equivalent": false
+  },
+  "complexity": {
+    "n_nodes": 113,
+    "n_table_cells": 17588
+  },
+  "is_hard": false,
+  "sae": {
+    "n_latents_alive": 253,
+    "n_latents_symbolized": 64,
+    "coverage_activation_mass": 0.519,
+    "sae_final_loss": 1.1071,
+    "selected_features": {
+      "pos": 1.0,
+      "tok": 0.963,
+      "maj_self": 0.935,
+      "is_max": 0.886,
+      "is_min": 0.876,
+      "eq_tok+1": 0.872,
+      "eq_tok-1": 0.87,
+      "tok_mirror": 0.671,
+      "tok_at_learned": 0.914
+    },
+    "learned_gather_map": {
+      "2": 4,
+      "4": 2,
+      "5": 3,
+      "6": 2,
+      "7": 1,
+      "8": 0
+    },
+    "compositions": {
+      "pos_x_tok": 0.967,
+      "pos_x_maj_self": 0.925,
+      "pos_x_is_max": 0.87,
+      "pos_x_is_min": 0.867,
+      "pos_x_eq_tok+1": 0.857,
+      "pos_x_eq_tok-1": 0.859,
+      "tok_x_maj_self": 0.901,
+      "tok_x_is_max": 0.865,
+      "tok_x_is_min": 0.873,
+      "tok_x_eq_tok+1": 0.841,
+      "tok_x_eq_tok-1": 0.837,
+      "maj_self_x_maj_self": 0.935,
+      "maj_self_x_is_max": 0.854,
+      "maj_self_x_eq_tok+1": 0.861,
+      "maj_self_x_eq_tok-1": 0.861,
+      "any_maj_self": 0.926,
+      "allpre1_maj_self": 0.972,
+      "allpre0_is_max": 0.95,
+      "allpre1_is_max": 0.948,
+      "allpre0_is_min": 0.95,
+      "allpre1_is_min": 0.951,
+      "allpre1_eq_tok+1": 0.944,
+      "allpre1_eq_tok-1": 0.946,
+      "kth_is_max_tok": 0.869,
+      "kth_eq_tok+1_tok": 0.883,
+      "kth_eq_tok-1_tok": 0.883,
+      "pos_x_kth_is_max_tok": 0.863,
+      "tok_x_kth_is_max_tok": 0.867,
+      "tok_x_kth_eq_tok+1_tok": 0.879,
+      "tok_x_kth_eq_tok-1_tok": 0.879,
+      "maj_self_x_kth_is_max_tok": 0.862,
+      "is_max_x_kth_is_max_tok": 0.866,
+      "is_min_x_kth_is_max_tok": 0.857,
+      "eq_tok+1_x_kth_is_max_tok": 0.86,
+      "eq_tok+1_x_kth_eq_tok+1_tok": 0.875,
+      "eq_tok+1_x_kth_eq_tok-1_tok": 0.875
+    }
+  },
+  "cegis_rounds": 0,
+  "seconds": 97.3
+}

@@ -1,7 +1,7 @@
 {
   "position_agreement": 1.0,
   "sequence_agreement": 1.0,
-  "mean_tv": 0.00018381881437888497,
+  "mean_tv": 0.0005391663711220078,
   "n_sampled": 20000,
   "formal": {
     "mode": "sampled",
@@ -11,42 +11,18 @@
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 50,
-    "n_table_cells": 4704
+    "n_nodes": 3,
+    "n_table_cells": 42
   },
   "is_hard": false,
   "sae": {
-    "n_latents_alive": 45,
+    "n_latents_alive": 47,
     "n_latents_symbolized": 0,
-    "coverage_activation_mass": 0.007,
-    "sae_final_loss": 0.322,
-    "selected_features": {
-      "eq_tok-1": 0.929,
-      "eq_tok+1": 0.927,
-      "is_max": 0.851
-    },
-    "compositions": {
-      "eq_tok-1_x_eq_tok+1": 0.879,
-      "kth_eq_tok-1_tok": 0.935,
-      "kth_eq_tok+1_tok": 0.935,
-      "kth_is_max_tok": 0.868,
-      "eq_tok-1_x_kth_eq_tok-1_tok": 0.983,
-      "eq_tok-1_x_kth_eq_tok+1_tok": 0.983,
-      "eq_tok-1_x_kth_is_max_tok": 0.954,
-      "eq_tok+1_x_kth_eq_tok-1_tok": 0.934,
-      "eq_tok+1_x_kth_eq_tok+1_tok": 0.934,
-      "eq_tok+1_x_kth_is_max_tok": 0.865,
-      "is_max_x_kth_eq_tok-1_tok": 0.934,
-      "is_max_x_kth_eq_tok+1_tok": 0.934,
-      "is_max_x_kth_is_max_tok": 0.868,
-      "tok_x_kth_eq_tok-1_tok": 0.931,
-      "tok_x_kth_eq_tok+1_tok": 0.931,
-      "tok_x_kth_is_max_tok": 0.856,
-      "pos_x_kth_eq_tok-1_tok": 0.933,
-      "pos_x_kth_eq_tok+1_tok": 0.933,
-      "pos_x_kth_is_max_tok": 0.868
-    }
+    "coverage_activation_mass": 0.0,
+    "sae_final_loss": 0.3185,
+    "selected_features": {},
+    "compositions": {}
   },
   "cegis_rounds": 0,
-  "seconds": 30.0
+  "seconds": 7.8
 }

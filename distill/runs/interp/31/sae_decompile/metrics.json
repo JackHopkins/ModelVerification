@@ -1,7 +1,7 @@
 {
   "position_agreement": 1.0,
   "sequence_agreement": 1.0,
-  "mean_tv": 0.0001747767795269393,
+  "mean_tv": 0.00023979532912671463,
   "n_sampled": 20000,
   "formal": {
     "mode": "sampled",
@@ -11,51 +11,23 @@
     "exact_equivalent": false
   },
   "complexity": {
-    "n_nodes": 66,
-    "n_table_cells": 4835
+    "n_nodes": 15,
+    "n_table_cells": 657
   },
   "is_hard": false,
   "sae": {
-    "n_latents_alive": 26,
-    "n_latents_symbolized": 0,
-    "coverage_activation_mass": 0.075,
-    "sae_final_loss": 0.1605,
+    "n_latents_alive": 23,
+    "n_latents_symbolized": 3,
+    "coverage_activation_mass": 0.209,
+    "sae_final_loss": 0.1543,
     "selected_features": {
-      "is_min": 0.912,
-      "eq_tok-1": 0.908,
-      "eq_tok+1": 0.904,
-      "is_max": 0.878
+      "is_min": 0.861,
+      "frac_listen": 0.747
     },
     "compositions": {
-      "kth_is_min_tok": 0.936,
-      "kth_eq_tok-1_tok": 0.917,
-      "kth_eq_tok+1_tok": 0.917,
-      "kth_is_max_tok": 0.882,
-      "is_min_x_kth_is_min_tok": 0.924,
-      "is_min_x_kth_eq_tok-1_tok": 0.914,
-      "is_min_x_kth_eq_tok+1_tok": 0.914,
-      "is_min_x_kth_is_max_tok": 0.875,
-      "eq_tok-1_x_kth_is_min_tok": 0.97,
-      "eq_tok-1_x_kth_eq_tok-1_tok": 0.974,
-      "eq_tok-1_x_kth_eq_tok+1_tok": 0.974,
-      "eq_tok-1_x_kth_is_max_tok": 0.935,
-      "eq_tok+1_x_kth_is_min_tok": 0.924,
-      "eq_tok+1_x_kth_eq_tok-1_tok": 0.915,
-      "eq_tok+1_x_kth_eq_tok+1_tok": 0.915,
-      "eq_tok+1_x_kth_is_max_tok": 0.869,
-      "is_max_x_kth_is_min_tok": 0.925,
-      "is_max_x_kth_eq_tok-1_tok": 0.915,
-      "is_max_x_kth_eq_tok+1_tok": 0.915,
-      "is_max_x_kth_is_max_tok": 0.865,
-      "tok_x_kth_is_min_tok": 0.863,
-      "tok_x_kth_eq_tok-1_tok": 0.91,
-      "tok_x_kth_eq_tok+1_tok": 0.91,
-      "pos_x_kth_is_min_tok": 0.897,
-      "pos_x_kth_eq_tok-1_tok": 0.914,
-      "pos_x_kth_eq_tok+1_tok": 0.914,
-      "pos_x_kth_is_max_tok": 0.881
+      "allpre1_is_min": 0.912
     }
   },
   "cegis_rounds": 0,
-  "seconds": 37.5
+  "seconds": 9.8
 }

@@ -1,0 +1,4 @@
+|--- feature_2 <= 2.50
+|   |--- class: 0
+|--- feature_2 >  2.50
+|   |--- class: 1

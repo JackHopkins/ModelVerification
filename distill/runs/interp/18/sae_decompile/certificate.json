@@ -1,8 +1,8 @@
 {
   "mode": "exhaustive",
   "n_checked": 1953125,
-  "n_disagreements": 9,
-  "disagreement_rate": 4.608e-06,
+  "n_disagreements": 5,
+  "disagreement_rate": 2.56e-06,
   "exact_equivalent": false,
   "examples": [
     [
@@ -21,39 +21,6 @@
       1,
       1,
       1,
-      1,
-      1,
-      1,
-      2,
-      1
-    ],
-    [
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      2,
-      1,
-      1
-    ],
-    [
-      1,
-      1,
-      1,
-      1,
-      1,
-      2,
-      1,
-      1,
-      1
-    ],
-    [
-      1,
-      1,
-      1,
-      1,
       2,
       1,
       1,
@@ -85,17 +52,6 @@
     [
       1,
       2,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
-    ],
-    [
-      2,
-      1,
       1,
       1,
       1,

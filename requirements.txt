@@ -4,6 +4,7 @@ jaxlib==0.11.0
 dm-haiku==0.0.17
 numpy==2.5.1
 huggingface_hub
+z3-solver==5.0.0.0  # distill/prove: relational verification (SMT over weights)
 # Optional — needed for interp_bench inference sanity checks:
 # torch==2.13.0
 # transformer_lens==3.6.0
